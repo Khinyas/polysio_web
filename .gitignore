@@ -1,0 +1,214 @@
+# --- JAVA & COMPILATION ---
+*.class
+/bin/
+/build/
+target/
+
+# --- WEB SPECIFIC ---
+# On ignore les classes compilées qui pourraient finir dans le dossier de déploiement
+/src/main/webContent/WEB-INF/classes/
+/src/main/webapp/WEB-INF/classes/
+/.deployables/
+/.tmp/
+
+# --- ECLIPSE SPECIFIC ---
+.metadata/
+.recommenders/
+/RemoteSystemsTempFiles/
+.project
+.classpath
+.settings/
+
+
+
+# ═══════════════════════════════════════════════════════════════
+# GITIGNORE JAVA + ECLIPSE + MAVEN + INTELLIJ
+# ═══════════════════════════════════════════════════════════════
+# Ce fichier indique à Git quels fichiers/dossiers NE PAS suivre
+# (ne pas commit sur GitHub)
+# ═══════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════
+# 0. FICHIERS PERSO
+# ═══════════════════════════════════════════════════════════════
+HELPER
+# Ignorer tous les fichiers commençant par HELP
+HELP*
+
+# Ou si tu veux être plus spécifique :
+HELP*.txt
+HELP*.md
+HELP*.pdfgit
+
+# ═══════════════════════════════════════════════════════════════
+# 1. FICHIERS COMPILÉS JAVA
+# ═══════════════════════════════════════════════════════════════
+# Pourquoi ignorer ?
+# - Les .class sont générés automatiquement par javac
+# - Pas besoin de les sauvegarder (on a le .java source)
+# ═══════════════════════════════════════════════════════════════
+
+*.class
+# ↑ Ignore TOUS les fichiers .class (bytecode compilé)
+
+*.jar
+# ↑ Ignore les fichiers JAR (sauf dépendance spécifique)
+
+*.war
+*.ear
+# ↑ Fichiers d'archive Java
+
+hs_err_pid*
+# ↑ Fichiers de crash de la JVM
+
+
+# ═══════════════════════════════════════════════════════════════
+# 2. DOSSIERS DE SORTIE (Maven, Eclipse, IntelliJ)
+# ═══════════════════════════════════════════════════════════════
+# Pourquoi ignorer ?
+# - Contiennent la compilation et les fichiers temporaires
+# - Se régénèrent à chaque "Build" ou "Compile"
+# ═══════════════════════════════════════════════════════════════
+
+target/
+# ↑ Sortie Maven
+
+bin/
+# ↑ Sortie Eclipse
+
+out/
+# ↑ Sortie IntelliJ IDEA
+
+
+# ═══════════════════════════════════════════════════════════════
+# 3. LOGS ET FICHIERS TEMPORAIRES
+# ═══════════════════════════════════════════════════════════════
+
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+
+# ═══════════════════════════════════════════════════════════════
+# 4. FICHIERS DE CONFIGURATION SENSIBLES
+# ═══════════════════════════════════════════════════════════════
+# ⚠️ NE JAMAIS COMMIT : contiennent des mots de passe ou clés API
+# ═══════════════════════════════════════════════════════════════
+
+resources/config.properties
+application.properties
+application-*.properties
+.env
+*.key
+*.pem
+*.p12
+
+
+# ═══════════════════════════════════════════════════════════════
+# 5. ECLIPSE - CONFIGURATION IDE
+# ═══════════════════════════════════════════════════════════════
+
+.metadata/
+.settings/
+.classpath
+.project
+*.launch
+.factorypath
+.cache-main
+.scala_dependencies
+.worksheet
+.recommenders/
+
+
+# ═══════════════════════════════════════════════════════════════
+# 6. INTELLIJ IDEA - CONFIGURATION IDE
+# ═══════════════════════════════════════════════════════════════
+# Pourquoi ignorer ?
+# - Contient tes index de recherche et préférences locales
+# - Évite les conflits entre développeurs
+# ═══════════════════════════════════════════════════════════════
+
+.idea/
+# ↑ Dossier de configuration IntelliJ
+
+*.iml
+*.iws
+*.ipr
+# ↑ Fichiers de projet et modules
+
+atlassian-ide-plugin.xml
+
+
+# ═══════════════════════════════════════════════════════════════
+# 7. AUTRES IDEs (NetBeans, VS Code)
+# ═══════════════════════════════════════════════════════════════
+
+.vscode/
+nbproject/
+nbbuild/
+dist/
+nbdist/
+
+
+# ═══════════════════════════════════════════════════════════════
+# 8. SYSTÈME D'EXPLOITATION
+# ═══════════════════════════════════════════════════════════════
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+.directory
+
+
+# ═══════════════════════════════════════════════════════════════
+# 9. MAVEN - FICHIERS LOCAUX
+# ═══════════════════════════════════════════════════════════════
+
+.mvn/
+mvnw
+mvnw.cmd
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+
+# ═══════════════════════════════════════════════════════════════
+# 10. BASES DE DONNÉES LOCALES
+# ═══════════════════════════════════════════════════════════════
+
+*.db
+*.sqlite
+*.h2.db
+
+
+# ═══════════════════════════════════════════════════════════════
+# 11. FICHIERS SPÉCIFIQUES AU PROJET MONOPOLY
+# ═══════════════════════════════════════════════════════════════
+
+parties_sauvegardees/
+uploads/
+user_avatars/
+
+
+# ═══════════════════════════════════════════════════════════════
+# 12. GARDER DES FICHIERS EXEMPLE
+# ═══════════════════════════════════════════════════════════════
+
+!config.properties.example
+
+# ═══════════════════════════════════════════════════════════════
+# 13. FICHIER CONFIGURATION JEU
+# ═══════════════════════════════════════════════════════════════
+polysio.properties
