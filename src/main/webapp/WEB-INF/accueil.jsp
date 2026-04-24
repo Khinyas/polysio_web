@@ -9,9 +9,9 @@
 <body>
 <H1> Page Accueil</H1>
 
-<button> Lancer une partie</button>
+<button action="ControllerChoixPartie"> Lancer une partie</button>
 <button> Charger une partie</button>
-<button> Quitter le jeu</button>
+<button onclick="window.close()"> Quitter le jeu</button>
 
 </body>
 </html>

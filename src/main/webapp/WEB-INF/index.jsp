@@ -12,13 +12,13 @@
 <body>
     <h1>Bienvenue sur Polysio Web</h1>
     <div class="menu">
-        <a href="ControllerConnexion.java">Se connecter</a>
+        <a href="ControllerConnexion">Se connecter</a>
         
-        <a href="Controllerinscription.java">S'inscrire</a>
+        <a href="Controllerinscription">S'inscrire</a>
         
         <a href="test_db.jsp">Tester la Connexion BDD</a>
         
-        <a href="ControllerAccueil.java">Accueil</a>
+        <a href="ControllerAccueil">Accueil</a>
     </div>
 </body>
 </html>
