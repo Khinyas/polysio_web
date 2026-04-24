@@ -141,6 +141,8 @@ application-*.properties
 
 atlassian-ide-plugin.xml
 
+.smarttomcat/
+# ↑ Fichiers de smarttomcat (plugin)
 
 # ═══════════════════════════════════════════════════════════════
 # 7. AUTRES IDEs (NetBeans, VS Code)
