@@ -1,33 +1,46 @@
 package connexion;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+import java.util.Properties;
 
 public class DAOAcces {
-    private static Connection conn = null;
+    private static final Properties props = new Properties();
 
-
-    public DAOAcces() {
-        System.out.println(" Initialisation de la connexion " + MainApp.cfgApp.get("db.type") + "..." + MainApp.cfgApp.get("db.name"));
-        throw new UnsupportedOperationException("Classe utilitaire");
-    }
-
-    public static Connection getConnexion() {
-        try {
-            if (conn == null || conn.isClosed()) {
-                initConnexion();
+    // Bloc statique pour charger la config une seule fois au démarrage du serveur
+    static {
+        try (InputStream input = DAOAcces.class.getClassLoader().getResourceAsStream("config.properties")) {
+            if (input == null) {
+                System.out.println("Désolé, impossible de trouver config.properties");
+            } else {
+                props.load(input);
+                // Chargement explicite du driver pour Tomcat
+                Class.forName(props.getProperty("db.driver"));
             }
-            return conn;
-        } catch (SQLException erreur) {
-            System.out.println("Erreur lors de la vérification de la connexion : " + erreur.getMessage());
-            erreur.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return null;
     }
 
-    public static void initConnexion() {
+    public static Connection getConnexion() throws SQLException {
+        // Construction de l'URL avec les paramètres du fichier properties
+        String url = props.getProperty("db.url") +
+                     "?autoReconnect=" + props.getProperty("db.autoReconnect") +
+                     "&useSSL=" + props.getProperty("db.useSSL") +
+                     "&serverTimezone=" + props.getProperty("db.serverTimezone") +
+                     "&allowPublicKeyRetrieval=true";
+        
+        return DriverManager.getConnection(
+            url, 
+            props.getProperty("db.login"), 
+            props.getProperty("db.password")
+        );
+    }
+}
+
+  /*  public static void initConnexion() {
         // Paramétrage :
         String driver = MainApp.cfgApp.get("db.driver");
         String dbName = MainApp.cfgApp.get("db.name");
@@ -54,7 +67,7 @@ public class DAOAcces {
             System.out.println("Erreur SQL, Constructor Fail" + erreur.getMessage());
             erreur.printStackTrace();
         }
-    }
+    } 
 
     public static void closeConnexion() {
         try {
@@ -67,4 +80,4 @@ public class DAOAcces {
     }
 }
 
-
+*/

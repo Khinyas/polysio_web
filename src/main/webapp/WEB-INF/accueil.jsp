@@ -7,7 +7,11 @@
 <title>Test</title>
 </head>
 <body>
-<H1> Page connexion</H1>
+<H1> Page Accueil</H1>
+
+<button> Lancer une partie</button>
+<button> Charger une partie</button>
+<button> Quitter le jeu</button>
 
 </body>
 </html>

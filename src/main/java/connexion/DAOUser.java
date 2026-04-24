@@ -5,26 +5,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import model.ModelUser;
 import model.ModelUserRole;
 import service.Securite;
 
 public class DAOUser {
-    // REQUETES SQL
-    // VERIFIER EXISTENCE UTILISATEUR
+
     public static boolean reqVerifierUserExiste(String usernameP) {
-        String reqSQL = "SELECT id_utilisateur, pseudo FROM polysio.utilisateur WHERE pseudo = ?";
-        try (PreparedStatement pst = DAOAcces.getConnexion().prepareStatement(reqSQL)) {
+        String reqSQL = "SELECT id_utilisateur FROM utilisateur WHERE pseudo = ?";
+        
+        // On ouvre la connexion ici, elle sera fermée automatiquement à la fin du bloc
+        try (Connection conn = DAOAcces.getConnexion();
+             PreparedStatement pst = conn.prepareStatement(reqSQL)) {
+            
             pst.setString(1, usernameP);
             try (ResultSet rs = pst.executeQuery()) {
-                return rs.next(); // Si resultat alors il existe
+                return rs.next();
             }
         } catch (SQLException erreur) {
-            System.err.println("Erreur SQL lors du checkUser : " + erreur.getMessage());
             erreur.printStackTrace();
         }
-        return false; // L'UTILISATEUR N EXISTE PAS = FALSE (VALEUR PAR DEFAULT PRESUME)
+        return false;
     }
 
     // CONNECTER UN UTILISATEUR
