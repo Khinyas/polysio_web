@@ -4,10 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Test</title>
+<style><%@include file="/WEB-INF/styles.css"%></style>
+<title>Accueil</title>
 </head>
 <body>
-<H1> Page connexion</H1>
-
+Et voici l'accueil, ${NomRecu} ! Et voici ton mail: ${Email} !
+	<form action="/polysio_web/ControllerInscription" method="POST">
+		<button type="submit">Déconnexion</button>
+	</form>
 </body>
 </html>
