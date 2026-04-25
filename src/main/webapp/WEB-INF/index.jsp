@@ -10,7 +10,7 @@
     </style>
 </head>
 <body>
-    <h1>Bienvenue sur Polysio Web</h1>
+    <h1>${message}</h1>
     <div class="menu">
         <a href="ControllerConnexion">Se connecter</a>
         
