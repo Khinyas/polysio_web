@@ -24,7 +24,7 @@
 
         <section class="classement">
             <h3>Top Joueurs</h3>
-            </section>
+        </section>
     </main>
 
     <footer>
