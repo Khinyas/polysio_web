@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.ModelUser;
 import model.modelUser;
 
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class ControllerInscription extends HttpServlet {
     	String name = request.getParameter("username");
     	String email = request.getParameter("email");
     	String password = request.getParameter("password");
-    	modelUser nouvelUtilisateur = new modelUser(name,email,password);
+    	ModelUser nouvelUtilisateur = new ModelUser(name,email,password);
     	DAOUser dao = new DAOUser();
     	dao.creerUtilisateur(nouvelUtilisateur);
     	

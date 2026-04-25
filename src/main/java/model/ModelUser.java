@@ -1,13 +1,5 @@
 package model;
 
-import connexion.DAOAcces;
-import service.Securite;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class ModelUser {
     private int id;
     private String password;

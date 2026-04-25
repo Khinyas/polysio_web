@@ -3,11 +3,13 @@ package connexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import model.ModelUser;
 import model.modelUser;
 
 public class DAOUser {
 
-    public void creerUtilisateur(modelUser user) {
+    public void creerUtilisateur(ModelUser user) {
     	String sql = "INSERT INTO users (nom,email,password) VALUES (?,?,?)";
     	
 
