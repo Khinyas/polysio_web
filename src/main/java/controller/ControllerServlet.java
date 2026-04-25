@@ -26,6 +26,8 @@ public class ControllerServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -38,19 +40,20 @@ public class ControllerServlet extends HttpServlet {
 			case "/index":
 				request.setAttribute("message", "Bienvenue sur l'index");
 				vue = "/WEB-INF/index.jsp";
+				
 			case "/accueil":
 				request.setAttribute("message", "Page connexion");
 				vue = "/WEB-INF/connexion.jsp";
+				
 			case "/connexion":
 				request.setAttribute("message", "Bienvenue sur le plateau");
 				vue = "/WEB-INF/plateau.jsp";
-			
-			
-				
+							
 			default:
 				vue = "/WEB-INF/404.jsp";
 				break;
 		}
+		request.getRequestDispatcher(vue).forward(request, response);
 	}
 
 	/**
