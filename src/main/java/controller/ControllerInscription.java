@@ -32,7 +32,7 @@ public class ControllerInscription extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Juste afficher le formulaire
-        request.getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/inscription.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
