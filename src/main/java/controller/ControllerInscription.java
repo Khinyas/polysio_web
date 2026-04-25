@@ -29,10 +29,6 @@ public class ControllerInscription extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Juste afficher le formulaire
-        request.getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
-    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String name = request.getParameter("username");
