@@ -38,19 +38,33 @@ public class ControllerServlet extends HttpServlet {
 		switch (path) {
 		
 			case "/index":
-				
+			
 				request.setAttribute("message", "Bienvenue sur l'index");
 				//String message = "Bienvenue connard";
 				vue = "/WEB-INF/index.jsp";
 				break;
+			
+			
+		
+			case "/connexion":
+				request.setAttribute("message", "Bienvenue sur le plateau");
+				vue = "/WEB-INF/connexion.jsp";
+				break;
+				
+			case "/":
+				request.setAttribute("message", "Page d'accueil");
+				vue = "/WEB-INF/accueil.jsp";
+				break;
+				
+			case "/inscription":
+				request.setAttribute("message", "Page d'inscription");
+				vue = "/WEB-INF/inscription.jsp";
+				break;
+		
 				
 			case "/accueil":
 				request.setAttribute("message", "Page d'accueil");
 				vue = "/WEB-INF/accueil.jsp";
-				break;
-			case "/connexion":
-				request.setAttribute("message", "Bienvenue sur le plateau");
-				vue = "/WEB-INF/connexion.jsp";
 				break;
 				
 			case "/profil":

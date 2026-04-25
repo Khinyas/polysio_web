@@ -12,13 +12,13 @@
 <body>
     <h1>${message}</h1>
     <div class="menu">
-        <a href="ControllerConnexion">Se connecter</a>
+        <a href="connexion">Se connecter</a>
         
-        <a href="Controllerinscription">S'inscrire</a>
+        <a href="inscription">S'inscrire</a>
         
         <a href="test_db.jsp">Tester la Connexion BDD</a>
         
-        <a href="ControllerAccueil">Accueil</a>
+        <a href="accueil">Accueil</a>
     </div>
 </body>
 </html>
