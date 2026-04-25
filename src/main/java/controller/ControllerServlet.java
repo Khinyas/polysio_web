@@ -40,14 +40,16 @@ public class ControllerServlet extends HttpServlet {
 			case "/index":
 				request.setAttribute("message", "Bienvenue sur l'index");
 				vue = "/WEB-INF/index.jsp";
+				break;
 				
 			case "/accueil":
 				request.setAttribute("message", "Page connexion");
 				vue = "/WEB-INF/connexion.jsp";
-				
+				break;
 			case "/connexion":
 				request.setAttribute("message", "Bienvenue sur le plateau");
 				vue = "/WEB-INF/plateau.jsp";
+				break;
 							
 			default:
 				vue = "/WEB-INF/404.jsp";
