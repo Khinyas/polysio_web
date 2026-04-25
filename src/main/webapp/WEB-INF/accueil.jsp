@@ -7,7 +7,7 @@
 <title>Test</title>
 </head>
 <body>
-<H1> Page Accueil</H1>
+<H1> $message</H1>
 
 <button action="ControllerChoixPartie"> Lancer une partie</button>
 <button> Charger une partie</button>

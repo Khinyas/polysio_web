@@ -39,8 +39,8 @@ public class ControllerServlet extends HttpServlet {
 		
 			case "/index":
 				
-				// request.setAttribute("message", "Bienvenue sur l'index");
-				String message = "Bienvenue connard";
+				request.setAttribute("message", "Bienvenue sur l'index");
+				//String message = "Bienvenue connard";
 				vue = "/WEB-INF/index.jsp";
 				break;
 				
