@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/css_style.css">
-    <script type="module" src="/index.js"></script>
+    <script type="module" src="/contenu-template.js"></script>
 </head>
 <body>
     <header>

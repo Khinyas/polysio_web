@@ -45,3 +45,7 @@ function genererCardHTML(plateauP) {
         </div>
     `;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    injecterContenuIndex();
+});
