@@ -3,52 +3,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<style><%@include file="/WEB-INF/styles.css"%></style>
-<title>Inscription</title>
+    <title>Inscription - Polysio</title>
 </head>
 <body>
-Page inscription
-	<div>
-	
-	<!--  Redirige au ControllerAccueil une fois le bouton d'inscription cliqué -->
-		<form action="ControllerAccueil" method="POST">
-		
-			<table border="0">
-				<tr>
-					<td>
-						Nom
-					</td>
-					<td>
-						<input type="text" name="username">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						E-mail
-					</td>
-					<td>
-						<input type="text" name="email">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Mot de passe
-					</td>
-					<td>
-						<input type="password" name="password">
-					</td>
-				</tr>
-				
-				<!-- Inclure champ mdp et confirmation mdp  -->
-				
-				<tr>
-					<td colspan="2" style="text-align:center;">
-						<button type="submit">S'inscrire</button>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
+    <!--  %@ include file="header.jsp" % -->
+
+
+    <div class="form-container">
+        <h2>Inscription</h2>
+
+        <% if(request.getParameter("erreur") != null) { %>
+            <div class="error">Erreur lors de l'inscription (pseudo déjà utilisé ?).</div>
+        <% } %>
+
+        <form action="${pageContext.request.contextPath}/ControllerInscription" method="POST">
+            <input type="text" name="username" placeholder="Pseudo" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Mot de passe" required>
+            <button type="submit">Créer mon compte</button>
+        </form>
+
+        <p style="text-align: center; margin-top: 15px;">
+            Déjà inscrit ? <a href="${pageContext.request.contextPath}/ControllerConnexion">Se connecter</a>
+        </p>
+    </div>
 </body>
 </html>
