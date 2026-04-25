@@ -8,16 +8,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class ControllerChoixPartie
+ * Servlet implementation class ControllerServlet
  */
-@WebServlet("/ControllerChoixPartie")
-public class ControllerChoixPartie extends HttpServlet {
+
+@WebServlet(urlPatterns = {"/index", "/accueil", "/connexion"})
+public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControllerChoixPartie() {
+    public ControllerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,8 +28,29 @@ public class ControllerChoixPartie extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		String path = request.getServletPath();
+		String vue = "";
+		
+		switch (path) {
+		
+			case "/index":
+				request.setAttribute("message", "Bienvenue sur l'index");
+				vue = "/WEB-INF/index.jsp";
+			case "/accueil":
+				request.setAttribute("message", "Page connexion");
+				vue = "/WEB-INF/connexion.jsp";
+			case "/connexion":
+				request.setAttribute("message", "Bienvenue sur le plateau");
+				vue = "/WEB-INF/plateau.jsp";
+			
+			
+				
+			default:
+				vue = "/WEB-INF/404.jsp";
+				break;
+		}
 	}
 
 	/**
