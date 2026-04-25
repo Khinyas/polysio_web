@@ -5,9 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <style><%@include file="/WEB-INF/styles.css"%></style>
+
 <title>Accueil</title>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 Et voici l'accueil, ${NomRecu} ! Et voici ton mail: ${Email} !
 	<form action="/polysio_web/ControllerInscription" method="POST">
 		<button type="submit">Déconnexion</button>
