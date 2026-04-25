@@ -25,18 +25,23 @@ public class ControllerAccueil extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("WEB-INF/accueil.jsp").forward(request, response);
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("servletAttribute", 1);
+        afficherPage(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Logique pour traiter le formulaire
+        String nom = request.getParameter("pseudo"); // Recupere la donnee du formulaire inscription.jsp
+        request.setAttribute("NomRecu", nom); // Pour l'envoyer a l'accueil
+        
+        // On appelle la même méthode d'affichage
+        afficherPage(request, response);
+    }
+
+    // Méthode utilitaire pour centraliser le forward
+    private void afficherPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+    }
 
 }

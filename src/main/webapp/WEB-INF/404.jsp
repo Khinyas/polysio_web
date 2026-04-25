@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>$message</title>
+<title>404 - VOUS ETES PERDU'</title>
 </head>
 <body>
+
+<H1> Bravo, vous avez eu une erreur, relancez</H1>
 
 </body>
 </html>
