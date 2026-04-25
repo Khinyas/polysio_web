@@ -3,9 +3,11 @@
 <html>
 <head>
     <title>Connexion - Polysio</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/style.css">
 </head>
 <body>
    <!--  %@ include file="header.jsp" % -->
+  
 
     <div class="form-container">
         <h2>Connexion</h2>
@@ -21,7 +23,7 @@
         </form>
         
         <p style="text-align: center; margin-top: 15px;">
-            Pas de compte ? <a href="${pageContext.request.contextPath}/ControllerInscription">S'inscrire</a>
+            Pas de compte ? <a href="${pageContext.request.contextPath}/inscription">S'inscrire</a>
         </p>
     </div>
 </body>

@@ -24,7 +24,7 @@
         </form>
 
         <p style="text-align: center; margin-top: 15px;">
-            Déjà inscrit ? <a href="${pageContext.request.contextPath}/ControllerConnexion">Se connecter</a>
+            Déjà inscrit ? <a href="${pageContext.request.contextPath}/connexion">Se connecter</a>
         </p>
     </div>
 </body>

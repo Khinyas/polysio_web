@@ -11,7 +11,7 @@ import java.io.IOException;
  * Servlet implementation class ControllerServlet
  */
 
-@WebServlet(urlPatterns = {"/index", "/accueil", "/connexion", "/inscription"})
+@WebServlet(urlPatterns = { "/connexion","/index", "/accueil", "/inscription"})
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

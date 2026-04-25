@@ -26,22 +26,21 @@ public class ControllerAccueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("servletAttribute", 1);
-        afficherPage(request, response);
+    	request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Logique pour traiter le formulaire
-        String nom = request.getParameter("pseudo"); // Recupere la donnee du formulaire inscription.jsp
-        request.setAttribute("NomRecu", nom); // Pour l'envoyer a l'accueil
+       // String nom = request.getParameter("username"); // Recupere la donnee du formulaire inscription.jsp
+     //   request.setAttribute("NomRecu", nom); // Pour l'envoyer a l'accueil
         
         // On appelle la même méthode d'affichage
-        afficherPage(request, response);
+       // afficherPage(request, response);
     }
 
-    // Méthode utilitaire pour centraliser le forward
+   /* // Méthode utilitaire pour centraliser le forward
     private void afficherPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
-    }
+    } */
 
 }

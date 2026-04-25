@@ -32,7 +32,7 @@ public class ControllerConnexion extends HttpServlet {
             session.setAttribute("utilisateur", userConnecte);
             
             // 2. Rediriger vers l'accueil
-            response.sendRedirect(request.getContextPath() + "/ControllerAccueil");
+            response.sendRedirect(request.getContextPath() + "/accueil");
         } else {
             // 3. Retour à la page avec un message d'erreur
             response.sendRedirect(request.getContextPath() + "/ControllerConnexion?erreur=identifiants");
