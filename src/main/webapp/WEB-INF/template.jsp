@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/css_style.css">
-    <script type="module" src="/contenu-template.js"></script>
+    <link rel="stylesheet" href="/webapp/CSS/css_style.css">
+    <script type="module" src="/webapp/JS/contenu-template.js"></script>
 </head>
 <body>
     <header>
