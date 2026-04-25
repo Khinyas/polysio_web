@@ -15,7 +15,7 @@ import connexion.DAOUser;
 /**
  * Servlet implementation class ControllerInscription
  */
-@WebServlet("/ControllerInscription")
+@WebServlet("/ControllerTemplate")
 public class ControllerTemplate extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
