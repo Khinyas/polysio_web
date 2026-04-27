@@ -1,16 +1,14 @@
 const PLATEAU = [
                 {
-                    imageSrc:  '/asset/Plateau/Case/0.png',
+                    imageSrc:  'asset/Plateau/Case/0.png',
                     title:     'case + `X`',
-                    description:      'Case du plateau',
                     id: 'plateau',
                     btnText:   'Voir Propriete',
                     btnClass:  'btn-casePlateau'
                 },
                 {
-                    imageSrc:  '/asset/Plateau/Case/1.png',
+                    imageSrc:  'asset/Plateau/Case/1.png',
                     title:     'case + `X`',
-                    description:      'Case du plateau',
                     id: 'plateau',
                     btnText:   'Voir Propriete',
                     btnClass:  'btn-casePlateau'
@@ -36,12 +34,17 @@ function genererCardHTML(plateauP) {
         <div class="case-app">
             <div class="case-image-box">
                 <div class="case-image-fallback" style="background: linear-gradient(135deg,#1c2330,#2a3444);">
-                    <img src="${plateauP.imageSrc}" alt="${plateauP.title}" loading="lazy">
+                    <img src="${plateauP.imageSrc}" 				
+						alt="${plateauP.title}" 
+				        title="Cliquez pour voir les détails"
+				        onclick="afficherDetails('${plateauP.title}')" 
+				        style="cursor: pointer;" 
+				     >
                 </div>
             </div>
             <div class="case-body">
                 <h3>${plateauP.title}</h3>
-                <p>${plateauP.description}</p> <button class="btn-case ${plateauP.btnClass}">${plateauP.btnText} →</button> </div>
+                <button class="btn-case ${plateauP.btnClass}">${plateauP.btnText} →</button> </div>
         </div>
     `;
 }
@@ -49,3 +52,8 @@ function genererCardHTML(plateauP) {
 document.addEventListener('DOMContentLoaded', () => {
     injecterContenuIndex();
 });
+
+// La fonction qui sera appelée au clic
+function afficherDetails(nom) {
+    alert("Détails de la case : " + nom);
+}

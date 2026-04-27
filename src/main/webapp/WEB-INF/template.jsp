@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/css_style.css">
-    <script <!-- type="module"--> src="${pageContext.request.contextPath}/JS/contenu-template.js"></script>
+    <script src="${pageContext.request.contextPath}/JS/contenu-template.js"></script>
 </head>
 	<body>
    <header>
