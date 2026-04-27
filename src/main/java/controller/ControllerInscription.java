@@ -38,8 +38,8 @@ public class ControllerInscription extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String username = request.getParameter("username");
     	String email = request.getParameter("email");
-    	String password = request.getParameter("password");
-    	ModelUser nouvelUtilisateur = new ModelUser(username,email,password);
+    	String passwordClairP = request.getParameter("password");
+    	ModelUser nouvelUtilisateur = new ModelUser(username,email,passwordClairP);
     	DAOUser dao = new DAOUser();
     	dao.creerUtilisateur(nouvelUtilisateur);
     	

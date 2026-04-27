@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import model.ModelUser;
+import service.Securite;
 
 public class DAOUser {
 
@@ -17,7 +18,8 @@ public class DAOUser {
              PreparedStatement pstmt = conn.prepareStatement(sql);
              pstmt.setString(1, user.getUsername());
              pstmt.setString(2, user.getEmail());
-             pstmt.setString(3, user.getPassword());
+             // Hash le mot de passe passé en paramètre
+             pstmt.setString(3, Securite.hacherPassword(user.getPassword()));
              pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
