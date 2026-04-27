@@ -32,10 +32,17 @@ public class ControllerServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		// On aiguille au niveau de l'URL, la page de connexion sera la première page qui ouvre ici.
+		
 		String path = request.getServletPath();
 		String vue = "";
 		
 		switch (path) {
+			
+			case "/":
+				request.setAttribute("message", "Page d'accueil");
+				vue = "/WEB-INF/accueil.jsp";
+				break;
 		
 			case "/index":
 			
@@ -51,10 +58,7 @@ public class ControllerServlet extends HttpServlet {
 				vue = "/WEB-INF/connexion.jsp";
 				break;
 				
-			case "/":
-				request.setAttribute("message", "Page d'accueil");
-				vue = "/WEB-INF/accueil.jsp";
-				break;
+			
 				
 			case "/inscription":
 				request.setAttribute("message", "Page d'inscription");

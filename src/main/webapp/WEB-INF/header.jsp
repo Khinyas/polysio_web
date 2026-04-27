@@ -16,7 +16,7 @@
         %>
             <%-- Cas : Utilisateur connecté --%>
             <span class="welcome-text">Bonjour, <strong><%= user.getUsername() %></strong></span>
-            <a href="${pageContext.request.contextPath}/ControllerDeconnexion" class="btn-logout">Déconnexion</a>
+            <a href="${pageContext.request.contextPath}/profil" class="btn-profil">Profil</a>
         <% 
             } else { 
         %>
