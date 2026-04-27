@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DAOAcces {
 
     // Tes identifiants (à adapter selon ta configuration locale)
-    private static final String URL = "jdbc:mysql://localhost:3306/polysio-web";
+    private static final String URL = "jdbc:mysql://localhost:3306/polysio";
     private static final String USER = "root";
     private static final String PASSWORD = "";
 

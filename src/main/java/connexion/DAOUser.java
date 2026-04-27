@@ -5,12 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import model.ModelUser;
-import model.modelUser;
 
 public class DAOUser {
 
     public void creerUtilisateur(ModelUser user) {
-    	String sql = "INSERT INTO users (nom,email,password) VALUES (?,?,?)";
+    	String sql = "INSERT INTO utilisateur (pseudo,email,mot_de_passe) VALUES (?,?,?)";
     	
 
         // Utilise DAOAcces pour obtenir la connexion existante

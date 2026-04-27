@@ -32,8 +32,8 @@ public class ControllerAccueil extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Logique pour traiter le formulaire
-        String nom = request.getParameter("pseudo"); // Recupere la donnee du formulaire inscription.jsp
-        request.setAttribute("NomRecu", nom); // Pour l'envoyer a l'accueil
+        String username = request.getParameter("username"); // Recupere la donnee du formulaire inscription.jsp
+        request.setAttribute("NomRecu", username); // Pour l'envoyer a l'accueil
         
         // On appelle la même méthode d'affichage
         afficherPage(request, response);

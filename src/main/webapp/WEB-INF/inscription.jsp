@@ -11,8 +11,8 @@
 Page inscription
 	<div>
 	
-	<!--  Redirige au ControllerAccueil une fois le bouton d'inscription cliqué -->
-		<form action="ControllerAccueil" method="POST">
+	<!--  Redirige au ControllerInscription une fois le bouton d'inscription cliqué -->
+		<form action="ControllerInscription" method="POST">
 		
 			<table border="0">
 				<tr>

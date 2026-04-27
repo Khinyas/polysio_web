@@ -36,15 +36,15 @@ public class ControllerInscription extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String name = request.getParameter("username");
+    	String username = request.getParameter("username");
     	String email = request.getParameter("email");
     	String password = request.getParameter("password");
-    	ModelUser nouvelUtilisateur = new ModelUser(name,email,password);
+    	ModelUser nouvelUtilisateur = new ModelUser(username,email,password);
     	DAOUser dao = new DAOUser();
     	dao.creerUtilisateur(nouvelUtilisateur);
     	
         // On redirige
-    	response.sendRedirect("/ControllerAccueil");
+    	response.sendRedirect("/polysio_web/ControllerAccueil");
     }
 
 }
