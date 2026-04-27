@@ -9,7 +9,7 @@
 </head>
 <body>
 Et voici l'accueil, ${NomRecu} ! Et voici ton mail: ${Email} !
-	<form action="/polysio_web/ControllerInscription" method="POST">
+	<form action="/polysio_web/ControllerConnexion" method="POST">
 		<button type="submit">Déconnexion</button>
 	</form>
 </body>

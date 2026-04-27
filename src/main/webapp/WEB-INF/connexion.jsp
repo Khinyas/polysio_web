@@ -12,7 +12,7 @@ Page connexion
 	<div>
 	
 	<!--  Redirige au ControllerInscription une fois le bouton d'inscription cliqué -->
-		<form action="ControllerConnexion" method="POST">
+		<form action="ControllerAccueil" method="POST">
 		
 			<table border="0">
 				<tr>
@@ -44,7 +44,7 @@ Page connexion
 				
 				<tr>
 					<td colspan="2" style="text-align:center;">
-						<button type="submit">S'inscrire</button>
+						<button type="submit">Se connecter</button>
 					</td>
 				</tr>
 			</table>
