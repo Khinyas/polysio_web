@@ -38,30 +38,31 @@ public class ViewPlateau extends HttpServlet {
         List<ModelCase> listeCases = (List<ModelCase>) request.getAttribute("listeCasesBdd");
         StringBuilder cases = new StringBuilder();
         for (ModelCase casePlateau : listeCases) {
-			if (casePlateau.getNom().equals("centre")) {
-				cases.append(String.format(
-					"<div id='%d' class='case' style='grid-column:%d / span 2; grid-row:%d / span 2; '>" +
-							"<img src='%s' alt='%s' width='100%' height='100%' />" +
-							"</div>",
-					casePlateau.getIdCSS(),
-					casePlateau.getPositionX(),
-					casePlateau.getPositionY(),
-					/*request.getContextPath() + */casePlateau.getCheminSvg(),
-					casePlateau.getNom()
-				));
-			} else {
-				cases.append(String.format(
-				"<div id='%d' class='case' style='grid-column:%d; grid-row:%d; '>" +
-							"<img src='%s' alt='%s' width='100%' height='100%' />" +
-						"</div>",
-						casePlateau.getIdCSS(),
-						casePlateau.getPositionX(),
-						casePlateau.getPositionY(),
-						/*request.getContextPath() + */casePlateau.getCheminSvg(),
-						casePlateau.getNom()
-						));
-			}
+            if (casePlateau.getNom().equals("centre")) {
+                cases.append(String.format(
+                    "<div id='%s' class='case' style='grid-column:%d / span 2; grid-row:%d / span 2; '>" +
+                    "<img src='%s' alt='%s' width='100%%' height='100%%' />" + 
+                    "</div>",
+                    casePlateau.getIdCSS(),
+                    casePlateau.getPositionX(),
+                    casePlateau.getPositionY(),
+                    request.getContextPath() + casePlateau.getCheminSvg(),
+                    casePlateau.getNom()
+                ));
+            } else {
+                cases.append(String.format(
+                    "<div id='%s' class='case' style='grid-column:%d; grid-row:%d; '>" +
+                    "<img src='%s' alt='%s' width='100%%' height='100%%' />" + 
+                    "</div>",
+                    casePlateau.getIdCSS(),
+                    casePlateau.getPositionX(),
+                    casePlateau.getPositionY(),
+                    request.getContextPath() + casePlateau.getCheminSvg(),
+                    casePlateau.getNom()
+                ));
+            }
         }
+        
         String html = """
             <!DOCTYPE html>
             <html>
