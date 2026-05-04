@@ -33,7 +33,10 @@ public class ControllerConstructeurPlateau extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-        String param = request.getParameter("action");	
+        String param = request.getParameter("action");
+		if (param == null) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action inconnue : " + param);
+		}
         if (param != null) {
         	System.out.println("test valeur null param");
         	switch (param) {
