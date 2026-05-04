@@ -1,3 +1,40 @@
 body {
-  background-color: powderblue;
+  background-image: url("images/inscription.jpg");
+  background-repeat: no-repeat;
+  /* 100% 100% force l'image à s'étirer sur toute la largeur et hauteur */
+  background-size: 100% 100%; 
+  /* On fixe la hauteur sur toute la vue du navigateur */
+  height: 100vh; 
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Empêche le scroll si on étire */
+  position: relative;
+}
+
+.form-container {
+  position: absolute;
+  /* Ces valeurs sont à ajuster selon la position exacte du losange sur ton image */
+  top: 55%; 
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centre parfaitement le bloc */
+  
+  width: 25%;  /* Largeur relative au losange */
+  height: 40%; /* Hauteur relative au losange */
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Style optionnel pour rendre les champs transparents/esthétiques dans le losange */
+.input-field {
+    width: 80%;
+    margin: 5px 0;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid #00fbff;
+    color: white;
+    border-radius: 5px;
 }

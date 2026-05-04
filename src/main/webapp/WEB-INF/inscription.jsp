@@ -11,6 +11,7 @@
 Page inscription
 	<div>
 	
+	<div class="form-container">
 	<!--  Redirige au ControllerInscription une fois le bouton d'inscription cliqué -->
 		<form action="ControllerInscription" method="POST">
 		
@@ -20,7 +21,7 @@ Page inscription
 						Nom
 					</td>
 					<td>
-						<input type="text" name="username">
+						<input type="text" name="username" class="input-field">
 					</td>
 				</tr>
 				<tr>
@@ -28,7 +29,7 @@ Page inscription
 						E-mail
 					</td>
 					<td>
-						<input type="text" name="email">
+						<input type="text" name="email" class="input-field">
 					</td>
 				</tr>
 				<tr>
@@ -38,7 +39,7 @@ Page inscription
 						<p style="color:red;">${msgErreur}</p>
 					</td>
 					<td>
-						<input type="password" name="password">
+						<input type="password" name="password" class="input-field">
 					</td>
 				</tr>
 				
@@ -47,7 +48,7 @@ Page inscription
 						Confirmer le mot de passe
 					</td>
 					<td>
-						<input type="password" name="confirmPassword">
+						<input type="password" name="confirmPassword" class="input-field">
 					</td>
 				</tr>
 				
@@ -59,6 +60,7 @@ Page inscription
 				</tr>
 			</table>
 		</form>
+		
 		<form action="ControllerConnexion" method="POST">
 			<table border="0">
 		<td colspan="2" style="text-align:center;">
@@ -67,6 +69,7 @@ Page inscription
 				</tr>
 			</table>
 		</form>
+	</div>
 	</div>
 </body>
 </html>

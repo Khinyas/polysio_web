@@ -11,6 +11,7 @@
 Page connexion
 	<div>
 	
+	<div class="form-container">
 	<!--  Redirige au ControllerConnexion une fois le bouton d'inscription cliqué -->
 		<form action="ControllerConnexion" method="POST">
 		
@@ -20,7 +21,7 @@ Page connexion
 						Nom
 					</td>
 					<td>
-						<input type="text" name="username">
+						<input type="text" name="username" class="input-field">
 					</td>
 				</tr>
 				<tr>
@@ -28,7 +29,7 @@ Page connexion
 						E-mail
 					</td>
 					<td>
-						<input type="text" name="email">
+						<input type="text" name="email" class="input-field">
 					</td>
 				</tr>
 				<tr>
@@ -36,7 +37,7 @@ Page connexion
 						Mot de passe
 					</td>
 					<td>
-						<input type="password" name="password">
+						<input type="password" name="password" class="input-field">
 					</td>
 				</tr>
 				
@@ -50,7 +51,9 @@ Page connexion
 			</table>
 		</form>
 		
+		
 		<a href="ControllerInscription" class="button">Pas de compte ? S'inscrire</a>
+	</div>
 	</div>
 </body>
 </html>
