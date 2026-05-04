@@ -35,7 +35,7 @@ public class ControllerConnexion extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/accueil");
         } else {
             // 3. Retour à la page avec un message d'erreur
-            response.sendRedirect(request.getContextPath() + "/ControllerConnexion?erreur=identifiants");
+            response.sendRedirect(request.getContextPath() + "/connexion?erreur=identifiants");
         }
     }
 }

@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/style.css">
 </head>
 <body>
-   <!--  %@ include file="header.jsp" % -->
+<%@ include file="header.jsp" %>   
   
 
     <div class="form-container">

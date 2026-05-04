@@ -11,7 +11,7 @@
 <body>
 <%@ include file="header.jsp" %>
 
-<button> Lancer une partie</button>
+<a href="${pageContext.request.contextPath}/ChoixPartie"> Lancer une partie </a>
 <br>
 <button> Charger une partie</button>
 <br>

@@ -76,6 +76,12 @@ public class ControllerServlet extends HttpServlet {
 				vue = "/WEB-INF/profil.jsp";
 				break;
 				
+			
+			case "/ChoixPartie":
+				request.setAttribute("message", "Choix de partie");
+				vue = "/WEB-INF/ChoixPartie.jsp";
+				break;
+				
 				
 							
 			default:
