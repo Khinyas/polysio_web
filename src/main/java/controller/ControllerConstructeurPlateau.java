@@ -46,11 +46,9 @@ public class ControllerConstructeurPlateau extends HttpServlet {
 	        	}
 	        	default : {
 	                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action inconnue : " + param);
-	                return;
 	        	}
         	}
         }
-		
 	}
 
 	/**

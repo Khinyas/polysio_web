@@ -38,34 +38,47 @@ public class ViewPlateau extends HttpServlet {
         List<ModelCase> listeCases = (List<ModelCase>) request.getAttribute("listeCasesBdd");
         StringBuilder cases = new StringBuilder();
         for (ModelCase casePlateau : listeCases) {
-        	cases.append(String.format("<div id='%s' class='case' style='grid-column:%d; grid-row:%d;'>%s</div>",
-        		casePlateau.getId(),
-        		casePlateau.getNom(),
-        		casePlateau.getPositionX(),
-        		casePlateau.getPositionY(),
-        		casePlateau.getTypeCase(),
-        		casePlateau.getCheminSvg(),
-        		casePlateau.getIdCSS()
-        		))
+			if (casePlateau.getNom().equals("centre")) {
+				cases.append(String.format(
+					"<div id='%d' class='case' style='grid-column:%d / span 2; grid-row:%d / span 2; '>" +
+							"<img src='%s' alt='%s' width='100%' height='100%' />" +
+							"</div>",
+					casePlateau.getIdCSS(),
+					casePlateau.getPositionX(),
+					casePlateau.getPositionY(),
+					/*request.getContextPath() + */casePlateau.getCheminSvg(),
+					casePlateau.getNom()
+				));
+			} else {
+				cases.append(String.format(
+				"<div id='%d' class='case' style='grid-column:%d; grid-row:%d; '>" +
+							"<img src='%s' alt='%s' width='100%' height='100%' />" +
+						"</div>",
+						casePlateau.getIdCSS(),
+						casePlateau.getPositionX(),
+						casePlateau.getPositionY(),
+						/*request.getContextPath() + */casePlateau.getCheminSvg(),
+						casePlateau.getNom()
+						));
+			}
         }
-        /*String html = """
+        String html = """
             <!DOCTYPE html>
             <html>
                 <head>
                     <title>Mon Plateau</title>
                 </head>
                 <body>
-                    <h1>Bonjour %s !</h1>
-                    <p>Le HTML est enfin lisible dans mon code Java.</p>
+                    <div class="plateau">
+                    	%s
+                    </div>
                 </body>
             </html>
-            """.formatted(nom); // On injecte la variable avec %s
+            """.formatted(cases.toString());
 
         out.print(html);
-        
         // On vide le buffer vers le navigateur sans fermer brutalement
-        out.flush(); 
-        */
+        out.flush();
     }
 
     

@@ -5,8 +5,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.ModelCase;
+
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.List;
 
 /**
  * Servlet implementation class ControllerAccueil
@@ -26,25 +29,28 @@ public class ControllerAccueil extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("servletAttribute", 1);
-        String param = request.getParameter("action");	
-        if (param != null) {
-        	System.out.println("test valeur null param");
-        	switch (param) {
-	        	case "jouer" : { 
-	        		response.sendRedirect(request.getContextPath() + "/ControllerConstructeurPlateau");
-	        		return;
-	        	}
-	        	default : {
-	                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action inconnue : " + param);
-	                return;
-	        	}
-        	}
-        }
-        //afficherPage(request, response);
-    	request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
-    }
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String param = request.getParameter("action");
+
+		// ← Si pas de paramètre, on considère que c'est "jouer" par défaut
+		if (param == null) {
+			param = "jouer";
+		}
+
+		switch (param) {
+			case "jouer" : {
+				List<ModelCase> listeCases = ControllerCase.plateauBuilder();
+				request.setAttribute("listeCasesBdd", listeCases);
+				request.getRequestDispatcher("/ViewPlateau").forward(request, response);
+				return;
+			}
+			default : {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action inconnue : " + param);
+			}
+		}
+	}
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Logique pour traiter le formulaire
