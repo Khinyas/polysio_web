@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style><%@include file="/WEB-INF/styles.css"%></style>
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/style.css">
 <title>Accueil</title>
 </head>
 <body>
@@ -23,5 +23,13 @@ Et voici l'accueil, ${NomRecu} ! Et voici ton mail: ${Email} !
 </form>
 
 
+=======
+
+<a href="${pageContext.request.contextPath}/ChoixPartie"> Lancer une partie </a>
+<br>
+<button> Charger une partie</button>
+<br>
+<button> Quitter le jeu</button>
+	
 </body>
 </html>

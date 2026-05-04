@@ -36,15 +36,39 @@ public class ControllerInscription extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String name = request.getParameter("username");
-    	String email = request.getParameter("email");
-    	String password = request.getParameter("password");
-    	ModelUser nouvelUtilisateur = new ModelUser(name,email,password);
-    	DAOUser dao = new DAOUser();
-    	dao.creerUtilisateur(nouvelUtilisateur);
-    	
-        // On redirige
-    	response.sendRedirect("/ControllerAccueil");
+        String username = request.getParameter("username");
+        
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        
+        // On utilise la méthode statique qui existe déjà dans ton DAOUser
+        Boolean succes = DAOUser.insererUser(username, password, email);
+        
+     // --- CONTRÔLE DE SAISIE ---
+        
+        username = username.replaceAll("<[^>]*>", "");
+        
+        if (username == null || username.trim().length() < 3) {
+            response.sendRedirect("inscription?erreur=pseudo_court");
+            return;
+        }
+        if (!username.matches("^[a-zA-Z0-9_]{3,20}$")) {
+            response.sendRedirect(request.getContextPath() + "inscription?erreur=format_pseudo");
+            return;
+        }
+        if (!email.contains("@")) {
+            response.sendRedirect("inscription?erreur=email_invalide");
+            return;
+        }
+        
+        if (succes) {
+            // Inscription réussie : on redirige vers la connexion
+            // On ajoute getContextPath() pour éviter les erreurs 404 sur Tomcat
+            response.sendRedirect(request.getContextPath() + "/connexion");
+        } else {
+            // Échec (ex: pseudo déjà pris) : on renvoie au formulaire
+            response.sendRedirect(request.getContextPath() + "/inscription?erreur=1");
+        }
     }
 
 }
