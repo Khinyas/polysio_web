@@ -11,8 +11,8 @@
 Page connexion
 	<div>
 	
-	<!--  Redirige au ControllerInscription une fois le bouton d'inscription cliqué -->
-		<form action="ControllerAccueil" method="POST">
+	<!--  Redirige au ControllerConnexion une fois le bouton d'inscription cliqué -->
+		<form action="ControllerConnexion" method="POST">
 		
 			<table border="0">
 				<tr>
@@ -49,6 +49,8 @@ Page connexion
 				</tr>
 			</table>
 		</form>
+		
+		<a href="ControllerInscription" class="button">Pas de compte ? S'inscrire</a>
 	</div>
 </body>
 </html>

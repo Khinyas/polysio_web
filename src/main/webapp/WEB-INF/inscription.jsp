@@ -34,17 +34,35 @@ Page inscription
 				<tr>
 					<td>
 						Mot de passe
+						<!-- Affichage erreur si elle existe -->
+						<p style="color:red;">${msgErreur}</p>
 					</td>
 					<td>
 						<input type="password" name="password">
 					</td>
 				</tr>
 				
-				<!-- Inclure champ mdp et confirmation mdp  -->
+				<tr>
+					<td>
+						Confirmer le mot de passe
+					</td>
+					<td>
+						<input type="password" name="confirmPassword">
+					</td>
+				</tr>
+				
 				
 				<tr>
 					<td colspan="2" style="text-align:center;">
 						<button type="submit">S'inscrire</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<form action="ControllerConnexion" method="POST">
+			<table border="0">
+		<td colspan="2" style="text-align:center;">
+						<button type="submit">Se connecter</button>
 					</td>
 				</tr>
 			</table>
