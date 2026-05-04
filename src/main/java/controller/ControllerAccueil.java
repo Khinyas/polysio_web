@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 
 /**
  * Servlet implementation class ControllerAccueil
@@ -27,6 +28,16 @@ public class ControllerAccueil extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("servletAttribute", 1);
+        String param = request.getParameter("action");	
+        if (param != null) {
+        	System.out.println("test valeur null param");
+        	switch (param) {
+	        	case "jouer" : { 
+	        		response.sendRedirect(request.getContextPath() + "/ControllerConstructeurPlateau");
+	        		return;
+	        	}
+        	}
+        }
         afficherPage(request, response);
     }
 

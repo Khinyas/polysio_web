@@ -14,5 +14,14 @@ Et voici l'accueil, ${NomRecu} ! Et voici ton mail: ${Email} !
 	<form action="/polysio_web/ControllerInscription" method="POST">
 		<button type="submit">Déconnexion</button>
 	</form>
+	
+	<form action="${pageContext.request.contextPath}/ControllerAccueil" method="GET">
+    <input type="hidden" name="action" value="jouer">
+    
+    <input type="text" name="parametre" placeholder="Ton Parametre" requested>
+    <button type="submit">Valider Joueur</button>
+</form>
+
+
 </body>
 </html>

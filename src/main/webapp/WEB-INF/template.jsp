@@ -6,12 +6,10 @@
     <script src="${pageContext.request.contextPath}/JS/contenu-template.js"></script>
 </head>
 	<body>
-   <header>
-        <nav id="header">Logo PolySIO | Accueil | Profil</nav>
-    </header>
+<%@ include file="header.jsp" %>
 
     <section class="hero">
-        <h1>Bienvenue sur PolySIO</h1>
+        <h1>Plateau de jeu Polysio</h1>
         <div id="plateau">
         <!-- Contenu du Plateau -->
             </div>

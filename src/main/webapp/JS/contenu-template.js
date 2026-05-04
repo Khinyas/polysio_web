@@ -12,7 +12,127 @@ const PLATEAU = [
                     id: 'plateau',
                     btnText:   'Voir Propriete',
                     btnClass:  'btn-casePlateau'
-                }
+                },
+				{
+				    imageSrc:  'asset/Plateau/Case/2.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/2.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/3.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/4.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/5.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/6.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/7.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/8.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/9.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/10.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/11.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/12.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/13.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+
+				{
+				    imageSrc:  'asset/Plateau/Case/14.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/15.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/16.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				},
+				{
+				    imageSrc:  'asset/Plateau/Case/17.png',
+				    title:     'case + `X`',
+				    id: 'plateau',
+				    btnText:   'Voir Propriete',
+				    btnClass:  'btn-casePlateau'
+				}																																																																				
                 ];
 
 
@@ -38,13 +158,10 @@ function genererCardHTML(plateauP) {
 						alt="${plateauP.title}" 
 				        title="Cliquez pour voir les détails"
 				        onclick="afficherDetails('${plateauP.title}')" 
-				        style="cursor: pointer;" 
-				     >
+				        style="cursor: pointer;">
                 </div>
+				<!--<button class="btn-case ${plateauP.btnClass}">${plateauP.btnText} →</button>-->
             </div>
-            <div class="case-body">
-                <h3>${plateauP.title}</h3>
-                <button class="btn-case ${plateauP.btnClass}">${plateauP.btnText} →</button> </div>
         </div>
     `;
 }
