@@ -33,17 +33,20 @@ public class ControllerConstructeurPlateau extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		if (request.getParameter("parametre") == null) {
-	    }
         String param = request.getParameter("action");	
         if (param != null) {
         	System.out.println("test valeur null param");
         	switch (param) {
 	        	case "jouer" : { 
 	        		List<ModelCase> listeCases = new ArrayList<>();
-	        		request.setAttribute("listeCases", listeCases)
-	        		response.sendRedirect(request.getContextPath() + "/ViewPlateau");
+	        		listeCases = ControllerCase.plateauBuilder();
+	        		request.setAttribute("listeCasesBdd", listeCases);
+	        		request.getRequestDispatcher("/ViewPlateau").forward(request, response);
 	        		return;
+	        	}
+	        	default : {
+	                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action inconnue : " + param);
+	                return;
 	        	}
         	}
         }

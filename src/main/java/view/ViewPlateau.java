@@ -18,7 +18,6 @@ import java.util.List;
 @WebServlet("/ViewPlateau")
 public class ViewPlateau extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private List<ModelCase> ListeCases = new ArrayList<>();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,8 +35,20 @@ public class ViewPlateau extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         String nom = request.getParameter("parametre");
-
-        String html = """
+        List<ModelCase> listeCases = (List<ModelCase>) request.getAttribute("listeCasesBdd");
+        StringBuilder cases = new StringBuilder();
+        for (ModelCase casePlateau : listeCases) {
+        	cases.append(String.format("<div id='%s' class='case' style='grid-column:%d; grid-row:%d;'>%s</div>",
+        		casePlateau.getId(),
+        		casePlateau.getNom(),
+        		casePlateau.getPositionX(),
+        		casePlateau.getPositionY(),
+        		casePlateau.getTypeCase(),
+        		casePlateau.getCheminSvg(),
+        		casePlateau.getIdCSS()
+        		))
+        }
+        /*String html = """
             <!DOCTYPE html>
             <html>
                 <head>
@@ -54,6 +65,7 @@ public class ViewPlateau extends HttpServlet {
         
         // On vide le buffer vers le navigateur sans fermer brutalement
         out.flush(); 
+        */
     }
 
     

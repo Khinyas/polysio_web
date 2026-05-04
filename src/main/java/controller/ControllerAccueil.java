@@ -36,6 +36,10 @@ public class ControllerAccueil extends HttpServlet {
 	        		response.sendRedirect(request.getContextPath() + "/ControllerConstructeurPlateau");
 	        		return;
 	        	}
+	        	default : {
+	                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action inconnue : " + param);
+	                return;
+	        	}
         	}
         }
         //afficherPage(request, response);
