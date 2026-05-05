@@ -53,6 +53,12 @@ public class ControllerInscription extends HttpServlet {
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             erreur = "Tous les champs sont obligatoires.";
         } 
+        
+        // Dans ControllerInscription.java
+        else if (!username.matches("^[a-zA-Z0-9]+$")) {
+            erreur = "Le pseudo ne doit contenir que des lettres et des chiffres.";
+        }
+        
         else if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$")) {
             erreur = "Le mot de passe doit contenir 8 caractères, Maj, Min, Chiffre et Symbole.";
         }

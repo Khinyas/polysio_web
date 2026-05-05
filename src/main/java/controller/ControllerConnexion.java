@@ -42,7 +42,7 @@ public class ControllerConnexion extends HttpServlet {
         String pseudo = request.getParameter("username");
         String passwordSaisi = request.getParameter("password");
 
-        DAOUser dao = new DAOUser();
+        DAOUser dao = new DAOUser(); 
         ModelUser user = dao.trouverParPseudo(pseudo);
 
         // Securite.verifierPassword doit comparer le clair saisi et le hash en base

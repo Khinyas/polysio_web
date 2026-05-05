@@ -26,14 +26,6 @@ Page connexion
 				</tr>
 				<tr>
 					<td>
-						E-mail
-					</td>
-					<td>
-						<input type="text" name="email" class="input-field">
-					</td>
-				</tr>
-				<tr>
-					<td>
 						Mot de passe
 					</td>
 					<td>
