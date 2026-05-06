@@ -10,16 +10,16 @@ import model.ModelUser;
 import java.io.IOException;
 
 /**
- * Servlet implementation class ControllerAccueil
+ * Servlet implementation class ControllerProfil
  */
-@WebServlet("/ControllerAccueil")
-public class ControllerAccueil extends HttpServlet {
+@WebServlet("/ControllerProfil")
+public class ControllerProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControllerAccueil() {
+    public ControllerProfil() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,7 +49,7 @@ public class ControllerAccueil extends HttpServlet {
 
     // Méthode utilitaire pour centraliser le forward
     private void afficherPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
     }
 
 }
