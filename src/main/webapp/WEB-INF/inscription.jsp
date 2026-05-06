@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style><%@include file="/WEB-INF/styles.css"%></style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+<%@include file="/WEB-INF/styles.css"%>
+</style>
 <title>Inscription</title>
 </head>
 <body>
