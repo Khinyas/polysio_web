@@ -65,7 +65,7 @@ public class DAOUser {
  // Dans ton fichier DAOUser.java
     public ModelUser trouverParPseudo(String pseudo) {
         // La requête SQL pour trouver l'utilisateur par son pseudo
-        String sql = "SELECT id_utilisateur, pseudo, email, mot_de_passe FROM utilisateur WHERE pseudo = ?";
+        String sql = "SELECT id_utilisateur, pseudo, email, mot_de_passe, role FROM utilisateur WHERE pseudo = ?";
         
         try (Connection conn = DAOAcces.getConnexion(); 
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -76,11 +76,12 @@ public class DAOUser {
                 if (rs.next()) {
                     // On crée et on retourne l'objet ModelUser avec les données de la BDD
                 	return new ModelUser(
-                		    rs.getInt("id_utilisateur"), // On récupère l'ID ici !
-                		    rs.getString("pseudo"),
-                		    rs.getString("email"),
-                		    rs.getString("mot_de_passe")
-                		);
+                            rs.getInt("id_utilisateur"),
+                            rs.getString("pseudo"),
+                            rs.getString("email"),
+                            rs.getString("mot_de_passe"),
+                            ModelUserRole.valueOf(rs.getString("role").toUpperCase())
+                        );
                 }
             }
         } catch (SQLException e) {
@@ -142,10 +143,8 @@ public class DAOUser {
                             rs.getInt("id_utilisateur"),
                             rs.getString("pseudo"),
                             rs.getString("email"),
-                            ModelUserRole.valueOf(
-                                rs.getString("role")
-                                .toUpperCase()
-                            )
+                            rs.getString("mot_de_passe"),
+                            ModelUserRole.valueOf(rs.getString("role").toUpperCase())
                         );
                     }
                 }

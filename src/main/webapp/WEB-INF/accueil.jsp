@@ -17,7 +17,7 @@
 	<div class="form-container">
 
   Et voici l'accueil, ${NomRecu} ! Et voici ton mail: ${Email} !
-	<form action="/polysio_web/ControllerDeconnexion" method="POST">
+	<form action="${pageContext.request.contextPath}/deconnexion" method="GET">
 		<button type="submit">Déconnexion</button>
 	</form> 
 	
