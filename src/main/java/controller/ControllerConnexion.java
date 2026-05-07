@@ -31,8 +31,7 @@ public class ControllerConnexion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Juste afficher le formulaire
-        request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
+
     }
 
 	/**

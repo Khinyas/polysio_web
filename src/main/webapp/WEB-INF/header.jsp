@@ -10,13 +10,15 @@
     <div class="user-menu">
         <% 
             // On récupère l'utilisateur stocké en session par le ControllerConnexion
-            ModelUser user = (ModelUser) session.getAttribute("utilisateur"); 
+            ModelUser user = (ModelUser) session.getAttribute("userSession"); 
             
             if (user != null) { 
         %>
             <%-- Cas : Utilisateur connecté --%>
             <span class="welcome-text">Bonjour, <strong><%= user.getUsername() %></strong></span>
-            <a href="${pageContext.request.contextPath}/profil" class="btn-profil">Profil</a>
+        <form action="ControllerProfil" method="GET">
+	        <button type="submit">Profil</button>
+	    </form>
         <% 
             } else { 
         %>
@@ -26,5 +28,6 @@
         <% 
             } 
         %>
+	</div>
     </div>
 </nav>

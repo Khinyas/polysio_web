@@ -39,7 +39,7 @@ public class ControllerAccueil extends HttpServlet {
             request.setAttribute("email", user.getEmail());
         }
         
-        afficherPage(request, response);
+        
         
         
         
