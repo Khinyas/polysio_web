@@ -121,20 +121,22 @@ public class ViewPlateau extends HttpServlet {
         	                    border: 2px solid black;
         	                }
 
-        	                .case {
-        	                    border: 1px solid black;
-        	                    padding: 0;
-        	                    margin: 0;
-        	                    display: flex;
-        	                    overflow: hidden;
-        	                }
+							.case {
+							    border: 1px solid black;
+							    margin: 0;
+							    padding: 0;
+							    display: block; /* On passe de flex à block pour simplifier */
+							    overflow: hidden;
+							    width: 100%%;
+							    height: 100%%;
+							}
 
-        	                .case img {
-        	                    width: 100%%; /* DOUBLE POURCENTAGE ICI */
-        	                    height: 100%%; /* DOUBLE POURCENTAGE ICI */
-        	                    object-fit: fill; 
-        	                    display: block;
-        	                }
+							.case img {
+							    width: 100%%;  /* Ajoute ceci */
+							    height: 100%%; /* Ajoute ceci */
+							    object-fit: fill; 
+							    display: block;
+							}
 
         	                /* Panneau latéral : exploite l'espace vide à droite du plateau carré */
         	                .side-panel {
