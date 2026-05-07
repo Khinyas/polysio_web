@@ -45,6 +45,8 @@ Page connexion
 				</tr>
 			</table>
 		</form>
+			<!-- Affichage erreur si elle existe -->
+			<p style="color:red;">${msgErreur}</p>
 		
 		
 		<a href="ControllerInscription" class="button">Pas de compte ? S'inscrire</a>
