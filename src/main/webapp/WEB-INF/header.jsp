@@ -1,16 +1,20 @@
+<%-- Import du modï¿½le pour que le JSP reconnaisse l'objet ModelUser --%>
 <%@ page import="model.ModelUser" %>
+<head>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/style.css">
+</head>
 
 <nav class="header-nav">
     <div class="logo">Polysio</div>
     
     <div class="user-menu">
         <% 
-            // On récupère l'utilisateur stocké en session par le ControllerConnexion
+            // On rÃ©cupÃ¨re l'utilisateur stockÃ© en session par le ControllerConnexion
             ModelUser user = (ModelUser) session.getAttribute("userSession"); 
             
             if (user != null) { 
         %>
-            <%-- Cas : Utilisateur connecté --%>
+            <%-- Cas : Utilisateur connectÃ© --%>
             <span class="welcome-text">Bonjour, <strong><%= user.getUsername() %></strong></span>
         <form action="ControllerProfil" method="GET">
 	        <button type="submit">Profil</button>
@@ -18,7 +22,7 @@
         <% 
             } else { 
         %>
-            <%-- Cas : Personne n'est connecté --%>
+            <%-- Cas : Personne n'est connectÃ© --%>
             <a href="${pageContext.request.contextPath}/connexion" class="btn-login">Connexion</a>
             <a href="${pageContext.request.contextPath}/inscription" class="btn-register">S'inscrire</a>
         <% 
