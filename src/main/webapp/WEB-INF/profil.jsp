@@ -17,10 +17,6 @@
 	    <br>
 	    Adresse E-mail : ${email} 
 	    
-	    <!-- Bouton de déconnexion (redirige vers le Servlet de connexion) -->
-	    <form action="ControllerConnexion" method="GET">
-	        <button type="submit">Déconnexion</button>
-	   	</form>
 	   	<!-- Bouton d'accueil (redirige vers le Servlet d'accueil) -->
 	    <form action="ControllerAccueil" method="GET">
 	        <button type="submit">Accueil</button>
