@@ -155,7 +155,7 @@ public class ViewPlateau extends HttpServlet {
         	        <body>
         	            <div class="page-wrapper">
 
-        	                <!-- <%@ include file="header.jsp" %> -->
+        	                
 
         	                <div class="game-area">
 
@@ -171,7 +171,7 @@ public class ViewPlateau extends HttpServlet {
 
         	                </div>
 
-        	                <!-- <%@ include file="footer.jsp" %> -->
+        	                
 
         	            </div>
         	        </body>
