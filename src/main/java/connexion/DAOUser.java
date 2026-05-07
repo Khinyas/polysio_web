@@ -61,7 +61,7 @@ public class DAOUser {
  // Dans ton fichier DAOUser.java
     public ModelUser trouverParPseudo(String pseudo) {
         // La requête SQL pour trouver l'utilisateur par son pseudo
-        String sql = "SELECT pseudo, email, mot_de_passe FROM utilisateur WHERE pseudo = ?";
+        String sql = "SELECT id_utilisateur, pseudo, email, mot_de_passe FROM utilisateur WHERE pseudo = ?";
         
         try (Connection conn = DAOAcces.getConnexion(); 
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

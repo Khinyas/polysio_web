@@ -59,7 +59,7 @@ public class ControllerInscription extends HttpServlet {
             erreur = "Le pseudo ne doit contenir que des lettres et des chiffres.";
         }
         
-        else if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$")) {
+        else if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!_-])(?=\\S+$).{8,}$")) {
             erreur = "Le mot de passe doit contenir 8 caractères, Maj, Min, Chiffre et Symbole.";
         }
         else if (!password.equals(confirmPassword)) {

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import connexion.DAOAcces;
 
 public class ModelUser {
+	private int id;
 	private String username;
 	private String email;
 	private String password;
@@ -23,6 +24,7 @@ public class ModelUser {
 	}
 	
 	// Ajoute les getters et setters
+    public int id() { return id; }
     public String getUsername() { return username; }
     public String getEmail() { return email; }
     public String getPassword() { return password; }
