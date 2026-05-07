@@ -53,10 +53,7 @@ public class ControllerProfil extends HttpServlet {
             return;
         }
         
-        new DAOUser().modifierUtilisateur(new ModelUser(newusername));
-        // UNE SEULE REDIRECTION ICI
-        //response.sendRedirect("ControllerProfil");
-    	
+        new DAOUser().modifierUsername(new ModelUser(newusername));
         // On appelle la même méthode d'affichage
         afficherPage(request, response);
     }

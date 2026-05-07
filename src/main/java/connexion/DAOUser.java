@@ -44,14 +44,14 @@ public class DAOUser {
         }
     }
     
-    public void modifierUtilisateur(ModelUser modifUser) {
+    public void modifierUsername(ModelUser modifUsername) {
 		String sql = "UPDATE `utilisateur` SET `pseudo`=? WHERE id_utilisateur=41;";
 		
 		// Utilise DAOAcces pour obtenir la connexion existante
         try (Connection conn = DAOAcces.getConnexion()) {
              PreparedStatement pstmt = conn.prepareStatement(sql);
-             System.out.println(modifUser.getNewusername());
-             pstmt.setString(1, modifUser.getNewusername());
+             System.out.println(modifUsername.getNewusername());
+             pstmt.setString(1, modifUsername.getNewusername());
              pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

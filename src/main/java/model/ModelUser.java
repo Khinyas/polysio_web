@@ -21,6 +21,7 @@ public class ModelUser {
     public ModelUser(String newusername) {
 		this.newusername = newusername;
 	}
+	
 	// Ajoute les getters et setters
     public String getUsername() { return username; }
     public String getEmail() { return email; }
