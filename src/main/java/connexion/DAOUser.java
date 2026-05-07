@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 import model.ModelUser;
+<<<<<<< HEAD
+=======
+import model.ModelUserRole;
+>>>>>>> jluc
 import service.Securite;
 
 public class DAOUser {
@@ -27,6 +31,7 @@ public class DAOUser {
 	    return false;
 	}
 
+<<<<<<< HEAD
     public void creerUtilisateur(ModelUser user) {
     	String sql = "INSERT INTO utilisateur (pseudo,email,mot_de_passe) VALUES (?,?,?)";
     	

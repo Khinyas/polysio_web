@@ -11,7 +11,7 @@ import java.io.IOException;
  * Servlet implementation class ControllerServlet
  */
 
-@WebServlet(urlPatterns = {"/index", "/accueil", "/connexion"})
+@WebServlet(urlPatterns = { "/connexion","/index", "/accueil", "/inscription"})
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,30 +32,54 @@ public class ControllerServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		// On aiguille au niveau de l'URL, la page de connexion sera la première page qui ouvre ici.
+		
 		String path = request.getServletPath();
 		String vue = "";
 		
 		switch (path) {
+			
+			case "/":
+				request.setAttribute("message", "Page d'accueil");
+				vue = "/WEB-INF/accueil.jsp";
+				break;
 		
 			case "/index":
-				
+			
 				request.setAttribute("message", "Bienvenue sur l'index");
 				//String message = "Bienvenue connard";
 				vue = "/WEB-INF/index.jsp";
 				break;
-				
-			case "/accueil":
-				request.setAttribute("message", "Page d'accueil");
-				vue = "/WEB-INF/accueil.jsp";
-				break;
+			
+			
+		
 			case "/connexion":
 				request.setAttribute("message", "Bienvenue sur le plateau");
 				vue = "/WEB-INF/connexion.jsp";
 				break;
 				
+			
+				
+			case "/inscription":
+				request.setAttribute("message", "Page d'inscription");
+				vue = "/WEB-INF/inscription.jsp";
+				break;
+		
+				
+			case "/accueil":
+				request.setAttribute("message", "Page d'accueil");
+				vue = "/WEB-INF/accueil.jsp";
+				break;
+				
 			case "/profil":
 				request.setAttribute("message", "Page de profil");
 				vue = "/WEB-INF/profil.jsp";
+				break;
+				
+			
+			case "/ChoixPartie":
+				request.setAttribute("message", "Choix de partie");
+				vue = "/WEB-INF/ChoixPartie.jsp";
 				break;
 				
 				

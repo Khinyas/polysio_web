@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 <%@include file="/WEB-INF/styles.css"%>
@@ -28,5 +29,18 @@
 	        <button type="submit">Modifier le pseudo</button>
 	   	</form>
 	</div>
+=======
+<title>	Profil</title>
+</head>
+<body>
+
+<h1> Profil  de ${user} </h1>
+
+<label for="Pseudo-changement">Changement de mot de passe</label>
+<input type="text" id="username-change"></input>
+
+
+
+>>>>>>> jluc
 </body>
 </html>

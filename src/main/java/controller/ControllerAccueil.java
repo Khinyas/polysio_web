@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.ModelUser;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 /**
  * Servlet implementation class ControllerAccueil
@@ -39,7 +40,28 @@ public class ControllerAccueil extends HttpServlet {
         }
         
         afficherPage(request, response);
-    }
+        
+        
+        
+        request.setAttribute("servletAttribute", 1);
+        String param = request.getParameter("action");
+        if (param != null) {
+        	System.out.println("test valeur null param");
+        	switch (param) {
+            	case "jouer" : {
+            		response.sendRedirect(request.getContextPath() + "/ControllerConstructeurPlateau?action=jouer");
+            		return;
+            	}
+            	default : {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action inconnue : " + param);
+                    return;
+            	}
+        	}
+        }
+        //afficherPage(request, response);
+        request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+        }
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         

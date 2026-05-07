@@ -27,19 +27,5 @@ public class ModelUser {
     public String getPassword() { return password; }
     public String getNewusername() { return newusername; }
     
-    public ModelUser trouverParPseudo(String pseudo) {
-        String sql = "SELECT * FROM utilisateur WHERE pseudo = ?";
-        try (Connection conn = DAOAcces.getConnexion();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, pseudo);
-            var rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return new ModelUser(rs.getString("pseudo"), rs.getString("email"), rs.getString("mot_de_passe"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
     
 }
