@@ -9,6 +9,8 @@ import model.ModelUser;
 
 import java.io.IOException;
 
+import connexion.DAOUser;
+
 /**
  * Servlet implementation class ControllerProfil
  */
@@ -42,7 +44,19 @@ public class ControllerProfil extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String newusername = request.getParameter("newusername");
+    	
+    	// Sécurité : Vérifier si les paramètres sont null avant de faire .isEmpty()
+        if (newusername == null) {
+            // Si on arrive ici sans données, on renvoie simplement au formulaire
+            doGet(request, response);
+            return;
+        }
         
+        new DAOUser().modifierUtilisateur(new ModelUser(newusername));
+        // UNE SEULE REDIRECTION ICI
+        //response.sendRedirect("ControllerProfil");
+    	
         // On appelle la même méthode d'affichage
         afficherPage(request, response);
     }

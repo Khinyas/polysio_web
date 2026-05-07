@@ -43,6 +43,21 @@ public class DAOUser {
             e.printStackTrace();
         }
     }
+    
+    public void modifierUtilisateur(ModelUser modifUser) {
+		String sql = "UPDATE `utilisateur` SET `pseudo`=? WHERE id_utilisateur=41;";
+		
+		// Utilise DAOAcces pour obtenir la connexion existante
+        try (Connection conn = DAOAcces.getConnexion()) {
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             System.out.println(modifUser.getNewusername());
+             pstmt.setString(1, modifUser.getNewusername());
+             pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
+    
  // Dans ton fichier DAOUser.java
     public ModelUser trouverParPseudo(String pseudo) {
         // La requête SQL pour trouver l'utilisateur par son pseudo
@@ -68,4 +83,5 @@ public class DAOUser {
         }
         return null; // Retourne null si l'utilisateur n'est pas trouvé
     }
+
 }

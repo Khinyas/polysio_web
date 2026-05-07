@@ -21,6 +21,12 @@
 	    <form action="ControllerAccueil" method="GET">
 	        <button type="submit">Accueil</button>
 	   	</form>
+	   	
+	   	<!-- Test modif pseudo -->
+	    <form action="ControllerProfil" method="POST">
+	    <input type="text" name="newusername" class="input-field">
+	        <button type="submit">Modifier le pseudo</button>
+	   	</form>
 	</div>
 </body>
 </html>
