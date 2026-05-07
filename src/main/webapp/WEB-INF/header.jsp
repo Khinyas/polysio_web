@@ -44,16 +44,3 @@
 
 <% } %>
 
-<% if (user == null) { %>
-
-    <a href="${pageContext.request.contextPath}/ControllerConnexion">
-        <button>CONNEXION</button>
-    </a>
-
-<% } else { %>
-
-    <a href="${pageContext.request.contextPath}/deconnexion">
-        <button>DECONNEXION</button>
-    </a>
-
-<% } %>

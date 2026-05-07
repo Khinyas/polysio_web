@@ -75,7 +75,7 @@ public class ControllerInscription extends HttpServlet {
         } else {
             new DAOUser().creerUtilisateur(new ModelUser(username, email, password));
             // UNE SEULE REDIRECTION ICI
-            response.sendRedirect("ControllerConnexion");
+            request.getRequestDispatcher("ControllerConnexion").forward(request, response);
         }
         // SURTOUT PAS DE CODE ICI APRÈS LE ELSE
     }

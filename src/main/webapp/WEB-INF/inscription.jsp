@@ -63,15 +63,6 @@ Page inscription
 				</tr>
 			</table>
 		</form>
-		
-		<form action="ControllerConnexion" method="POST">
-			<table border="0">
-		<td colspan="2" style="text-align:center;">
-						<button type="submit">Se connecter</button>
-					</td>
-				</tr>
-			</table>
-		</form>
 	</div>
 	</div>
 </body>
