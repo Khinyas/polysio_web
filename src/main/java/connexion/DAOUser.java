@@ -44,19 +44,21 @@ public class DAOUser {
         }
     }
     
-    public void modifierUsername(ModelUser modifUsername) {
-		String sql = "UPDATE `utilisateur` SET `pseudo`=? WHERE id_utilisateur=41;";
-		
-		// Utilise DAOAcces pour obtenir la connexion existante
-        try (Connection conn = DAOAcces.getConnexion()) {
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             System.out.println(modifUsername.getNewusername());
-             pstmt.setString(1, modifUsername.getNewusername());
-             pstmt.executeUpdate();
+    public void modifierUsername(int idUtilisateur, String nouveauPseudo) {
+        // Note : utilise le nom exact de ta colonne BDD, ici 'id_utilisateur'
+        String sql = "UPDATE utilisateur SET pseudo = ? WHERE id_utilisateur = ?";
+        
+        try (Connection conn = DAOAcces.getConnexion();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, nouveauPseudo);
+            pstmt.setInt(2, idUtilisateur); // Utilise setInt car l'ID est un nombre
+            
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-	}
+    }
     
  // Dans ton fichier DAOUser.java
     public ModelUser trouverParPseudo(String pseudo) {
@@ -71,11 +73,12 @@ public class DAOUser {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     // On crée et on retourne l'objet ModelUser avec les données de la BDD
-                    return new ModelUser(
-                        rs.getString("pseudo"),
-                        rs.getString("email"),
-                        rs.getString("mot_de_passe")
-                    );
+                	return new ModelUser(
+                		    rs.getInt("id_utilisateur"), // On récupère l'ID ici !
+                		    rs.getString("pseudo"),
+                		    rs.getString("email"),
+                		    rs.getString("mot_de_passe")
+                		);
                 }
             }
         } catch (SQLException e) {

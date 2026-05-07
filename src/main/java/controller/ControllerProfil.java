@@ -44,18 +44,25 @@ public class ControllerProfil extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String newusername = request.getParameter("newusername");
-    	
-    	// Sécurité : Vérifier si les paramètres sont null avant de faire .isEmpty()
-        if (newusername == null) {
-            // Si on arrive ici sans données, on renvoie simplement au formulaire
-            doGet(request, response);
-            return;
-        }
+        String newusername = request.getParameter("newusername");
         
-        new DAOUser().modifierUsername(new ModelUser(newusername));
-        // On appelle la même méthode d'affichage
-        afficherPage(request, response);
+        // 1. Récupérer l'utilisateur actuel depuis la session
+        ModelUser user = (ModelUser) request.getSession().getAttribute("userSession");
+
+        if (newusername != null && !newusername.isEmpty() && user != null) {
+            // 2. Modifier en base de données via l'ID
+            DAOUser dao = new DAOUser();
+            dao.modifierUsername(user.getId(), newusername);
+            
+            // 3. MISE À JOUR CRUCIALE : Mettre à jour l'objet en session
+            user.setUsername(newusername);
+            // request.getSession().setAttribute("userSession", user); // Optionnel si l'objet est modifié par référence
+            
+            // 4. Rediriger pour éviter de renvoyer le formulaire en rafraîchissant
+            response.sendRedirect("ControllerProfil"); 
+        } else {
+            doGet(request, response);
+        }
     }
 
     // Méthode utilitaire pour centraliser le forward
