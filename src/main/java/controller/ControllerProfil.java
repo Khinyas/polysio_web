@@ -9,17 +9,19 @@ import model.ModelUser;
 
 import java.io.IOException;
 
+import connexion.DAOUser;
+
 /**
- * Servlet implementation class ControllerAccueil
+ * Servlet implementation class ControllerProfil
  */
-@WebServlet("/ControllerAccueil")
-public class ControllerAccueil extends HttpServlet {
+@WebServlet("/ControllerProfil")
+public class ControllerProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControllerAccueil() {
+    public ControllerProfil() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,14 +44,26 @@ public class ControllerAccueil extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String newusername = request.getParameter("newusername");
+    	
+    	// Sécurité : Vérifier si les paramètres sont null avant de faire .isEmpty()
+        if (newusername == null) {
+            // Si on arrive ici sans données, on renvoie simplement au formulaire
+            doGet(request, response);
+            return;
+        }
         
+        new DAOUser().modifierUtilisateur(new ModelUser(newusername));
+        // UNE SEULE REDIRECTION ICI
+        //response.sendRedirect("ControllerProfil");
+    	
         // On appelle la même méthode d'affichage
         afficherPage(request, response);
     }
 
     // Méthode utilitaire pour centraliser le forward
     private void afficherPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
     }
 
 }
