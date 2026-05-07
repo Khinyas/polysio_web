@@ -11,7 +11,6 @@ public class ModelUser {
     private ModelUserRole role = ModelUserRole.UTILISATEUR; // Je définis la valeur par défaut du role ICI
     private String profilepicture;
     public Object setProfilepicture;
-
     // --- CONSTRUCTEURS ---
 
     // Constructeur vide (souvent utile pour certains frameworks)
@@ -96,5 +95,5 @@ public class ModelUser {
 	public void setSetProfilepicture(Object setProfilepicture) {
 		this.setProfilepicture = setProfilepicture;
 	}
-    
+
 }
