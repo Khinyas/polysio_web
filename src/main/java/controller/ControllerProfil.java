@@ -50,9 +50,25 @@ public class ControllerProfil extends HttpServlet {
         ModelUser user = (ModelUser) request.getSession().getAttribute("userSession");
 
         if (newusername != null && !newusername.isEmpty() && user != null) {
+        	
+        	String erreur = null;
+
+        	if (newusername.isEmpty()) {
+                erreur = "Tous les champs sont obligatoires.";
+            } 
+            
+            // Dans ControllerInscription.java
+            else if (!newusername.matches("^[a-zA-Z0-9]+$")) {
+                erreur = "Le pseudo ne doit contenir que des lettres et des chiffres.";
+            }
+            if (erreur != null) {
+                request.setAttribute("msgErreur", erreur);
+                request.getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
+            } else {
             // 2. Modifier en base de données via l'ID
             DAOUser dao = new DAOUser();
             dao.modifierUsername(user.getId(), newusername);
+            }
             
             // 3. MISE À JOUR CRUCIALE : Mettre à jour l'objet en session
             user.setUsername(newusername);
