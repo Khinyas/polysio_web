@@ -8,7 +8,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 <%@include file="/WEB-INF/styles.css"%>
 </style>
-<title>Accueil</title>
+<title>Profil</title>
 </head>
 <body>
 	<div class="form-container">
