@@ -7,8 +7,8 @@
 <<<<<<< HEAD
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
-<%@include file="/WEB-INF/styles.css"%>
 </style>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/style.css">
 <title>Accueil</title>
 </head>
 <body>
