@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.ModelCase;
+import model.ModelJoueur;
+import model.ModelPlateau;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,184 +33,90 @@ public class ViewPlateau extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
 
-		String nom = request.getParameter("parametre");
-		List<ModelCase> listeCases = (List<ModelCase>) request.getAttribute("listeCasesBdd");
-		StringBuilder cases = new StringBuilder();
-		for (ModelCase casePlateau : listeCases) {
-			// On convertit les positions 0-10 en positions CSS 1-11
-			int cssX = casePlateau.getPositionX() + 1;
-			int cssY = casePlateau.getPositionY() + 1;
-/*<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+		ModelPlateau plateau = (ModelPlateau) request.getSession().getAttribute("plateau");
+		ModelJoueur joueur = (ModelJoueur) request.getSession().getAttribute("joueurActif");
 
-					<div class="plateau-grid">
-					<c:forEach var="case" items="${plateau.listeCases}">
-					<c:if test="${case.id != 99}">
-					<div class="case case-${case.type}"
-			style="grid-column: ${case.positionX + 1}; grid-row: ${case.positionY + 1};"
-			data-id="${case.id}">
-
-					<span class="case-nom">${case.nom}</span>
-
-					<c:if test="${not empty case.image}">
-					<img src="/img/cases/${case.image}" alt="${case.nom}" />
-					</c:if>
-            </div>
-					</c:if>
-    </c:forEach>
-
-					<%-- Case centrale --%>
-					<div class="case case-centrale" style="grid-column: 2 / 11; grid-row: 2 / 11;">
-					<img src="/img/logo-centre.png" alt="centre" />
-					</div>
-					</div>
-				*/
-			if (casePlateau.getNom().equals("centre")) {
-				cases.append(String.format(
-						"<div id='%s' class='case' style='grid-column:%d / span 9; grid-row:%d / span 9; '>" +
-								"<img src='%s' alt='%s' width='100%%' height='100%%' />" +
-								"</div>",
-						casePlateau.getIdCSS(),
-						2, // Le centre commence à la colonne 2 (après la 1ère case)
-						2, // Le centre commence à la ligne 2
-						request.getContextPath() + casePlateau.getCheminSvg(),
-						casePlateau.getNom()
-				));
-			} else {
-				cases.append(String.format(
-						"<div id='%s' class='case' style='grid-column:%d; grid-row:%d; '>" +
-								"<img src='%s' alt='%s' width='100%%' height='100%%' />" +
-								"</div>",
-						casePlateau.getIdCSS(),
-						cssX, // Utilise la position corrigée (+1)
-						cssY, // Utilise la position corrigée (+1)
-						request.getContextPath() + casePlateau.getCheminSvg(),
-						casePlateau.getNom()
-				));
-			}
+		if (plateau == null) {
+			response.sendRedirect(request.getContextPath() + "/accueil");
+			return;
 		}
 
-		String html = """
-        	    <!DOCTYPE html>
-        	    <html>
-        	        <head>
-        	            <title>Mon Plateau</title>
-        	            <link rel="stylesheet" type="text/css" href="%s/css/style.css">
-        	            <style>
-        	                /* Reset global : supprime les marges par défaut du navigateur qui causent du blanc */
-        	                *, *::before, *::after {
-        	                    box-sizing: border-box;
-        	                    margin: 0;
-        	                    padding: 0;
-        	                }
+		// Le HTML du plateau est déjà construit dans ModelPlateau
+		String plateauHTML = plateau.getPlateauHTML();
 
-        	                html, body {
-        	                    height: 100%%;
-        	                    overflow: hidden; /* pas de scroll pendant la partie */
-        	                }
+		// Infos joueur (null-safe)
+		String nomJoueur = (joueur != null) ? joueur.getPseudonyme() : "—";
+		int argent = (joueur != null) ? joueur.getPointsCompetences() : 0;
 
-        	                /* Zone de jeu : header (inclus via JSP) + game-area + footer */
-        	                .page-wrapper {
-        	                    display: flex;
-        	                    flex-direction: column;
-        	                    height: 100vh;
-        	                }
+		PrintWriter out = response.getWriter();
 
-        	                /* game-area prend tout l'espace restant entre header et footer */
-        	                .game-area {
-        	                    flex: 1;
-        	                    display: flex;
-        	                    align-items: center;
-        	                    justify-content: flex-start;
-        	                    gap: 16px;
-        	                    padding: 12px;
-        	                    min-height: 0; /* important : permet au flex-child de rétrécir */
-        	                }
+		// 1. Header en premier
+		request.getRequestDispatcher("/WEB-INF/header.jsp").include(request, response);
 
-        	                /* Le plateau est carré : height=100%% du parent, width s'ajuste via aspect-ratio */
-        	                .plateau-wrapper {
-        	                    height: 100%%;
-        	                    aspect-ratio: 1 / 1;
-        	                    flex-shrink: 0;
-        	                }
-							.plateau-grid {
-								display: grid;
-								grid-template-columns: 12.5% repeat(9, 8.3%) 12.5%;
-								grid-template-rows:    12.5% repeat(9, 8.3%) 12.5%;
-								width: 80vmin;
-								height: 80vmin;
-							}
-							
-							.case {\s
-								border: 1px solid #333;\s
-								display: flex;
-								flex-direction: column;
-								align-items: center;
-								justify-content: center;
-								overflow: hidden;
-							}
-							
-							.case-centrale {
-								grid-column: 2 / 11;
-								grid-row: 2 / 11;
-							}
+		// 2. Reste de la page
+		out.print("""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Plateau de jeu</title>
+            <link rel="stylesheet" href="%s/css/style.css">
+            <style>
+                *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+                html, body { height: 100%%; overflow: hidden; }
+                .page-wrapper { display: flex; flex-direction: column; height: 100vh; }
+                .game-area {
+                    flex: 1; display: flex; align-items: center;
+                    justify-content: flex-start; gap: 16px; padding: 12px; min-height: 0;
+                }
+                .plateau-wrapper { height: 100%%; aspect-ratio: 1/1; flex-shrink: 0; }
+                .plateau-grid {
+                    display: grid;
+                    grid-template-columns: 12.5%% repeat(9, 8.3%%) 12.5%%;
+                    grid-template-rows:    12.5%% repeat(9, 8.3%%) 12.5%%;
+                    width: 80vmin; height: 80vmin;
+                }
+                .case {
+                    border: 1px solid #333; display: flex; flex-direction: column;
+                    align-items: center; justify-content: center; overflow: hidden;
+                }
+                .case img { width: 100%%; height: 100%%; object-fit: fill; display: block; }
+                .side-panel {
+                    flex: 1; min-width: 200px; height: 100%%;
+                    background: #f5f0e8; border: 1px solid #ccc;
+                    border-radius: 8px; padding: 16px;
+                    display: flex; flex-direction: column; gap: 12px; overflow-y: auto;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="page-wrapper">
+                <div class="game-area">
 
-							.case img {
-							    width: 100%%;  /* Ajoute ceci */
-							    height: 100%%; /* Ajoute ceci */
-							    object-fit: fill; 
-							    display: block;
-							}
+                    <div class="plateau-wrapper">
+                        %s
+                    </div>
 
-        	                /* Panneau latéral : exploite l'espace vide à droite du plateau carré */
-        	                .side-panel {
-        	                    flex: 1;
-        	                    min-width: 200px;
-        	                    height: 100%%;
-        	                    background: #f5f0e8;
-        	                    border: 1px solid #ccc;
-        	                    border-radius: 8px;
-        	                    padding: 16px;
-        	                    display: flex;
-        	                    flex-direction: column;
-        	                    gap: 12px;
-        	                    overflow-y: auto;
-        	                }
-        	            </style>
-        	        </head>
-        	        <body>
-        	            <div class="page-wrapper">
+                    <div class="side-panel">
+                        <h3>%s</h3>
+                        <p>💰 %d pts</p>
+                    </div>
 
-        	                
+                </div>
+            </div>
+        </body>
+        </html>
+        """.formatted(
+				request.getContextPath(),
+				plateauHTML,          // ← HTML déjà construit par ModelPlateau
+				nomJoueur,
+				argent
+		));
 
-        	                <div class="game-area">
-
-        	                    <div class="plateau-wrapper">
-        	                        <div class="plateau">
-        	                            %s
-        	                        </div>
-        	                    </div>
-
-        	                    <!-- Panneau latéral : infos joueur, dés, cartes... -->
-        	                    <aside class="side-panel">
-        	                    </aside>
-
-        	                </div>
-
-        	                
-
-        	            </div>
-        	        </body>
-        	    </html>
-        	    """.formatted(request.getContextPath(), cases.toString());
-
-		RequestDispatcher header = request.getRequestDispatcher("WEB-INF/header.jsp");
-		header.include(request, response);
-		out.print(html);
-		// On vide le buffer vers le navigateur sans fermer brutalement
 		out.flush();
 	}
 

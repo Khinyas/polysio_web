@@ -8,13 +8,14 @@ public class ModelPlateau  {
     private List<ModelCase> listeCases;
     private List<ModelPropriete> listeProprietes;
     private ArrayList<ModelJoueur> listeJoueurs;
+    private String contextPath;
+    private String plateauHTML;
 
-    public ModelPlateau(List<ModelCase> listeCasesP, List<ModelPropriete> listeProprieteP) {
+    public ModelPlateau(List<ModelCase> listeCasesP, List<ModelPropriete> listeProprieteP, String contextPathP) {
         this.listeCases = listeCasesP;
         this.listeProprietes = listeProprieteP;
-        listeJoueurs = new ArrayList<>();
-
-        this.initialiserPlateau();
+        this.contextPath = contextPathP;
+        this.plateauHTML = initialiserPlateau();
     }
 
     public List<ModelCase> getListeCases() {
@@ -25,43 +26,101 @@ public class ModelPlateau  {
         return listeProprietes;
     }
 
-   public void initialiserPlateau() {
-        // Inserer controller plateau pour créer le plateau graphique à partir des model cases
-        for (ModelCase caseModelCase : this.listeCases) {
-            // On ignore la case centrale ici pour ne pas l'ajouter en 1x1 dans la boucle
-            if (caseModelCase.getId() == 99 || caseModelCase.getNom().equalsIgnoreCase("centre")) {
-                continue;
-            }
-            ViewCase casePlateau = new ViewCase(caseModelCase);
+    public String getPlateauHTML() {
+        return plateauHTML;
+    }
 
-// FORCE LA CASE À PRENDRE TOUTE LA PLACE DE LA CELLULE
-            GridPane.setHgrow(casePlateau, Priority.ALWAYS);
-            GridPane.setVgrow(casePlateau, Priority.ALWAYS);
+    public void setPlateauHTML(String plateauHTML) {
+        this.plateauHTML = plateauHTML;
+    }
 
-            int colonne = caseModelCase.getPositionX();
-            int ligne = caseModelCase.getPositionY();
+    public ArrayList<ModelJoueur> getListeJoueurs() {
+        return listeJoueurs;
+    }
 
-            // Utilisation directe de add() pour plus de clarté
-            this.add(casePlateau, colonne, ligne);
-            // ToDo : Création d'une liste de ViewCase pour utiliser pour les popup etc (est ce indispensable ?? )
-            listeViewCases.add(casePlateau);
+    public void setListeJoueurs(ArrayList<ModelJoueur> listeJoueurs) {
+        this.listeJoueurs = listeJoueurs;
+    }
+
+    public void setListeCases(List<ModelCase> listeCases) {
+        this.listeCases = listeCases;
+    }
+
+    public List<ModelPropriete> getListeProprietes() {
+        return listeProprietes;
+    }
+
+    public void setListeProprietes(List<ModelPropriete> listeProprietes) {
+        this.listeProprietes = listeProprietes;
+    }
+
+    public String initialiserPlateau() {
+       StringBuilder cases = new StringBuilder();
+       cases.append("<div class='plateau-grid'>");
+
+       for (ModelCase casePlateau : this.listeCases) {
+           // On convertit les positions 0-10 en positions CSS 1-11
+           int cssX = casePlateau.getPositionX() + 1;
+           int cssY = casePlateau.getPositionY() + 1;
+
+           if (casePlateau.getNom().equals("centre")) {
+               cases.append("""
+                    <div id='%s' class='case'
+                         style='grid-column:%d / span 9; grid-row:%d / span 9;'>
+                        <img src='%s' alt='%s' width='100%%' height='100%%'/>
+                    </div>
+                    """.formatted(
+                       casePlateau.getIdCSS(),
+                       2,
+                       2,
+                       contextPath + casePlateau.getCheminSvg(),
+                       casePlateau.getNom()
+               ));
+           } else {
+               cases.append("""
+                    <div id='%s' class='case case-%s'
+                         style='grid-column:%d; grid-row:%d;'
+                         data-id='%d'>
+                        <img src='%s' alt='%s' width='100%%' height='100%%'/>
+                    </div>
+                    """.formatted(
+                       casePlateau.getIdCSS(),
+                       casePlateau.getTypeCase(),
+                       casePlateau.getPositionX() + 1,
+                       casePlateau.getPositionY() + 1,
+                       casePlateau.getId(),
+                       contextPath + casePlateau.getCheminSvg(),
+                       casePlateau.getNom()
+               ));
+           }
+       }
+
+       cases.append("</div>");
+
+       return cases.toString();
+   }
+
+
+
+    public ModelCase getCaseParPosition(int positionP) {
+        for (ModelCase modelCase : listeCases) {
+            if (modelCase.getId() == positionP) return modelCase;
         }
+        return null;
+    }
 
-        // ToDo : CaseCentrale est la derniere pour l'instant mais peut etre prendre getName ou Id à la place ?
-        // On récupère la case centrale et on lui donne un Span de 9x9 pour remplir le milieu
-        ModelCase mCentrale = this.listeCases.getLast();
-        ViewCase vueCentrale = new ViewCase(mCentrale);
-        this.add(vueCentrale, 1, 1, 9, 9);
-
-        // Constuire les Cartes de proprietees :
-
+    public ModelPropriete getProprieteParPosition(int positionP) {
         for (ModelPropriete propriete : this.listeProprietes) {
-            ViewPropriete viewPropriete = new ViewPropriete(propriete);
-            listeViewPropriete.add(viewPropriete);
+            if (propriete.getCasePlateau() == positionP) return propriete;
         }
+        return null;
+    }
 
-
-       req.getSession().setAttribute("plateau", plateau);
-       req.getSession().setAttribute("joueurActif", j1);
+    public void payer(ModelJoueur joueur, int montant) {
+        int ancienSolde = joueur.getPointsCompetences();
+        int nouveauSolde = ancienSolde - montant;
+        joueur.setPointsCompetences(nouveauSolde);
+        System.out.println("[ECONOMIE] " + joueur.getPseudonyme()
+                + " : " + ancienSolde + " -> " + nouveauSolde);
     }
 }

@@ -49,24 +49,9 @@ public class ControllerConstructeurPlateau extends HttpServlet {
 					List<ModelPropriete> listeProprietes = new ArrayList<>();
 					listeProprietes = ControllerPropriete.proprietePlateau();
 
-
-					ModelPlateau modelPlateau = new ModelPlateau(listeCases, listeProprietes);
-					request.setAttribute("plateau", modelPlateau);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+					// Todo Liste de joueur à rajouter en parametre (et du constructeur ModelPlateau)
+					ModelPlateau modelPlateau = new ModelPlateau(listeCases, listeProprietes, request.getContextPath());
+					request.getSession().setAttribute("plateau", modelPlateau);
 
 	        		request.getRequestDispatcher("/ViewPlateau").forward(request, response);
 	        		return;
@@ -266,7 +251,6 @@ public class ControllerConstructeurPlateau extends HttpServlet {
 
 	/*--------------------------------------------------------------------------*/
 
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
