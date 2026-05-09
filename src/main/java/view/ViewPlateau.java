@@ -1,5 +1,6 @@
 package view;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -155,7 +156,6 @@ public class ViewPlateau extends HttpServlet {
         	            </style>
         	        </head>
         	        <body>
-        	        <%@ include file="/WEB-INF/views/header.jsp" %>
         	            <div class="page-wrapper">
 
         	                
@@ -181,6 +181,8 @@ public class ViewPlateau extends HttpServlet {
         	    </html>
         	    """.formatted(request.getContextPath(), cases.toString());
 
+		RequestDispatcher header = request.getRequestDispatcher("WEB-INF/header.jsp");
+		header.include(request, response);
 		out.print(html);
 		// On vide le buffer vers le navigateur sans fermer brutalement
 		out.flush();
