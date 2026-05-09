@@ -15,11 +15,6 @@
 <%@ include file="header.jsp" %>
 
 	<div class="form-container">
-
-  Et voici l'accueil, ${NomRecu} ! Et voici ton mail: ${Email} !
-	<form action="${pageContext.request.contextPath}/deconnexion" method="GET">
-		<button type="submit">Déconnexion</button>
-	</form> 
 	
 	<form action="${pageContext.request.contextPath}/ControllerAccueil" method="GET">
     <input type="hidden" name="action" value="jouer">
@@ -30,8 +25,8 @@
 
 
 
-
 <a href="${pageContext.request.contextPath}/ControllerAccueil?action=choisirPartie"> Lancer une partie </a>
+</div>
 
 </body>
 </html>

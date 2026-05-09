@@ -5,13 +5,19 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.ModelUser;
+import model.ModelUserRole;
+
 import java.io.IOException;
+import java.util.ArrayList;
+
+import connexion.DAOUser;
 
 /**
  * Servlet implementation class ControllerServlet
  */
 
-@WebServlet(urlPatterns = { "/connexion","/index", "/accueil", "/inscription"})
+@WebServlet(urlPatterns = { "/connexion","/index", "/accueil", "/inscription", "/ChoixPartie", "/admin"})
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,6 +43,20 @@ public class ControllerServlet extends HttpServlet {
 		String path = request.getServletPath();
 		String vue = "";
 		
+		
+		ModelUser user = (ModelUser) request.getSession().getAttribute("userSession");
+		
+		if (path.equals("/admin")) {
+	        if (user == null || user.getRole() != ModelUserRole.ADMIN) {
+	            request.setAttribute("message", "Accès refusé : Identifiants insuffisants.");
+	            request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+	            return; 
+	        }
+	    }
+
+
+		
+		
 		switch (path) {
 			
 			case "/":
@@ -50,6 +70,13 @@ public class ControllerServlet extends HttpServlet {
 				//String message = "Bienvenue connard";
 				vue = "/WEB-INF/index.jsp";
 				break;
+				
+			case "/admin":
+	            
+	            ArrayList<ModelUser> utilisateurs = DAOUser.reqListeTousLesUtilisateurs();
+	            request.setAttribute("utilisateurs", utilisateurs);
+	            vue = "/WEB-INF/admin.jsp";
+	            break;
 			
 			
 		
@@ -83,7 +110,6 @@ public class ControllerServlet extends HttpServlet {
 				break;
 				
 				
-							
 			default:
 				vue = "/WEB-INF/404.jsp";
 				break;
