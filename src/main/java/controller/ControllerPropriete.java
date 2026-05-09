@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Servlet implementation class ControllerAccueil
  */
-@WebServlet("/ControllerAccueil")
+@WebServlet("/ControllerPropriete")
 public class ControllerPropriete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -79,12 +79,12 @@ public class ControllerPropriete extends HttpServlet {
                     listeProprieteBdd.add(proprietes);
                 }
             }
-            System.out.println("DEBUG SQL : Nombre de cases récupérées = " + listeProprieteBdd.size());
+            System.out.println("DEBUG SQL : Nombre de proprietés récupérées = " + listeProprieteBdd.size());
             return listeProprieteBdd;
         }
         catch (SQLException erreur) {
             // Un seul CATCH : erreurs SQL
-            System.err.println("Erreur SQL : Liste Cases non récupérée " + erreur.getMessage());
+            System.err.println("Erreur SQL : Liste proprietés non récupérée " + erreur.getMessage());
             erreur.printStackTrace();
         }
         return listeProprieteBdd;}

@@ -64,7 +64,7 @@ public class ControllerConstructeurPlateau extends HttpServlet {
 		/*-------------------------------------------------------------------------------------------------*/
 
 
-
+/*
 
 
 		// On crée la palette de couleur à partir de l'enum ModelJoueurCouleur

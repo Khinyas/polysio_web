@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Servlet implementation class ControllerConstructeurPlateau
  */
-@WebServlet("/ControllerConstructeurPlateau")
+@WebServlet("/ControllerPlateau")
 public class ControllerPlateau extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
