@@ -155,7 +155,6 @@ public class ViewPlateau extends HttpServlet {
         	            </style>
         	        </head>
         	        <body>
-        	        <%@ include file="/WEB-INF/views/header.jsp" %>
         	            <div class="page-wrapper">
 
         	                
