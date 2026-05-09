@@ -48,9 +48,10 @@ public class ControllerConstructeurPlateau extends HttpServlet {
 
 					List<ModelPropriete> listeProprietes = new ArrayList<>();
 					listeProprietes = ControllerPropriete.proprietePlateau();
-					request.setAttribute("listeProprieteBdd", listeProprietes);
+
 
 					ModelPlateau modelPlateau = new ModelPlateau(listeCases, listeProprietes);
+					request.setAttribute("plateau", modelPlateau);
 
 
 

@@ -42,7 +42,30 @@ public class ViewPlateau extends HttpServlet {
 			// On convertit les positions 0-10 en positions CSS 1-11
 			int cssX = casePlateau.getPositionX() + 1;
 			int cssY = casePlateau.getPositionY() + 1;
+/*<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+					<div class="plateau-grid">
+					<c:forEach var="case" items="${plateau.listeCases}">
+					<c:if test="${case.id != 99}">
+					<div class="case case-${case.type}"
+			style="grid-column: ${case.positionX + 1}; grid-row: ${case.positionY + 1};"
+			data-id="${case.id}">
+
+					<span class="case-nom">${case.nom}</span>
+
+					<c:if test="${not empty case.image}">
+					<img src="/img/cases/${case.image}" alt="${case.nom}" />
+					</c:if>
+            </div>
+					</c:if>
+    </c:forEach>
+
+					<%-- Case centrale --%>
+					<div class="case case-centrale" style="grid-column: 2 / 11; grid-row: 2 / 11;">
+					<img src="/img/logo-centre.png" alt="centre" />
+					</div>
+					</div>
+				*/
 			if (casePlateau.getNom().equals("centre")) {
 				cases.append(String.format(
 						"<div id='%s' class='case' style='grid-column:%d / span 9; grid-row:%d / span 9; '>" +
@@ -111,25 +134,26 @@ public class ViewPlateau extends HttpServlet {
         	                    aspect-ratio: 1 / 1;
         	                    flex-shrink: 0;
         	                }
-
-        	                .plateau {
-        	                    display: grid;
-        	                    grid-template-columns: repeat(11, 1fr);
-        	                    grid-template-rows: repeat(11, 1fr);
-        	                    width: 100%%;
-        	                    height: 100%%;
-        	                    grid-gap: 0; 
-        	                    border: 2px solid black;
-        	                }
-
-							.case {
-							    border: 1px solid black;
-							    margin: 0;
-							    padding: 0;
-							    display: block; /* On passe de flex à block pour simplifier */
-							    overflow: hidden;
-							    width: 100%%;
-							    height: 100%%;
+							.plateau-grid {
+								display: grid;
+								grid-template-columns: 12.5% repeat(9, 8.3%) 12.5%;
+								grid-template-rows:    12.5% repeat(9, 8.3%) 12.5%;
+								width: 80vmin;
+								height: 80vmin;
+							}
+							
+							.case {\s
+								border: 1px solid #333;\s
+								display: flex;
+								flex-direction: column;
+								align-items: center;
+								justify-content: center;
+								overflow: hidden;
+							}
+							
+							.case-centrale {
+								grid-column: 2 / 11;
+								grid-row: 2 / 11;
 							}
 
 							.case img {
