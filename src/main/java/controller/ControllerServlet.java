@@ -53,6 +53,14 @@ public class ControllerServlet extends HttpServlet {
 	            return; 
 	        }
 	    }
+		
+		if (path.equals("/connexion") || path.equals("/inscription")) {
+		    if (user != null) {
+		        // L'utilisateur est déjà connecté, on le renvoie vers l'accueil
+		        response.sendRedirect(request.getContextPath() + "/accueil");
+		        return;
+		    }
+		}
 
 
 		
