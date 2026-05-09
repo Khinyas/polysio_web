@@ -28,13 +28,15 @@
         <% 
             } 
         %>
+        
+			        <a href="${pageContext.request.contextPath}/accueil">
+			    			ACCUEIL
+					</a>
 	</div>
     </div>
 </nav>
 
-<a href="${pageContext.request.contextPath}/accueil">
-    <button>ACCUEIL</button>
-</a>
+
 
 <% if (user != null && user.getRole().toString().equals("ADMIN")) { %>
 

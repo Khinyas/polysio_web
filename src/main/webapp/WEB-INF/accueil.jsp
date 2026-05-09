@@ -31,7 +31,7 @@
 
 
 
-<a href="${pageContext.request.contextPath}/ChoixPartie"> Lancer une partie </a>
+<a href="${pageContext.request.contextPath}/ControllerAccueil?action=choisirPartie"> Lancer une partie </a>
 
 </body>
 </html>

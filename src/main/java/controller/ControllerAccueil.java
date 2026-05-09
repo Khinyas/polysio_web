@@ -52,6 +52,11 @@ public class ControllerAccueil extends HttpServlet {
             		response.sendRedirect(request.getContextPath() + "/ControllerConstructeurPlateau?action=jouer");
             		return;
             	}
+            	case "choisirPartie" : {
+                    request.getRequestDispatcher("/ControllerChoixPartie").forward(request, response);
+                    return;
+                }
+            	
             	default : {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action inconnue : " + param);
                     return;
