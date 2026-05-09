@@ -14,7 +14,7 @@ public class ModelPlateau  {
         this.listeProprietes = listeProprieteP;
         listeJoueurs = new ArrayList<>();
 
-        //this.initialiserPlateau();
+        this.initialiserPlateau();
     }
 
     public List<ModelCase> getListeCases() {
@@ -59,5 +59,9 @@ public class ModelPlateau  {
             ViewPropriete viewPropriete = new ViewPropriete(propriete);
             listeViewPropriete.add(viewPropriete);
         }
+
+
+       req.getSession().setAttribute("plateau", plateau);
+       req.getSession().setAttribute("joueurActif", j1);
     }
 }
