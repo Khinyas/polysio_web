@@ -53,6 +53,7 @@ public class ViewPlateau extends HttpServlet {
 		String nomJoueur = (joueur != null) ? joueur.getPseudonyme() : "—";
 		int argent = (joueur != null) ? joueur.getPointsCompetences() : 0;
 
+
 		PrintWriter out = response.getWriter();
 
 		// 1. Header en premier
@@ -104,6 +105,7 @@ public class ViewPlateau extends HttpServlet {
                     <div class="side-panel">
                         <h3>%s</h3>
                         <p>💰 %d pts</p>
+                        
                     </div>
 
                 </div>

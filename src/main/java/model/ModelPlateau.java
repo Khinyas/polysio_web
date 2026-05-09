@@ -123,4 +123,5 @@ public class ModelPlateau  {
         System.out.println("[ECONOMIE] " + joueur.getPseudonyme()
                 + " : " + ancienSolde + " -> " + nouveauSolde);
     }
+
 }
