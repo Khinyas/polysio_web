@@ -1,6 +1,5 @@
 package model;
 
-import controller.ControllerPlateau;
 
 public class ModelPropriete {
 

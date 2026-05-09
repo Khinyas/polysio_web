@@ -1,21 +1,14 @@
 package model;
 
-import View.ViewCase;
-import View.ViewPropriete;
-import javafx.geometry.Pos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 // On utilise StackPane pour pouvoir empiler le background ET le plateau par dessus
-public class ModelPlateau extends GridPane {
+public class ModelPlateau  {
     private List<ModelCase> listeCases;
-    private List<ViewCase> listeViewCases = new ArrayList<>();
+    //private List<ViewCase> listeViewCases = new ArrayList<>();
     private List<ModelPropriete> listePropriete;
-    private List<ViewPropriete> listeViewPropriete = new ArrayList<>();;
+    //private List<ViewPropriete> listeViewPropriete = new ArrayList<>();;
     private ArrayList<ModelJoueur> listeJoueurs;
 
     public ModelPlateau(List<ModelCase> listeCasesP, List<ModelPropriete> listeProprieteP) {
@@ -26,22 +19,22 @@ public class ModelPlateau extends GridPane {
         this.prefWidthProperty().bind(this.heightProperty().multiply(0.8));
          */
 
-        this.setAlignment(Pos.CENTER);
-        this.setGridLinesVisible(false); // Mets à true pour débugger et voir la grille !
+       // this.setAlignment(Pos.CENTER);
+        //this.setGridLinesVisible(false); // Mets à true pour débugger et voir la grille !
 
         // On force une taille minimale pour le test si le bind échoue
         //this.setMinSize(400, 400);
         //this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
         // 0, 0, 0 = Noir | 1.0 = Opacité
-        this.setStyle("-fx-background-color: rgba(0, 0, 0, 1.0);");
+        //this.setStyle("-fx-background-color: rgba(0, 0, 0, 1.0);");
 
         // Espacement entre cellule grille (optionnel) :
         /*
         this.plateau.setHgap(2);
         this.plateau.setVgap(2);
         */
-        this.initialiserPlateau();
+        //this.initialiserPlateau();
     }
 
     public List<ModelCase> getListeCases() {
@@ -52,7 +45,7 @@ public class ModelPlateau extends GridPane {
         return listePropriete;
     }
 
-    public void initialiserPlateau() {
+   /* public void initialiserPlateau() {
         // On clear toujours la gridPane pour s'assurer qu'elle est vide
         this.getChildren().clear();
         this.getColumnConstraints().clear();
@@ -117,9 +110,7 @@ public class ModelPlateau extends GridPane {
         return listeViewCases.get(idP);
     }*/
 
-    public List<ViewPropriete> getListeViewPropriete() {
-        return listeViewPropriete;
-    }
+
     
     
 
