@@ -104,8 +104,13 @@
 		 this.mesProprietes = mesProprietes;
 	 }
 
+	// Dans ModelJoueur.java
 	 public void ajouterPropriete(ModelPropriete p) {
-		 this.mesProprietes.add(p);
+	     if (this.mesProprietes == null) {
+	         this.mesProprietes = new ArrayList<>();
+	     }
+	     this.mesProprietes.add(p);
+	     p.setProprietaire(this.getPseudonyme()); // Optionnel : lie la propriété au joueur
 	 }
 
 	 public int getNombreToursJoues() {

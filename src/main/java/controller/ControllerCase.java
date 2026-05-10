@@ -52,8 +52,11 @@ public class ControllerCase extends HttpServlet {
 		ArrayList<ModelCase> listeCases = new ArrayList<>();
 
 		String reqSQL = """
-        SELECT c.*, p.id_propriete, p.prix, p.loyer_nue, 
-               p.loyer_batiment, p.id_couleur, p.batiment
+        SELECT c.*,
+			c.chemin_svg AS img_plateau, 
+           p.chemin_svg AS img_fiche,
+           p.id_propriete, p.prix, p.loyer_nue, 
+           p.loyer_batiment, p.id_couleur, p.batiment
         FROM polysio.case_plateau c
         LEFT JOIN polysio.propriete p USING (id_case_plateau)
         ORDER BY c.id_case_plateau ASC
@@ -66,12 +69,12 @@ public class ControllerCase extends HttpServlet {
 			while (rs.next()) {
 				if (rs.getObject("id_propriete") != null) {
 					listeCases.add(new ModelPropriete(
-							rs.getInt("id_propriete"),
+							rs.getInt("id_case_plateau"),
 							rs.getString("nom_case"),
 							rs.getString("type_case"),
 							rs.getInt("positionX"),
 							rs.getInt("positionY"),
-							rs.getString("chemin_svg"),
+							rs.getString("img_fiche"),
 							rs.getString("idCSS"),
 							rs.getInt("prix"),
 							rs.getInt("loyer_nue"),
@@ -86,7 +89,7 @@ public class ControllerCase extends HttpServlet {
 							rs.getString("type_case"),
 							rs.getInt("positionX"),
 							rs.getInt("positionY"),
-							rs.getString("chemin_svg"),
+							rs.getString("img_plateau"),
 							rs.getString("idCSS")
 					));
 				}

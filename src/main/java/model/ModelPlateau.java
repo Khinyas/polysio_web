@@ -140,25 +140,28 @@ public class ModelPlateau {
 
 /*** Méthodes Public que la vue pourra apeller en dynamique ***/
     public String genererInventaireHTML(ModelJoueur joueurP) {
-        StringBuilder html = new StringBuilder("<div class='inventaire'>");
-        for (ModelPropriete propriete : joueurP.getMesProprietes()) {
+        if (joueurP == null || joueurP.getMesProprietes().isEmpty()) {
+            return "<p style='font-size:0.8em; color:gray;'>Aucune propriété</p>";
+        }
+        
+        StringBuilder html = new StringBuilder("<div class='inventaire' style='display:flex; flex-wrap:wrap; gap:8px;'>");
+        for (ModelPropriete prop : joueurP.getMesProprietes()) {
             html.append(String.format("""
                 <div class='carte-inventaire'>
                     <a href='#detail-%d'>
-                        <img src='%s%s' title='%s' width='50'/>
+                        <img src='%s%s' title='%s' width='60' style='border-radius:4px; border:1px solid #444;'/>
                     </a>
                 </div>
                 """,
-                    propriete.getId(),         // ← lien vers la modale depuis l'inventaire aussi
-                    contextPath,
-                    propriete.getCheminSvg(),
-                    propriete.getNom()
+                prop.getId(), // ID de la case (ex: 24) pour ouvrir la bonne modale
+                this.contextPath,
+                prop.getCheminSvg(), // Ce sera img_fiche grâce au ControllerCase
+                prop.getNom()
             ));
         }
         html.append("</div>");
         return html.toString();
     }
-
 
     public ModelCase getCaseParPosition(int positionP) {
         for (ModelCase modelCase : listeCases) {
@@ -189,6 +192,6 @@ public class ModelPlateau {
     public void setListeCases(List<ModelCase> listeCases) { this.listeCases = listeCases; }
     public List<ModelPropriete> getListeProprietes() { return listeProprietes; }
     public void setListeProprietes(List<ModelPropriete> listeProprietes) { this.listeProprietes = listeProprietes; }
-    public ArrayList<ModelJoueur> getListeJoueurs() { return listeJoueurs; }
+    public List<ModelJoueur> getListeJoueurs() { return listeJoueurs; }
     public void setListeJoueurs(ArrayList<ModelJoueur> listeJoueurs) { this.listeJoueurs = listeJoueurs; }
 }

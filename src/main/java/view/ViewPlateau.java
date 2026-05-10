@@ -36,32 +36,39 @@ public class ViewPlateau extends HttpServlet {
 		}
 
 		// 2. TRAITEMENT DES ACTIONS
-		String action = request.getParameter("action");
-		if (action != null) {
-			switch (action) {
-				case "lancerDe" -> {
-					int de = (int)(Math.random() * 6) + 1;
-					joueur.avancer(de);
-				}
-				case "acheter" -> {
-					ModelCase casePlateau = plateau.getCaseParPosition(joueur.getPosition());
-					if (casePlateau instanceof ModelPropriete propriete) {
-						joueur.ajouterPropriete(propriete); // ← corrigé : "prop" → "propriete"
-					}
-				}
-				case "finirTour" -> {
-					// TODO : passer au joueur suivant
-				}
-				case "construire" -> {
-					// TODO : ajouter une maison
-				}
-				default -> System.out.println("Action inconnue : " + action);
-			}
+	    String action = request.getParameter("action");
+	    if (action != null) {
+	        switch (action) {
+	            case "lancerDe" -> {
+	                int de = (int)(Math.random() * 6) + 1;
+	                joueur.avancer(de);
+	            }
+	            case "acheter" -> {
+	                ModelCase casePlateau = plateau.getCaseParPosition(joueur.getPosition());
+	                if (casePlateau instanceof ModelPropriete propriete) {
+	                    // On vérifie si elle n'appartient à personne (Optionnel selon ton Model)
+	                    if (propriete.getProprietaire() == null || propriete.getProprietaire().equals("Aucun")) {
+	                        joueur.ajouterPropriete(propriete);
+	                        System.out.println("[ACHAT] " + joueur.getPseudonyme() + " achète " + propriete.getNom());
+	                    }
+	                }
+	            }
+	            case "finirTour" -> {
+	                // Logique pour changer de joueur à implémenter ici
+	            }
+	            case "construire" -> {
+	                // Logique pour ajouter un bâtiment
+	            }
+	            default -> System.out.println("Action inconnue : " + action);
+	        }
 
-			// Post-Redirect-Get : évite de rejouer l'action sur F5
-			response.sendRedirect(request.getContextPath() + "/ViewPlateau");
-			return;
-		}
+	        // CRUCIAL : On ré-enregistre le joueur modifié dans la session
+	        session.setAttribute("joueurCourant", joueur);
+
+	        // Post-Redirect-Get : On redirige pour "nettoyer" l'URL et éviter les doubles clics
+	        response.sendRedirect(request.getContextPath() + "/ViewPlateau");
+	        return; 
+	    }
 
 		// 3. RENDU HTML (uniquement si pas d'action)
 		String nomJoueur = (joueur != null) ? joueur.getPseudonyme() : "—";
