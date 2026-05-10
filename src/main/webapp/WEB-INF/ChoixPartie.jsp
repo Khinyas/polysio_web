@@ -18,7 +18,7 @@
     <input type="radio" name="nbJoueurs" value="4"> 4 Joueurs
 
     <h3>Durée de la partie</h3>
-    <select name="duree">
+    <select name="tempsJeu">
         <option value="1">1 minute</option>
         <option value="15">15 minutes</option>
         <option value="30">30 minutes</option>
