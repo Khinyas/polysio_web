@@ -5,13 +5,23 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.ModelUser;
+import model.ModelUserRole;
+
 import java.io.IOException;
+import java.util.ArrayList;
+
+import connexion.DAOUser;
 
 /**
  * Servlet implementation class ControllerServlet
  */
 
+<<<<<<< HEAD
 @WebServlet(urlPatterns = { "/", "/connexion","/index", "/accueil", "/inscription"})
+=======
+@WebServlet(urlPatterns = { "/connexion","/index", "/accueil", "/inscription", "/ChoixPartie", "/admin"})
+>>>>>>> jluc2
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,10 +42,39 @@ public class ControllerServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		// On aiguille au niveau de l'URL, la page de connexion sera la première page qui ouvre ici.
+		
 		String path = request.getServletPath();
 		String vue = "";
 		
+		
+		ModelUser user = (ModelUser) request.getSession().getAttribute("userSession");
+		
+		if (path.equals("/admin")) {
+	        if (user == null || user.getRole() != ModelUserRole.ADMIN) {
+	            request.setAttribute("message", "Accès refusé : Identifiants insuffisants.");
+	            request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+	            return; 
+	        }
+	    }
+		
+		if (path.equals("/connexion") || path.equals("/inscription")) {
+		    if (user != null) {
+		        // L'utilisateur est déjà connecté, on le renvoie vers l'accueil
+		        response.sendRedirect(request.getContextPath() + "/accueil");
+		        return;
+		    }
+		}
+
+
+		
+		
 		switch (path) {
+			
+			case "/":
+				request.setAttribute("message", "Page d'accueil");
+				vue = "/WEB-INF/accueil.jsp";
+				break;
 		
 			case "/":
 				request.setAttribute("message", "Page d'accueil");
@@ -48,6 +87,13 @@ public class ControllerServlet extends HttpServlet {
 				//String message = "Bienvenue connard";
 				vue = "/WEB-INF/index.jsp";
 				break;
+				
+			case "/admin":
+	            
+	            ArrayList<ModelUser> utilisateurs = DAOUser.reqListeTousLesUtilisateurs();
+	            request.setAttribute("utilisateurs", utilisateurs);
+	            vue = "/WEB-INF/admin.jsp";
+	            break;
 			
 			
 		
@@ -56,6 +102,10 @@ public class ControllerServlet extends HttpServlet {
 				vue = "/WEB-INF/connexion.jsp";
 				break;
 				
+<<<<<<< HEAD
+=======
+			
+>>>>>>> jluc2
 				
 			case "/inscription":
 				request.setAttribute("message", "Page d'inscription");
@@ -73,8 +123,13 @@ public class ControllerServlet extends HttpServlet {
 				vue = "/WEB-INF/profil.jsp";
 				break;
 				
+			
+			case "/ChoixPartie":
+				request.setAttribute("message", "Choix de partie");
+				vue = "/WEB-INF/ChoixPartie.jsp";
+				break;
 				
-							
+				
 			default:
 				vue = "/WEB-INF/404.jsp";
 				break;

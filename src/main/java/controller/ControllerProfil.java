@@ -8,19 +8,20 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.ModelUser;
 
 import java.io.IOException;
-import java.util.Enumeration;
+
+import connexion.DAOUser;
 
 /**
- * Servlet implementation class ControllerAccueil
+ * Servlet implementation class ControllerProfil
  */
-@WebServlet("/ControllerAccueil")
-public class ControllerAccueil extends HttpServlet {
+@WebServlet("/ControllerProfil")
+public class ControllerProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControllerAccueil() {
+    public ControllerProfil() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,44 +40,34 @@ public class ControllerAccueil extends HttpServlet {
             request.setAttribute("email", user.getEmail());
         }
         
-        
-        
-        
-        
-        request.setAttribute("servletAttribute", 1);
-        String param = request.getParameter("action");
-        if (param != null) {
-        	System.out.println("test valeur null param");
-        	switch (param) {
-            	case "jouer" : {
-            		response.sendRedirect(request.getContextPath() + "/ControllerPlateau?action=jouer");
-            		return;
-            	}
-            	case "choisirPartie" : {
-                    request.getRequestDispatcher("/ControllerChoixPartie").forward(request, response);
-                    return;
-                }
-            	
-            	default : {
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action inconnue : " + param);
-                    return;
-            	}
-        	}
-        }
-        //afficherPage(request, response);
-        request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
-        }
-
+        afficherPage(request, response);
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String newusername = request.getParameter("newusername");
         
-        // On appelle la même méthode d'affichage
-        afficherPage(request, response);
+        // 1. Récupérer l'utilisateur actuel depuis la session
+        ModelUser user = (ModelUser) request.getSession().getAttribute("userSession");
+
+        if (newusername != null && !newusername.isEmpty() && user != null) {
+            // 2. Modifier en base de données via l'ID
+            DAOUser dao = new DAOUser();
+            dao.modifierUsername(user.getId(), newusername);
+            
+            // 3. MISE À JOUR CRUCIALE : Mettre à jour l'objet en session
+            user.setUsername(newusername);
+            // request.getSession().setAttribute("userSession", user); // Optionnel si l'objet est modifié par référence
+            
+            // 4. Rediriger pour éviter de renvoyer le formulaire en rafraîchissant
+            response.sendRedirect("ControllerProfil"); 
+        } else {
+            doGet(request, response);
+        }
     }
 
     // Méthode utilitaire pour centraliser le forward
     private void afficherPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
     }
 
 }
