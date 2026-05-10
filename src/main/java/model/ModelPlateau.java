@@ -78,20 +78,20 @@ public class ModelPlateau {
 
     private String genererJoueursHTML(ModelJoueur joueur) {
         if (joueur == null) return "";
-        StringBuilder html = new StringBuilder();
-        // TODO : positionner le pion selon joueur.getPosition()
-        // Exemple minimal :
-        html.append("""
-            <div class='pion pion-%s'
-                 style='grid-column:%d; grid-row:%d;'>
-                🔵
-            </div>
-            """.formatted(
+
+        ModelCase caseActuelle = getCaseParPosition(joueur.getPosition());
+        if (caseActuelle == null) return "";
+
+        return """
+        <div class='pion pion-%s'
+             style='grid-column:%d; grid-row:%d;'>
+            🔵
+        </div>
+        """.formatted(
                 joueur.getPseudonyme(),
-                joueur.getPositionX() + 1,
-                joueur.getPositionY() + 1
-        ));
-        return html.toString();
+                caseActuelle.getPositionX() + 1,
+                caseActuelle.getPositionY() + 1
+        );
     }
 
     private String genererFichesDetailsHTML() {
