@@ -41,14 +41,28 @@ public class ControllerPlateau extends HttpServlet {
             System.out.println("test valeur null param");
             switch (param) {
                 case "jouer": {
+                	// Partie création joueur : à corriger si il faut
+                	Integer nbJoueurs = (Integer) request.getSession().getAttribute("nbJoueursConfig");
+                    if (nbJoueurs == null) nbJoueurs = 2;
+                    List<ModelJoueur> joueurs = new ArrayList<>();
+                    for (int i = 0; i < nbJoueurs; i++) {
+                  
+                        joueurs.add(new ModelJoueur(i, 0, 1500, ModelJoueurCouleur.values()[i], "Joueur " + (i+1)));
+                    }
+                    
+                	// partie liste case
                     List<ModelCase> listeCases = new ArrayList<>();
                     listeCases = ControllerCase.plateauBuilder();
-
+                    
+                    // partie liste propriété
                     List<ModelPropriete> listeProprietes = new ArrayList<>();
                     listeProprietes = ControllerPropriete.proprietePlateau();
 
                     // Todo Liste de joueur à rajouter en parametre (et du constructeur ModelPlateau)
                     ModelPlateau modelPlateau = new ModelPlateau(listeCases, listeProprietes, request.getContextPath());
+                    
+                    modelPlateau.setListeJoueurs((ArrayList<ModelJoueur>) joueurs);
+                    
                     request.getSession().setAttribute("plateau", modelPlateau);
 
                     request.getRequestDispatcher("/ViewPlateau").forward(request, response);

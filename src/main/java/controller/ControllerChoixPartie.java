@@ -37,6 +37,17 @@ public class ControllerChoixPartie extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		String nbJoueurs = request.getParameter("nbJoueurs");
+		String tempsJeu = request.getParameter("tempsJeu");
+		
+		if(nbJoueurs != null && tempsJeu != null) {
+			request.getSession().setAttribute("nbJoueurConfig", Integer.parseInt(nbJoueurs));
+			request.getSession().setAttribute("nbJoueurConfig", Integer.parseInt(tempsJeu));
+			
+			response.sendRedirect(request.getContextPath() + "/ControllerPlateau?action=jouer");
+		}
+		
 		doGet(request, response);
 		
 		
