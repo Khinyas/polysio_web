@@ -59,9 +59,12 @@ public class ControllerPlateau extends HttpServlet {
                     listeProprietes = ControllerPropriete.proprietePlateau();
 
                     // Todo Liste de joueur à rajouter en parametre (et du constructeur ModelPlateau)
-                    ModelPlateau modelPlateau = new ModelPlateau(listeCases, listeProprietes, request.getContextPath());
+                    ModelPlateau modelPlateau = new ModelPlateau(listeCases, listeProprietes, request.getContextPath(), joueurs);
                     
-                    modelPlateau.setListeJoueurs((ArrayList<ModelJoueur>) joueurs);
+                    //modelPlateau.setListeJoueurs((ArrayList<ModelJoueur>) joueurs);
+                    if (!joueurs.isEmpty()) {
+                        request.getSession().setAttribute("joueurCourant", joueurs.get(0));
+                    }
                     
                     request.getSession().setAttribute("plateau", modelPlateau);
 

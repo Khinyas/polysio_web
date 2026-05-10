@@ -25,8 +25,15 @@ public class ViewPlateau extends HttpServlet {
 
 		// 1. RÉCUPÉRATION SESSION
 		HttpSession session = request.getSession();
-		ModelJoueur joueur = (ModelJoueur) session.getAttribute("joueur");
+		ModelJoueur joueur = (ModelJoueur) session.getAttribute("joueurCourant");
 		ModelPlateau plateau = (ModelPlateau) session.getAttribute("plateau");
+
+		// --- AJOUTE CE FILET DE SÉCURITÉ ICI ---
+		if (plateau == null || joueur == null) {
+		    // Si on n'a rien, on force le passage par le contrôleur de création
+		    response.sendRedirect(request.getContextPath() + "/ControllerPlateau?action=jouer");
+		    return; // Stop l'exécution ici !
+		}
 
 		// 2. TRAITEMENT DES ACTIONS
 		String action = request.getParameter("action");
@@ -136,17 +143,17 @@ public class ViewPlateau extends HttpServlet {
                     </div>
                 </div>
 
-                %s
 
             </body>
             </html>
-        """.formatted(
-				request.getContextPath(),
-				plateauHTML,
-				nomJoueur,
-				argent,
-				plateau.genererInventaireHTML(joueur)  // inventaire dans le panneau// modales cachées en bas du body
-		));
+	""".formatted(
+	        request.getContextPath(),             // 1 : Pour le CSS
+	        plateauHTML,                          // 2 : Le plateau
+	        nomJoueur,                            // 3 : Titre <h3>
+	        argent,                               // 4 : Argent 💰
+	        plateau.genererInventaireHTML(joueur) // 5 : Liste des cartes
+	        //,plateau.genererFichesDetailsHTML()    // 6 : LES MODALES (Manquant !)
+	    ));
 
 		out.flush();
 	}

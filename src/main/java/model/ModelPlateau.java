@@ -7,13 +7,14 @@ public class ModelPlateau {
 
     private List<ModelCase> listeCases;
     private List<ModelPropriete> listeProprietes;
-    private ArrayList<ModelJoueur> listeJoueurs;
+    private List<ModelJoueur> listeJoueurs;
     private String contextPath;
 
-    public ModelPlateau(List<ModelCase> listeCasesP, List<ModelPropriete> listeProprieteP, String contextPathP) {
+    public ModelPlateau(List<ModelCase> listeCasesP, List<ModelPropriete> listeProprieteP, String contextPathP, List<ModelJoueur> joueurs) {
         this.listeCases = listeCasesP;
         this.listeProprietes = listeProprieteP;
         this.contextPath = contextPathP;
+        this.listeJoueurs = joueurs;
     }
 
     public String initialiserPlateau(ModelJoueur joueurActuel) {
@@ -22,7 +23,7 @@ public class ModelPlateau {
 
         html.append("<div class='plateau-grid'>");
         html.append(genererCasesHTML());         // private uniquement appelé ici
-        html.append(genererJoueursHTML(joueurActuel)); // private
+        html.append(genererJoueursHTML()); // private
         html.append("</div>");
 
         html.append(genererFichesDetailsHTML());  // private  modales cachées
@@ -76,22 +77,33 @@ public class ModelPlateau {
         return html.toString();
     }
 
-    private String genererJoueursHTML(ModelJoueur joueur) {
-        if (joueur == null) return "";
+    private String genererJoueursHTML() {
+        if (this.listeJoueurs == null || this.listeJoueurs.isEmpty()) return "";
 
-        ModelCase caseActuelle = getCaseParPosition(joueur.getPosition());
-        if (caseActuelle == null) return "";
+        StringBuilder html = new StringBuilder();
 
-        return """
-        <div class='pion pion-%s'
-             style='grid-column:%d; grid-row:%d;'>
-            🔵
-        </div>
-        """.formatted(
-                joueur.getPseudonyme(),
-                caseActuelle.getPositionX() + 1,
-                caseActuelle.getPositionY() + 1
-        );
+        for (ModelJoueur j : this.listeJoueurs) {
+            ModelCase caseActuelle = getCaseParPosition(j.getPosition());
+            
+            if (caseActuelle != null) {
+                // On ajoute un pion pour chaque joueur
+                // On peut utiliser j.getCouleur() ou j.getId() pour varier l'apparence
+                html.append("""
+                    <div class='pion pion-%s' 
+                         title='%s'
+                         style='grid-column:%d; grid-row:%d;'>
+                        %s
+                    </div>
+                    """.formatted(
+                            j.getPseudonyme(),
+                            j.getPseudonyme(),
+                            caseActuelle.getPositionX() + 1,
+                            caseActuelle.getPositionY() + 1,
+                            "🔵" // Ici tu pourrais mettre une image différente par joueur
+                    ));
+            }
+        }
+        return html.toString();
     }
 
     private String genererFichesDetailsHTML() {
