@@ -17,7 +17,9 @@ import connexion.DAOUser;
  * Servlet implementation class ControllerServlet
  */
 
+
 @WebServlet(urlPatterns = { "/connexion","/index", "/accueil", "/inscription", "/ChoixPartie", "/admin"})
+
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -72,6 +74,7 @@ public class ControllerServlet extends HttpServlet {
 				vue = "/WEB-INF/accueil.jsp";
 				break;
 		
+		
 			case "/index":
 			
 				request.setAttribute("message", "Bienvenue sur l'index");
@@ -93,7 +96,6 @@ public class ControllerServlet extends HttpServlet {
 				vue = "/WEB-INF/connexion.jsp";
 				break;
 				
-			
 				
 			case "/inscription":
 				request.setAttribute("message", "Page d'inscription");
