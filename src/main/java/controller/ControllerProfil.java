@@ -32,7 +32,12 @@ public class ControllerProfil extends HttpServlet {
  // Dans ControllerAccueil.java
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 1. On récupère l'objet stocké en session
-        ModelUser user = (ModelUser) request.getSession().getAttribute("userSession");
+        ModelUser user = (ModelUser) request.getSession().getAttribute("userSession");	
+        
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/connexion");
+            return; 
+        }
 
         // 2. Si l'utilisateur est connecté, on prépare les données pour la JSP
         if (user != null) {
@@ -42,6 +47,8 @@ public class ControllerProfil extends HttpServlet {
         
         afficherPage(request, response);
     }
+    
+    
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String newusername = request.getParameter("newusername");

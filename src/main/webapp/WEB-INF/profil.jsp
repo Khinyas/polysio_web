@@ -11,6 +11,9 @@
 <title>Profil</title>
 </head>
 <body>
+
+<%@ include file="header.jsp" %>
+
 	<div class="form-container">
 	<h1>PROFIL</h1>
 	    Nom d'utilisateur: ${username} 

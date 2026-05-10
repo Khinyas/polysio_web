@@ -18,7 +18,7 @@ import connexion.DAOUser;
  */
 
 
-@WebServlet(urlPatterns = { "/connexion","/index", "/accueil", "/inscription", "/ChoixPartie", "/admin"})
+@WebServlet(urlPatterns = { "/connexion","/index", "/accueil", "/inscription","/profil", "/ChoixPartie", "/admin"})
 
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -48,6 +48,8 @@ public class ControllerServlet extends HttpServlet {
 		
 		ModelUser user = (ModelUser) request.getSession().getAttribute("userSession");
 		
+		// Ici, c'est les if pour éviter les intrusions, il faudra peut être en mettre plus
+		
 		if (path.equals("/admin")) {
 	        if (user == null || user.getRole() != ModelUserRole.ADMIN) {
 	            request.setAttribute("message", "Accès refusé : Identifiants insuffisants.");
@@ -63,7 +65,14 @@ public class ControllerServlet extends HttpServlet {
 		        return;
 		    }
 		}
-
+		
+		if (path.equals("/profil")) {
+		    if (user == null) {
+		        System.out.println("DEBUG: Accès refusé, redirection accueil");
+		        response.sendRedirect(request.getContextPath() + "/connexion"); 
+		        return;
+		    }
+		}
 
 		
 		
@@ -78,7 +87,6 @@ public class ControllerServlet extends HttpServlet {
 			case "/index":
 			
 				request.setAttribute("message", "Bienvenue sur l'index");
-				//String message = "Bienvenue connard";
 				vue = "/WEB-INF/index.jsp";
 				break;
 				
