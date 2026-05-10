@@ -43,14 +43,11 @@ public class ControllerChoixPartie extends HttpServlet {
 		
 		if(nbJoueurs != null && tempsJeu != null) {
 			request.getSession().setAttribute("nbJoueurConfig", Integer.parseInt(nbJoueurs));
-			request.getSession().setAttribute("nbJoueurConfig", Integer.parseInt(tempsJeu));
+			request.getSession().setAttribute("tempsJeuConfig", Integer.parseInt(tempsJeu));
 			
 			response.sendRedirect(request.getContextPath() + "/ControllerPlateau?action=jouer");
-		}
-		
-		doGet(request, response);
-		
-		
-	}
-
-}
+		} else {
+	        
+	        doGet(request, response);
+	    }
+	}}
