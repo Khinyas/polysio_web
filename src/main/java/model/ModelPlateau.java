@@ -3,103 +3,149 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-// On utilise StackPane pour pouvoir empiler le background ET le plateau par dessus
-public class ModelPlateau  {
+public class ModelPlateau {
+
     private List<ModelCase> listeCases;
     private List<ModelPropriete> listeProprietes;
     private ArrayList<ModelJoueur> listeJoueurs;
     private String contextPath;
-    private String plateauHTML;
 
     public ModelPlateau(List<ModelCase> listeCasesP, List<ModelPropriete> listeProprieteP, String contextPathP) {
         this.listeCases = listeCasesP;
         this.listeProprietes = listeProprieteP;
         this.contextPath = contextPathP;
-        this.plateauHTML = initialiserPlateau();
     }
 
-    public List<ModelCase> getListeCases() {
-        return listeCases;
+    public String initialiserPlateau(ModelJoueur joueurActuel) {
+        StringBuilder html = new StringBuilder();
+        html.append("<div class='jeu-container'>");
+
+        html.append("<div class='plateau-grid'>");
+        html.append(genererCasesHTML());         // private uniquement appelé ici
+        html.append(genererJoueursHTML(joueurActuel)); // private
+        html.append("</div>");
+
+        html.append(genererFichesDetailsHTML());  // private  modales cachées
+
+        html.append("</div>");
+        return html.toString();
     }
 
-    public List<ModelPropriete> getListePropriete() {
-        return listeProprietes;
-    }
+/**** Les méthodes internes du plateau qui sont private ***/
+    private String genererCasesHTML() {
+        StringBuilder html = new StringBuilder();
+        for (ModelCase casePlateau : this.listeCases) {
 
-    public String getPlateauHTML() {
-        return plateauHTML;
-    }
-
-    public void setPlateauHTML(String plateauHTML) {
-        this.plateauHTML = plateauHTML;
-    }
-
-    public ArrayList<ModelJoueur> getListeJoueurs() {
-        return listeJoueurs;
-    }
-
-    public void setListeJoueurs(ArrayList<ModelJoueur> listeJoueurs) {
-        this.listeJoueurs = listeJoueurs;
-    }
-
-    public void setListeCases(List<ModelCase> listeCases) {
-        this.listeCases = listeCases;
-    }
-
-    public List<ModelPropriete> getListeProprietes() {
-        return listeProprietes;
-    }
-
-    public void setListeProprietes(List<ModelPropriete> listeProprietes) {
-        this.listeProprietes = listeProprietes;
-    }
-
-    public String initialiserPlateau() {
-       StringBuilder cases = new StringBuilder();
-       cases.append("<div class='plateau-grid'>");
-
-       for (ModelCase casePlateau : this.listeCases) {
-           // On convertit les positions 0-10 en positions CSS 1-11
-           int cssX = casePlateau.getPositionX() + 1;
-           int cssY = casePlateau.getPositionY() + 1;
-
-           if (casePlateau.getNom().equals("centre")) {
-               cases.append("""
+            if (casePlateau.getNom().equals("centre")) {
+                html.append("""
                     <div id='%s' class='case'
-                         style='grid-column:%d / span 9; grid-row:%d / span 9;'>
+                         style='grid-column:2 / span 9; grid-row:2 / span 9;'>
                         <img src='%s' alt='%s' width='100%%' height='100%%'/>
                     </div>
                     """.formatted(
-                       casePlateau.getIdCSS(),
-                       2,
-                       2,
-                       contextPath + casePlateau.getCheminSvg(),
-                       casePlateau.getNom()
-               ));
-           } else {
-               cases.append("""
+                        casePlateau.getIdCSS(),
+                        contextPath + casePlateau.getCheminSvg(),
+                        casePlateau.getNom()
+                ));
+            } else {
+                // C'est une propriété
+                String lienOuvrirDetail = (casePlateau instanceof ModelPropriete)
+                        ? "href='#detail-" + casePlateau.getId() + "'"
+                        : "";
+
+                html.append("""
                     <div id='%s' class='case case-%s'
                          style='grid-column:%d; grid-row:%d;'
                          data-id='%d'>
-                        <img src='%s' alt='%s' width='100%%' height='100%%'/>
+                        <a %s>
+                            <img src='%s' alt='%s' width='100%%' height='100%%'/>
+                        </a>
                     </div>
                     """.formatted(
-                       casePlateau.getIdCSS(),
-                       casePlateau.getTypeCase(),
-                       casePlateau.getPositionX() + 1,
-                       casePlateau.getPositionY() + 1,
-                       casePlateau.getId(),
-                       contextPath + casePlateau.getCheminSvg(),
-                       casePlateau.getNom()
-               ));
-           }
-       }
+                        casePlateau.getIdCSS(),
+                        casePlateau.getTypeCase(),
+                        casePlateau.getPositionX() + 1,
+                        casePlateau.getPositionY() + 1,
+                        casePlateau.getId(),
+                        lienOuvrirDetail,
+                        contextPath + casePlateau.getCheminSvg(),
+                        casePlateau.getNom()
+                ));
+            }
+        }
+        return html.toString();
+    }
 
-       cases.append("</div>");
+    private String genererJoueursHTML(ModelJoueur joueur) {
+        if (joueur == null) return "";
+        StringBuilder html = new StringBuilder();
+        // TODO : positionner le pion selon joueur.getPosition()
+        // Exemple minimal :
+        html.append("""
+            <div class='pion pion-%s'
+                 style='grid-column:%d; grid-row:%d;'>
+                🔵
+            </div>
+            """.formatted(
+                joueur.getPseudonyme(),
+                joueur.getPositionX() + 1,
+                joueur.getPositionY() + 1
+        ));
+        return html.toString();
+    }
 
-       return cases.toString();
-   }
+    private String genererFichesDetailsHTML() {
+        StringBuilder html = new StringBuilder();
+        for (ModelCase casePlateau : this.listeCases) {
+            if (casePlateau instanceof ModelPropriete propriete) {
+                html.append(String.format("""
+                    <div id='detail-%d' class='modal-overlay'>
+                        <div class='modal-content'>
+                            <a href='#' class='close'>&times;</a>
+                            <h2>%s</h2>
+                            <img src='%s%s' width='200'/>
+                            <ul>
+                                <li>Prix d'achat : %d pts</li>
+                                <li>Loyer de base : %d pts</li>
+                                <li>Avec bâtiment : %d pts</li>
+                            </ul>
+                            <p>Propriétaire : %s</p>
+                        </div>
+                    </div>
+                    """,
+                        propriete.getId(),
+                        propriete.getNom(),
+                        contextPath, propriete.getCheminSvg(),
+                        propriete.getPrix(),
+                        propriete.getLoyerNu(),
+                        propriete.getLoyerBatiment(),
+                        propriete.getProprietaire() != null ? propriete.getProprietaire() : "Aucun"
+                ));
+            }
+        }
+        return html.toString();
+    }
 
+/*** Méthodes Public que la vue pourra apeller en dynamique ***/
+    public String genererInventaireHTML(ModelJoueur joueurP) {
+        StringBuilder html = new StringBuilder("<div class='inventaire'>");
+        for (ModelPropriete propriete : joueurP.getMesProprietes()) {
+            html.append(String.format("""
+                <div class='carte-inventaire'>
+                    <a href='#detail-%d'>
+                        <img src='%s%s' title='%s' width='50'/>
+                    </a>
+                </div>
+                """,
+                    propriete.getId(),         // ← lien vers la modale depuis l'inventaire aussi
+                    contextPath,
+                    propriete.getCheminSvg(),
+                    propriete.getNom()
+            ));
+        }
+        html.append("</div>");
+        return html.toString();
+    }
 
 
     public ModelCase getCaseParPosition(int positionP) {
@@ -111,7 +157,7 @@ public class ModelPlateau  {
 
     public ModelPropriete getProprieteParPosition(int positionP) {
         for (ModelPropriete propriete : this.listeProprietes) {
-            if (propriete.getCasePlateau() == positionP) return propriete;
+            if (propriete.getId() == positionP) return propriete;
         }
         return null;
     }
@@ -121,7 +167,16 @@ public class ModelPlateau  {
         int nouveauSolde = ancienSolde - montant;
         joueur.setPointsCompetences(nouveauSolde);
         System.out.println("[ECONOMIE] " + joueur.getPseudonyme()
-                + " : " + ancienSolde + " -> " + nouveauSolde);
+                + " : " + ancienSolde + " → " + nouveauSolde);
     }
 
+
+    // GETTERS / SETTERS
+
+    public List<ModelCase> getListeCases() { return listeCases; }
+    public void setListeCases(List<ModelCase> listeCases) { this.listeCases = listeCases; }
+    public List<ModelPropriete> getListeProprietes() { return listeProprietes; }
+    public void setListeProprietes(List<ModelPropriete> listeProprietes) { this.listeProprietes = listeProprietes; }
+    public ArrayList<ModelJoueur> getListeJoueurs() { return listeJoueurs; }
+    public void setListeJoueurs(ArrayList<ModelJoueur> listeJoueurs) { this.listeJoueurs = listeJoueurs; }
 }

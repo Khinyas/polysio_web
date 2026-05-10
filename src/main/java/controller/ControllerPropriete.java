@@ -52,7 +52,7 @@ public class ControllerPropriete extends HttpServlet {
     }
 
     public static ArrayList<ModelPropriete> proprietePlateau() {
-        String reqSQL = "SELECT p.*, c.nom_case, c.type_case\n" +
+        String reqSQL = "SELECT p.*, c.nom_case, c.type_case, c.positionX, c.positionY \n" +
                 "FROM polysio.propriete p  \n" +
                 "JOIN case_plateau c USING (id_case_plateau)\n" +
                 "ORDER BY id_propriete ASC";
@@ -64,17 +64,17 @@ public class ControllerPropriete extends HttpServlet {
                 {
                     ModelPropriete proprietes =  new ModelPropriete(
                             rs.getInt("id_propriete"),
-                            rs.getBoolean("batiment"),
-                            rs.getInt("id_case_plateau"),
+                            rs.getString("nom_case"),
+                            rs.getString("type_case"),
+                            rs.getInt("positionX"),
+                            rs.getInt("positionY"),
                             rs.getString("chemin_svg"),
+                            rs.getString("idCSS"),
+                            rs.getInt("prix"),
                             rs.getInt("loyer_nue"),
                             rs.getInt("loyer_batiment"),
                             rs.getInt("id_couleur"),
-                            rs.getInt("prix"),
-                            rs.getString("nom_case"),
-                            rs.getString("type_case")
-
-                            //MainApp.cfgPolysio.get("pf.case"+rs.getInt("id_case_plateau"))
+                            rs.getBoolean("batiment")
                     );
                     listeProprieteBdd.add(proprietes);
                 }
