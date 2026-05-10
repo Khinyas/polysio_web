@@ -8,8 +8,8 @@ public class DAOAcces {
 
     // Tes identifiants (à adapter selon ta configuration locale)
     private static final String URL = "jdbc:mysql://localhost:3306/polysio?serverTimezone=UTC&charachterEncoding=UTF8";
-    private static final String USER = "Ken96";
-    private static final String PASSWORD = "Pomme69";
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
 
     public static Connection getConnexion() {
         try {
