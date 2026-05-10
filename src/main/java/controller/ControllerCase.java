@@ -74,7 +74,8 @@ public class ControllerCase extends HttpServlet {
 							rs.getString("type_case"),
 							rs.getInt("positionX"),
 							rs.getInt("positionY"),
-							rs.getString("img_fiche"),
+						    rs.getString("img_plateau"),  // ✅ image plateau → super()
+						    rs.getString("img_fiche"), 
 							rs.getString("idCSS"),
 							rs.getInt("prix"),
 							rs.getInt("loyer_nue"),

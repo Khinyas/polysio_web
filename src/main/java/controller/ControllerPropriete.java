@@ -68,7 +68,8 @@ public class ControllerPropriete extends HttpServlet {
                             rs.getString("type_case"),
                             rs.getInt("positionX"),
                             rs.getInt("positionY"),
-                            rs.getString("chemin_svg"),
+                            rs.getString("img_plateau"),  // ✅ image plateau
+                            rs.getString("img_fiche"), 
                             rs.getString("idCSS"),
                             rs.getInt("prix"),
                             rs.getInt("loyer_nue"),

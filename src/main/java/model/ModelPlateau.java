@@ -127,7 +127,7 @@ public class ModelPlateau {
                     """,
                         propriete.getId(),
                         propriete.getNom(),
-                        contextPath, propriete.getCheminSvg(),
+                        contextPath, propriete.getCheminSvgFiche(),
                         propriete.getPrix(),
                         propriete.getLoyerNu(),
                         propriete.getLoyerBatiment(),
@@ -155,7 +155,7 @@ public class ModelPlateau {
                 """,
                 prop.getId(), // ID de la case (ex: 24) pour ouvrir la bonne modale
                 this.contextPath,
-                prop.getCheminSvg(), // Ce sera img_fiche grâce au ControllerCase
+                prop.getCheminSvgFiche(), // Ce sera img_fiche grâce au ControllerCase
                 prop.getNom()
             ));
         }
