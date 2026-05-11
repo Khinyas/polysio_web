@@ -1,7 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ModelPlateau {
 
@@ -9,6 +11,8 @@ public class ModelPlateau {
     private List<ModelPropriete> listeProprietes;
     private List<ModelJoueur> listeJoueurs;
     private String contextPath;
+
+    private Map<String, String> emojiMap = new HashMap<>();
 
     public ModelPlateau(List<ModelCase> listeCasesP, List<ModelPropriete> listeProprieteP, String contextPathP, List<ModelJoueur> joueurs) {
         this.listeCases = listeCasesP;
@@ -102,7 +106,7 @@ public class ModelPlateau {
                             j.getPseudonyme(),
                             caseActuelle.getPositionX() + 1,
                             caseActuelle.getPositionY() + 1,
-                            "🔵" // Ici tu pourrais mettre une image différente par joueur
+                        j.getCouleur().getCouleurJoueur()
                     ));
             }
         }

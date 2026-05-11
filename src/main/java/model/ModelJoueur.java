@@ -24,8 +24,12 @@
 		this.enPrison     = false;
 		this.toursEnPrison = 0;
 	}
-	
-	public int getIdJoueur() {
+
+	 public void setCouleur(ModelJoueurCouleur couleur) {
+		 this.couleur = couleur;
+	 }
+
+	 public int getIdJoueur() {
 		return idJoueur;
 	}
 
@@ -142,4 +146,4 @@
 		+ "}";
 	}
 
-}
+ }
