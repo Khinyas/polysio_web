@@ -35,7 +35,11 @@ public class ControllerPlateau extends HttpServlet {
         //response.getWriter().append("Served at: ").append(request.getContextPath());
         String param = request.getParameter("action");
         if (param == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action inconnue : " + param);
+            param = (String) request.getAttribute("action"); // ← ajout
+        }
+        if (param == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action manquante");
+            return;
         }
         if (param != null) {
             System.out.println("test valeur null param");
@@ -45,7 +49,7 @@ public class ControllerPlateau extends HttpServlet {
                 	Integer nbJoueurs = (Integer) request.getSession().getAttribute("nbJoueursConfig");
                     int nbFinalJoueur = (nbJoueurs != null) ? nbJoueurs : 2;
                     List<ModelJoueur> joueurs = new ArrayList<>();
-                    for (int i = 0; i < nbJoueurs; i++) {
+                    for (int i = 0; i < nbFinalJoueur; i++) {
                   
                         joueurs.add(new ModelJoueur(i, 0, 1500, ModelJoueurCouleur.values()[i], "Joueur " + (i+1)));
                     }

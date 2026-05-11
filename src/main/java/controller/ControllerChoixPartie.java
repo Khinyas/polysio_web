@@ -46,8 +46,9 @@ public class ControllerChoixPartie extends HttpServlet {
 			request.getSession().setAttribute("tempsJeuConfig", Integer.parseInt(tempsJeu));
 			
 			System.out.println("");
-			
-			response.sendRedirect(request.getContextPath() + "/ControllerPlateau?action=jouer");
+
+			request.setAttribute("action", "jouer");
+			request.getRequestDispatcher("/ControllerPlateau").forward(request, response);
 		} else {
 	        
 	        doGet(request, response);

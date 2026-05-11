@@ -18,6 +18,7 @@ public class ModelPlateau {
     }
 
     public String initialiserPlateau(ModelJoueur joueurActuel) {
+        System.out.println("DEBUG plateauBuilder : " + listeCases.size() + " cases");
         StringBuilder html = new StringBuilder();
         html.append("<div class='jeu-container'>");
 
@@ -34,6 +35,7 @@ public class ModelPlateau {
 
 /**** Les méthodes internes du plateau qui sont private ***/
     private String genererCasesHTML() {
+        System.out.println("DEBUG genererCasesHTML : " + this.listeCases.size() + " cases");
         StringBuilder html = new StringBuilder();
         for (ModelCase casePlateau : this.listeCases) {
 
