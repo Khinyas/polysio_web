@@ -42,8 +42,10 @@ public class ControllerChoixPartie extends HttpServlet {
 		String tempsJeu = request.getParameter("tempsJeu");
 		
 		if(nbJoueurs != null && tempsJeu != null) {
-			request.getSession().setAttribute("nbJoueurConfig", Integer.parseInt(nbJoueurs));
+			request.getSession().setAttribute("nbJoueursConfig", Integer.parseInt(nbJoueurs));
 			request.getSession().setAttribute("tempsJeuConfig", Integer.parseInt(tempsJeu));
+			
+			System.out.println("");
 			
 			response.sendRedirect(request.getContextPath() + "/ControllerPlateau?action=jouer");
 		} else {

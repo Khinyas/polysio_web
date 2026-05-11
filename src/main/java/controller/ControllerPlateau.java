@@ -43,7 +43,7 @@ public class ControllerPlateau extends HttpServlet {
                 case "jouer": {
                 	// Partie création joueur : à corriger si il faut
                 	Integer nbJoueurs = (Integer) request.getSession().getAttribute("nbJoueursConfig");
-                    if (nbJoueurs == null) nbJoueurs = 2;
+                    int nbFinalJoueur = (nbJoueurs != null) ? nbJoueurs : 2;
                     List<ModelJoueur> joueurs = new ArrayList<>();
                     for (int i = 0; i < nbJoueurs; i++) {
                   
@@ -61,7 +61,7 @@ public class ControllerPlateau extends HttpServlet {
                     // Todo Liste de joueur à rajouter en parametre (et du constructeur ModelPlateau)
                     ModelPlateau modelPlateau = new ModelPlateau(listeCases, listeProprietes, request.getContextPath(), joueurs);
                     
-                    //modelPlateau.setListeJoueurs((ArrayList<ModelJoueur>) joueurs);
+                    modelPlateau.setListeJoueurs((ArrayList<ModelJoueur>) joueurs);
                     if (!joueurs.isEmpty()) {
                         request.getSession().setAttribute("joueurCourant", joueurs.get(0));
                     }
