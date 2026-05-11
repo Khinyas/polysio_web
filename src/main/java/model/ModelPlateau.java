@@ -103,7 +103,7 @@ public class ModelPlateau {
                             j.getPseudonyme(),
                             caseActuelle.getPositionX() + 1,
                             caseActuelle.getPositionY() + 1,
-                        j.getCouleur()
+                        j.getCouleur().getCouleurJoueur()
                     ));
             }
         }
