@@ -83,7 +83,7 @@ public class ViewPlateau extends HttpServlet {
             <html>
             <head>
                 <title>Plateau de jeu</title>
-                <link rel="stylesheet" href="%s/css/style.css">
+               
                 <style>
                     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
                     html, body { height: 100%%; overflow: hidden; }
