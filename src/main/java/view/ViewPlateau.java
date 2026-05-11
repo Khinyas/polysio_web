@@ -86,36 +86,33 @@ public class ViewPlateau extends HttpServlet {
                
                 <style>
                     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-                    html, body { height: 100%%; overflow: hidden; }
                     html, body { height: 100%%; margin: 0; padding: 0; overflow: hidden; }
-				.page-wrapper {\s
-				    display: flex; flex-direction: column;\s
-				    height: 100vh;\s
-				    overflow: hidden;
-				}
-.game-area {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 16px;
-    padding: 12px;
-    min-height: 0;
-    overflow: hidden;
-}
-.plateau-wrapper {
-    flex-shrink: 0;
-    width: 861px;
-    height: 861px;
-    overflow: hidden;
-}
-.plateau-grid {
-    display: grid;
-    grid-template-columns: 12.5%% repeat(9, 8.3%%) 12.5%%;
-    grid-template-rows:    12.5%% repeat(9, 8.3%%) 12.5%%;
-    width: 100%%;
-    height: 100%%;
-}
+				        .page-wrapper { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+				        .game-area {
+				            flex: 1;
+				            display: flex;
+				            align-items: center;
+				            justify-content: flex-start;
+				            gap: 16px;
+				            padding: 12px;
+				            min-height: 0;
+				            overflow: hidden;
+				        }
+				        .plateau-wrapper {
+				            flex-shrink: 0;
+				            min-height: 0;
+				            height: 100%%;
+				            aspect-ratio: 1 / 1;
+				            overflow: hidden;
+				        }
+				        .plateau-grid {
+				            display: grid;
+				            grid-template-columns: 12.5%% repeat(9, 8.3%%) 12.5%%;
+				            grid-template-rows:    12.5%% repeat(9, 8.3%%) 12.5%%;
+				            width: 100%%;
+				            height: 100%%;
+				        }
+				        .jeu-container { width: 100%%; height: 100%%; }
                     .case {
                         border: 1px solid #333; display: flex; flex-direction: column;
                         align-items: center; justify-content: center; overflow: hidden;
