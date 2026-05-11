@@ -73,6 +73,7 @@ public class ViewPlateau extends HttpServlet {
 		String plateauHTML = plateau.initialiserPlateau(joueur);
 
 		PrintWriter out = response.getWriter();
+		request.getRequestDispatcher("/WEB-INF/header.jsp").include(request, response);
 		out.print("""
             <!DOCTYPE html>
             <html>
