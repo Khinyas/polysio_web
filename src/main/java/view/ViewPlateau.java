@@ -131,44 +131,43 @@ public class ViewPlateau extends HttpServlet {
             <body>
                 """.formatted(ctx));
 
-				    // Header DANS le body, pas avant le DOCTYPE
 				    request.getRequestDispatcher("/WEB-INF/header.jsp").include(request, response);
 
-				    out.print("""
-                <div class="page-wrapper">
-                    <div class="game-area">
+		out.print("""
+            <div class="page-wrapper">
+                <div class="game-area">
 
-                        <div class="plateau-wrapper">
-                            %s
-                        </div>
-
-                        <div class="side-panel">
-                            
-
-                            <a href="?action=lancerDe"  class="btn">🎲 Lancer les dés</a>
-                            <a href="?action=acheter"   class="btn">🏠 Acheter</a>
-                            <a href="?action=construire" class="btn">🔨 Construire</a>
-                            <a href="?action=finirTour" class="btn">⏭ Finir le tour</a>
-
-                            <h4>Mes propriétés</h4>
-                            %s
-                        </div>
-
+                    <div class="plateau-wrapper">
+                        %s
                     </div>
+
+                    <div class="side-panel">
+                        
+
+                        <a href="%s/ViewPlateau?action=lancerDe"  class="btn">🎲 Lancer les dés</a>
+                        <a href="%s/ViewPlateau?action=acheter"   class="btn">🏠 Acheter</a>
+                        <a href="%s/ViewPlateau?action=construire" class="btn">🔨 Construire</a>
+                        <a href="%s/ViewPlateau?action=finirTour"  class="btn">⏭ Finir le tour</a>
+
+                        <h4>Mes propriétés</h4>
+                        %s
+                    </div>
+
                 </div>
+            </div>
 
-                %s
+            %s
 
-            </body>
-            </html>
-        """.formatted(
-			plateauHTML,
-			ctx, ctx, ctx, ctx,
-			listeJoueursHTML.toString(),
-			plateau.genererInventaireHTML(joueur)
-					));
+        </body>
+        </html>
+    """.formatted(
+				plateauHTML,
+				ctx, ctx, ctx, ctx,
+				plateau.genererInventaireHTML(joueur),
+				listeJoueursHTML.toString()
+		));
 
-		out.flush();  // ← ici, après la parenthèse fermante du print
+		out.flush();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
