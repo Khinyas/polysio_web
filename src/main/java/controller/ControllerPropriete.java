@@ -52,7 +52,10 @@ public class ControllerPropriete extends HttpServlet {
     }
 
     public static ArrayList<ModelPropriete> proprietePlateau() {
-        String reqSQL = "SELECT p.*, c.nom_case, c.type_case, c.positionX, c.positionY \n" +
+        String reqSQL = "SELECT p.*, " +
+                "p.chemin_svg AS img_fiche," +
+                "c.chemin_svg AS img_plateau," +
+                " c.nom_case, c.type_case, c.positionX, c.positionY \n" +
                 "FROM polysio.propriete p  \n" +
                 "JOIN case_plateau c USING (id_case_plateau)\n" +
                 "ORDER BY id_propriete ASC";
