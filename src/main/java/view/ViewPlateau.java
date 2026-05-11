@@ -89,16 +89,21 @@ public class ViewPlateau extends HttpServlet {
                     html, body { height: 100%%; overflow: hidden; }
                     .page-wrapper { display: flex; flex-direction: column; height: 100vh; }
                     .game-area {
-                        flex: 1; display: flex; align-items: center;
-                        justify-content: flex-start; gap: 16px; padding: 12px; min-height: 0;
-                    }
-                    .plateau-wrapper { height: 100%%; aspect-ratio: 1/1; flex-shrink: 0; }
-                    .plateau-grid {
-                        display: grid;
-                        grid-template-columns: 12.5%% repeat(9, 8.3%%) 12.5%%;
-                        grid-template-rows:    12.5%% repeat(9, 8.3%%) 12.5%%;
-                        width: 80vmin; height: 80vmin;
-                    }
+				                   flex: 1; display: flex; align-items: stretch;  /* ← stretch au lieu de center */
+				                   justify-content: flex-start; gap: 16px; padding: 12px; min-height: 0;
+				               }
+                    .plateau-wrapper {\s
+				                   height: 100%%;        /* ← prend toute la hauteur de game-area */
+				                   aspect-ratio: 1/1;\s
+				                   flex-shrink: 0;\s
+				               }
+					.plateau-grid {
+						display: grid;
+						grid-template-columns: 12.5%% repeat(9, 8.3%%) 12.5%%;
+						grid-template-rows:    12.5%% repeat(9, 8.3%%) 12.5%%;
+						width: 100%%;          /* ← suit la largeur du wrapper */
+						height: 100%%;         /* ← suit la hauteur du wrapper */
+					}
                     .case {
                         border: 1px solid #333; display: flex; flex-direction: column;
                         align-items: center; justify-content: center; overflow: hidden;
