@@ -13,7 +13,11 @@
 <body>
 
 <%@ include file="header.jsp" %>
-
+<% if (request.getAttribute("message") != null) { %>
+    <div class="alerte">
+        <%= request.getAttribute("message") %>
+    </div>
+<% } %>
 	<div class="form-container">
 	
 	<form action="${pageContext.request.contextPath}/ControllerAccueil" method="GET">

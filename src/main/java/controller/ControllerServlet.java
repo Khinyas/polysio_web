@@ -18,7 +18,7 @@ import connexion.DAOUser;
  */
 
 
-@WebServlet(urlPatterns = { "/connexion","/index", "/accueil", "/inscription","/profil", "/ChoixPartie", "/admin"})
+@WebServlet(urlPatterns = { "/", "/connexion","/index", "/accueil", "/inscription","/profil", "/ChoixPartie", "/admin"})
 
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -52,8 +52,8 @@ public class ControllerServlet extends HttpServlet {
 		
 		if (path.equals("/admin")) {
 	        if (user == null || user.getRole() != ModelUserRole.ADMIN) {
-	            request.setAttribute("message", "Accès refusé : Identifiants insuffisants.");
-	            request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+	            request.getSession().setAttribute("message", "Accès refusé : Identifiants insuffisants.");
+				response.sendRedirect(request.getContextPath() + "/accueil");
 	            return; 
 	        }
 	    }
@@ -109,10 +109,16 @@ public class ControllerServlet extends HttpServlet {
 				request.setAttribute("message", "Page d'inscription");
 				vue = "/WEB-INF/inscription.jsp";
 				break;
-		
-				
+
+
 			case "/accueil":
-				request.setAttribute("message", "Page d'accueil");
+				String flash = (String) request.getSession().getAttribute("flashMessage");
+				if (flash != null) {
+					request.setAttribute("message", flash);
+					request.getSession().removeAttribute("flashMessage");
+				} else {
+					request.setAttribute("message", "Page d'accueil"); // seulement si pas de flash
+				}
 				vue = "/WEB-INF/accueil.jsp";
 				break;
 				

@@ -1,4 +1,4 @@
-<%-- Import du modï¿½le pour que le JSP reconnaisse l'objet ModelUser --%>
+<%-- Import du modï¿½le pour que le JSP reconnaisse l'\objet ModelUser --%>
 <%@ page import="model.ModelUser" %>
 <head>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/style.css">
@@ -17,7 +17,7 @@
             <%-- Cas : Utilisateur connectÃ© --%>
             <span class="welcome-text">Bonjour, <strong><%= user.getUsername() %></strong></span>
        <a href="${pageContext.request.contextPath}/ControllerProfil" class="btn-profil">Profil</a>
-       <a href="${pageContext.request.contextPath}/deconnexion" class="btn-logout">Déconnexion</a>
+       <a href="${pageContext.request.contextPath}/deconnexion" class="btn-logout">Dï¿½connexion</a>
         <% 
             } else { 
         %>
