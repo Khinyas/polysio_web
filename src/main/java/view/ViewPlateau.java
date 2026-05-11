@@ -105,9 +105,8 @@ public class ViewPlateau extends HttpServlet {
 }
 .plateau-wrapper {
     flex-shrink: 0;
-    aspect-ratio: 1/1;
-    height: calc(100vh - 80px);   /* 80px = hauteur approximative de ton header */
-    max-height: calc(100vh - 80px);
+    width: 861px;
+    height: 861px;
     overflow: hidden;
 }
 .plateau-grid {
