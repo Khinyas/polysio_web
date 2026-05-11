@@ -87,23 +87,35 @@ public class ViewPlateau extends HttpServlet {
                 <style>
                     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
                     html, body { height: 100%%; overflow: hidden; }
-                    .page-wrapper { display: flex; flex-direction: column; height: 100vh; }
-                    .game-area {
-				                   flex: 1; display: flex; align-items: stretch;  /* ← stretch au lieu de center */
-				                   justify-content: flex-start; gap: 16px; padding: 12px; min-height: 0;
-				               }
-                    .plateau-wrapper {\s
-				                   height: 100%%;        /* ← prend toute la hauteur de game-area */
-				                   aspect-ratio: 1/1;\s
-				                   flex-shrink: 0;\s
-				               }
-					.plateau-grid {
-						display: grid;
-						grid-template-columns: 12.5%% repeat(9, 8.3%%) 12.5%%;
-						grid-template-rows:    12.5%% repeat(9, 8.3%%) 12.5%%;
-						width: 100%%;          /* ← suit la largeur du wrapper */
-						height: 100%%;         /* ← suit la hauteur du wrapper */
-					}
+                    html, body { height: 100%%; margin: 0; padding: 0; overflow: hidden; }
+				.page-wrapper {\s
+				    display: flex; flex-direction: column;\s
+				    height: 100vh;\s
+				    overflow: hidden;
+				}
+				.game-area {
+				    flex: 1;\s
+				    display: flex;\s
+				    align-items: stretch;
+				    justify-content: flex-start;\s
+				    gap: 16px;\s
+				    padding: 12px;\s
+				    min-height: 0;        /* ← CRITIQUE : sans ça flex ignore le débordement */
+				    overflow: hidden;
+				}
+				.plateau-wrapper {\s
+				    min-height: 0;        /* ← même chose ici */
+				    aspect-ratio: 1/1;\s
+				    flex-shrink: 0;
+				    overflow: hidden;
+				}
+				.plateau-grid {
+				    display: grid;
+				    grid-template-columns: 12.5%% repeat(9, 8.3%%) 12.5%%;
+				    grid-template-rows:    12.5%% repeat(9, 8.3%%) 12.5%%;
+				    width: 100%%;
+				    height: 100%%;
+				}
                     .case {
                         border: 1px solid #333; display: flex; flex-direction: column;
                         align-items: center; justify-content: center; overflow: hidden;
