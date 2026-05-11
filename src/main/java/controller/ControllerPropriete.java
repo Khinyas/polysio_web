@@ -66,7 +66,7 @@ public class ControllerPropriete extends HttpServlet {
             while (rs.next()) {
                 {
                     ModelPropriete proprietes =  new ModelPropriete(
-                            rs.getInt("id_propriete"),
+                            rs.getInt("id_case_plateau"),
                             rs.getString("nom_case"),
                             rs.getString("type_case"),
                             rs.getInt("positionX"),

@@ -38,6 +38,7 @@ public class ModelPlateau {
         for (ModelCase casePlateau : this.listeCases) {
 
             if (casePlateau.getNom().equals("centre")) {
+                System.out.println("CASE CENTRE CHARGEE");
                 html.append("""
                     <div id='%s' class='case'
                          style='grid-column:2 / span 9; grid-row:2 / span 9;'>
