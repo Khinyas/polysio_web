@@ -3,7 +3,7 @@ font-family: "Lexend", sans-serif;
   font-optical-sizing: auto;
   font-weight: 450;
   font-style: normal;
-  background-image: url("../images/inscription.jpg");
+  background-image: url("${pageContext.request.contextPath}/images/inscription.jpg");
   background-repeat: no-repeat;
   /* 100% 100% force l'image à s'étirer sur toute la largeur et hauteur */
   background-size: 100% 100%; 
