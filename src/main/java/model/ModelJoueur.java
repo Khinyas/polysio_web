@@ -1,6 +1,9 @@
  package model;
 
-public class ModelJoueur {
+ import java.util.ArrayList;
+ import java.util.List;
+
+ public class ModelJoueur {
 	private int idJoueur;
 	private int position;
 	private String pseudonyme;
@@ -10,7 +13,8 @@ public class ModelJoueur {
 	private int toursEnPrison;
 	private ModelJoueurRole roleJoueur = ModelJoueurRole.JOUEUR; // Je définis la valeur par défaut du role ICI
 	private int nombreToursJoues = 0;
-// ToDo : Remplir CFG avec les paramètre de début de game : argent, position etc ??
+	private List<ModelPropriete> mesProprietes = new ArrayList<>();
+
 	public ModelJoueur(int idJoueurP, int posP, int pcP, ModelJoueurCouleur couleurP, String pseudoP){
 		this.idJoueur = idJoueurP;
 		this.position = posP;
@@ -68,7 +72,48 @@ public class ModelJoueur {
 		this.toursEnPrison = 0;
 	}
 
-	public int getNombreToursJoues() {
+	 public boolean isEnPrison() {
+		 return enPrison;
+	 }
+
+	 public void setEnPrison(boolean enPrison) {
+		 this.enPrison = enPrison;
+	 }
+
+	 public int getToursEnPrison() {
+		 return toursEnPrison;
+	 }
+
+	 public void setToursEnPrison(int toursEnPrison) {
+		 this.toursEnPrison = toursEnPrison;
+	 }
+
+	 public ModelJoueurRole getRoleJoueur() {
+		 return roleJoueur;
+	 }
+
+	 public void setRoleJoueur(ModelJoueurRole roleJoueur) {
+		 this.roleJoueur = roleJoueur;
+	 }
+
+	 public List<ModelPropriete> getMesProprietes() {
+		 return mesProprietes;
+	 }
+
+	 public void setMesProprietes(List<ModelPropriete> mesProprietes) {
+		 this.mesProprietes = mesProprietes;
+	 }
+
+	// Dans ModelJoueur.java
+	 public void ajouterPropriete(ModelPropriete p) {
+	     if (this.mesProprietes == null) {
+	         this.mesProprietes = new ArrayList<>();
+	     }
+	     this.mesProprietes.add(p);
+	     p.setProprietaire(this.getPseudonyme()); // Optionnel : lie la propriété au joueur
+	 }
+
+	 public int getNombreToursJoues() {
 		return nombreToursJoues;
 	}
 

@@ -16,9 +16,8 @@
         %>
             <%-- Cas : Utilisateur connectÃ© --%>
             <span class="welcome-text">Bonjour, <strong><%= user.getUsername() %></strong></span>
-        <form action="ControllerProfil" method="GET">
-	        <button type="submit">Profil</button>
-	    </form>
+       <a href="${pageContext.request.contextPath}/ControllerProfil" class="btn-profil">Profil</a>
+       <a href="${pageContext.request.contextPath}/deconnexion" class="btn-logout">Déconnexion</a>
         <% 
             } else { 
         %>
@@ -28,19 +27,23 @@
         <% 
             } 
         %>
+        
+        <% if (user != null && user.getRole().toString().equals("ADMIN")) { %>
+
+			    <a href="${pageContext.request.contextPath}/admin">
+			    	Administration
+				</a>
+
+		<% } %>
+
+        
+			        <a href="${pageContext.request.contextPath}/accueil">
+			    			ACCUEIL
+					</a>
 	</div>
     </div>
 </nav>
 
-<a href="${pageContext.request.contextPath}/accueil">
-    <button>ACCUEIL</button>
-</a>
 
-<% if (user != null && user.getRole().toString().equals("ADMIN")) { %>
 
-    <a href="${pageContext.request.contextPath}/admin?afficher=true">
-    	<button>Administration</button>
-	</a>
-
-<% } %>
 

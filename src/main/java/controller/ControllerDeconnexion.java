@@ -23,7 +23,7 @@ public class ControllerDeconnexion extends HttpServlet {
 
         // Retour page connexion
         response.sendRedirect(
-            request.getContextPath() + "/ControllerConnexion"
+            request.getContextPath() + "/connexion"
         );
     }
 }

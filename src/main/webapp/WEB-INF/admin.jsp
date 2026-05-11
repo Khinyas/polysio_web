@@ -20,11 +20,11 @@
 <body>
 
     <nav>
-        <a href="${pageContext.request.contextPath}/admin">
+        <a href="${pageContext.request.contextPath}/accueil">
 		    <button>ACCUEIL</button>
 		</a>
 
-        <a href="${pageContext.request.contextPath}/admin?afficher=true">
+        <a href="${pageContext.request.contextPath}/admin">
             <button>Administration</button>
         </a>
 
@@ -32,22 +32,6 @@
             <button>DECONNEXION</button>
         </a>
     </nav>
-
-    <% if (!"true".equals(afficher)) { %>
-
-        <h1>POLYSIO</h1>
-
-        <div>
-            <button>Lancer une partie</button>
-            <br><br>
-
-            <button>Charger une partie</button>
-            <br><br>
-
-            <button>Quitter le jeu</button>
-        </div>
-
-    <% } else { %>
 
         <h1>PANNEAU D'ADMINISTRATION</h1>
 
@@ -80,7 +64,7 @@
         <button>Modifier</button>
         <button>Supprimer</button>
 
-    <% } %>
+    
 
 </body>
 </html>

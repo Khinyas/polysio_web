@@ -205,10 +205,11 @@ public class DAOUser {
                     }
 
                     return new ModelUser(
-                        id,
-                        username,
-                        email,
-                        roleBDD
+                            rs.getInt("id_utilisateur"),
+                            rs.getString("pseudo"),
+                            rs.getString("email"),
+                            rs.getString("mot_de_passe"),
+                            ModelUserRole.valueOf(rs.getString("role").toUpperCase())
                     );
                 }
             }
@@ -315,16 +316,13 @@ public class DAOUser {
 
             while (rs.next()) {
 
-                liste.add(
-                    new ModelUser(
+                liste.add(new ModelUser(
                         rs.getInt("id_utilisateur"),
                         rs.getString("pseudo"),
                         rs.getString("email"),
-                        ModelUserRole.valueOf(
-                            rs.getString("role")
-                            .toUpperCase()
-                        )
-                    )
+                        rs.getString("mot_de_passe"),
+                        ModelUserRole.valueOf(rs.getString("role").toUpperCase())
+                )
                 );
             }
 

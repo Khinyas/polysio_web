@@ -16,7 +16,6 @@
         
         <a href="inscription">S'inscrire</a>
         
-        <a href="test_db.jsp">Tester la Connexion BDD</a>
         
         <a href="accueil">Accueil</a>
     </div>

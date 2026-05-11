@@ -83,6 +83,11 @@ public class ModelCase {
 		this.idCSS = idCSS;
 	}
 
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	
 
 }

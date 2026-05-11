@@ -11,9 +11,11 @@
 <title>Inscription</title>
 </head>
 <body>
-Page inscription
+
+
+<%@ include file="header.jsp" %>
 	<div>
-	
+	Page inscription
 	<div class="form-container">
 	<!--  Redirige au ControllerInscription une fois le bouton d'inscription cliqué -->
 		<form action="ControllerInscription" method="POST">

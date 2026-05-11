@@ -49,9 +49,14 @@ public class ControllerAccueil extends HttpServlet {
         	System.out.println("test valeur null param");
         	switch (param) {
             	case "jouer" : {
-            		response.sendRedirect(request.getContextPath() + "/ControllerConstructeurPlateau?action=jouer");
+            		response.sendRedirect(request.getContextPath() + "/ControllerPlateau?action=jouer");
             		return;
             	}
+            	case "choisirPartie" : {
+                    request.getRequestDispatcher("/ControllerChoixPartie").forward(request, response);
+                    return;
+                }
+            	
             	default : {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Action inconnue : " + param);
                     return;

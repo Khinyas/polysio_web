@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import connexion.DAOAcces;
+import model.ModelPropriete;
 
 /**
  * Servlet implementation class ControllerCase
@@ -49,27 +50,54 @@ public class ControllerCase extends HttpServlet {
 
 	protected static ArrayList<ModelCase> plateauBuilder() {
 		ArrayList<ModelCase> listeCases = new ArrayList<>();
-		String reqCasesBdd = "SELECT * FROM polysio.case_plateau ORDER BY id_case_plateau ASC";
-		try (Connection conn = DAOAcces.getConnexion()) {
-			PreparedStatement pst = conn.prepareStatement(reqCasesBdd);
-			ResultSet rs = pst.executeQuery();
+
+		String reqSQL = """
+        SELECT c.*,
+			c.chemin_svg AS img_plateau, 
+           p.chemin_svg AS img_fiche,
+           p.id_propriete, p.prix, p.loyer_nue, 
+           p.loyer_batiment, p.id_couleur, p.batiment
+        FROM polysio.case_plateau c
+        LEFT JOIN polysio.propriete p USING (id_case_plateau)
+        ORDER BY c.id_case_plateau ASC
+    """;
+
+		try (Connection conn = DAOAcces.getConnexion();
+			 PreparedStatement pst = conn.prepareStatement(reqSQL);
+			 ResultSet rs = pst.executeQuery()) {
+
 			while (rs.next()) {
-				ModelCase casePlateau = new ModelCase(
-					rs.getInt("id_case_plateau"),
-					rs.getString("nom_case"),
-					rs.getString("type_case"),
-					rs.getInt("positionX"),
-					rs.getInt("positionY"),
-					rs.getString("chemin_svg"),
-					rs.getString("idCSS")
-						);
-				listeCases.add(casePlateau);
+				if (rs.getObject("id_propriete") != null) {
+					listeCases.add(new ModelPropriete(
+							rs.getInt("id_case_plateau"),
+							rs.getString("nom_case"),
+							rs.getString("type_case"),
+							rs.getInt("positionX"),
+							rs.getInt("positionY"),
+						    rs.getString("img_plateau"),  // ✅ image plateau → super()
+						    rs.getString("img_fiche"), 
+							rs.getString("idCSS"),
+							rs.getInt("prix"),
+							rs.getInt("loyer_nue"),
+							rs.getInt("loyer_batiment"),
+							rs.getInt("id_couleur"),
+							rs.getBoolean("batiment")
+					));
+				} else {
+					listeCases.add(new ModelCase(
+							rs.getInt("id_case_plateau"),
+							rs.getString("nom_case"),
+							rs.getString("type_case"),
+							rs.getInt("positionX"),
+							rs.getInt("positionY"),
+							rs.getString("img_plateau"),
+							rs.getString("idCSS")
+					));
+				}
 			}
-		} catch (SQLException erreur) {
-			System.err.println("Erreur SQL : Liste Cases non récupérée " + erreur.getMessage());
-			erreur.printStackTrace();
+		} catch (SQLException e) {
+			System.err.println("Erreur SQL : " + e.getMessage());
 		}
-		System.out.println("DEBUG SQL : Nombre de cases récupérées = " + listeCases.size());
 		return listeCases;
 	}
 }
