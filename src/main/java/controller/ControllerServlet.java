@@ -18,7 +18,7 @@ import connexion.DAOUser;
  */
 
 
-@WebServlet(urlPatterns = { "/", "/connexion","/index", "/accueil", "/inscription","/profil", "/ChoixPartie", "/admin"})
+@WebServlet(urlPatterns = { "/connexion","/index", "/accueil", "/inscription","/profil", "/ChoixPartie", "/admin"})
 
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -77,10 +77,6 @@ public class ControllerServlet extends HttpServlet {
 		
 		
 		switch (path) {
-
-			case "/":
-				response.sendRedirect(request.getContextPath() + "/accueil");
-				return;
 		
 		
 			case "/index":

@@ -143,28 +143,29 @@ public class ViewPlateau extends HttpServlet {
 
                     <div class="side-panel">
                         
-
+						<hr>
                         <a href="%s/ViewPlateau?action=lancerDe"  class="btn">🎲 Lancer les dés</a>
                         <a href="%s/ViewPlateau?action=acheter"   class="btn">🏠 Acheter</a>
                         <a href="%s/ViewPlateau?action=construire" class="btn">🔨 Construire</a>
                         <a href="%s/ViewPlateau?action=finirTour"  class="btn">⏭ Finir le tour</a>
-
+                        <h3>Joueurs</h3>
+				        %s
                         <h4>Mes propriétés</h4>
                         %s
+
                     </div>
 
                 </div>
             </div>
 
-            %s
 
         </body>
         </html>
     """.formatted(
 				plateauHTML,
 				ctx, ctx, ctx, ctx,
-				plateau.genererInventaireHTML(joueur),
-				listeJoueursHTML.toString()
+				listeJoueursHTML.toString(),
+				plateau.genererInventaireHTML(joueur)
 		));
 
 		out.flush();
