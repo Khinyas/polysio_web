@@ -20,7 +20,10 @@ public class ViewPlateau extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		System.out.println("DEBUG ViewPlateau : plateau="
+				+ request.getSession().getAttribute("plateau")
+				+ " joueur=" + request.getSession().getAttribute("joueurCourant")
+				+ " action=" + request.getParameter("action"));
 		response.setContentType("text/html;charset=UTF-8");
 
 		// 1. RÉCUPÉRATION SESSION
@@ -73,7 +76,8 @@ public class ViewPlateau extends HttpServlet {
 		String plateauHTML = plateau.initialiserPlateau(joueur);
 
 		PrintWriter out = response.getWriter();
-		request.getRequestDispatcher("/WEB-INF/header.jsp").include(request, response);
+		String ctx = request.getContextPath();
+
 		out.print("""
             <!DOCTYPE html>
             <html>
@@ -125,6 +129,12 @@ public class ViewPlateau extends HttpServlet {
                 </style>
             </head>
             <body>
+                """.formatted(ctx));
+
+				    // Header DANS le body, pas avant le DOCTYPE
+				    request.getRequestDispatcher("/WEB-INF/header.jsp").include(request, response);
+
+				    out.print("""
                 <div class="page-wrapper">
                     <div class="game-area">
 
@@ -152,15 +162,13 @@ public class ViewPlateau extends HttpServlet {
             </body>
             </html>
         """.formatted(
-				request.getContextPath(),
-				plateauHTML,
-			//	nomJoueur,
-			//	argent,
-				listeJoueursHTML.toString(),
-				plateau.genererInventaireHTML(joueur)  // inventaire dans le panneau// modales cachées en bas du body
-		));
+			plateauHTML,
+			ctx, ctx, ctx, ctx,
+			listeJoueursHTML.toString(),
+			plateau.genererInventaireHTML(joueur)
+					));
 
-		out.flush();
+		out.flush();  // ← ici, après la parenthèse fermante du print
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
