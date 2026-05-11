@@ -37,7 +37,7 @@
 		<% } %>
 
         
-			        <a href="${pageContext.request.contextPath}/accueil">
+			        <a href="${pageContext.request.contextPath}/accueil" class="btn-accueil">
 			    			ACCUEIL
 					</a>
 	</div>
