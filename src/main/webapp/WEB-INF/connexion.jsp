@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css">
 </style>
 <title>Connexion</title>
 </head>

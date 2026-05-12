@@ -7,7 +7,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 </style>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css">
 <title>Accueil</title>
 </head>
 <body>
@@ -19,8 +19,6 @@
 	<form action="${pageContext.request.contextPath}/ControllerAccueil" method="GET">
     <input type="hidden" name="action" value="jouer">
     
-    <input type="text" name="parametre" placeholder="Ton Parametre" requested>
-    <button type="submit">Valider Joueur</button>
 </form>
 
 

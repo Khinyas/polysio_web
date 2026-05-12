@@ -57,6 +57,16 @@ public class ControllerPlateau extends HttpServlet {
                     // partie liste propriété
                     List<ModelPropriete> listeProprietes = new ArrayList<>();
                     listeProprietes = ControllerPropriete.proprietePlateau();
+                    
+                    
+                    // partie chrono pour compter le temps de partie
+                    Integer tempsEnMinutes = (Integer) request.getSession().getAttribute("tempsJeuConfig");
+                    if (tempsEnMinutes == null) tempsEnMinutes = 30; // Valeur par défaut
+
+                    // On calcule le temps de fin en millisecondes (timestamp) pour plus de précision
+                    long tempsFinPartie = System.currentTimeMillis() + (tempsEnMinutes * 60 * 1000);
+                    request.getSession().setAttribute("tempsFinPartie", tempsFinPartie);
+                    request.getSession().setAttribute("tempsInitial", tempsEnMinutes * 60);
 
                     // Todo Liste de joueur à rajouter en parametre (et du constructeur ModelPlateau)
                     ModelPlateau modelPlateau = new ModelPlateau(listeCases, listeProprietes, request.getContextPath(), joueurs);

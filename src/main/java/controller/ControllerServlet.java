@@ -18,7 +18,7 @@ import connexion.DAOUser;
  */
 
 
-@WebServlet(urlPatterns = { "/connexion","/index", "/accueil", "/inscription","/profil", "/ChoixPartie", "/admin"})
+@WebServlet(urlPatterns = { "/connexion",  "/index", "/accueil", "/inscription","/profil", "/ChoixPartie", "/admin"})
 
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -43,6 +43,12 @@ public class ControllerServlet extends HttpServlet {
 		// On aiguille au niveau de l'URL, la page de connexion sera la première page qui ouvre ici.
 		
 		String path = request.getServletPath();
+		
+		if (path.endsWith(".css") || path.endsWith(".png") || path.endsWith(".jpg") || path.endsWith(".js")) {
+	        return; 
+	    }
+		
+		
 		String vue = "";
 		
 		
@@ -57,6 +63,8 @@ public class ControllerServlet extends HttpServlet {
 	            return; 
 	        }
 	    }
+		
+		
 		
 		if (path.equals("/connexion") || path.equals("/inscription")) {
 		    if (user != null) {
@@ -73,22 +81,37 @@ public class ControllerServlet extends HttpServlet {
 		        return;
 		    }
 		}
-
+		
+	/*	if (path.equals("")  || path == null || path.equals("/")) {
+			if (user == null) {
+		        System.out.println("DEBUG: Accès refusé, redirection accueil");
+		        response.sendRedirect(request.getContextPath() + "/connexion"); 
+		        return;
+			} else {
+				response.sendRedirect(request.getContextPath() + "/accueil");
+			}
+			return;
+		}
+			*/
 		
 		
 		switch (path) {
+		
 			
+		/*	case "" :
 			case "/":
 				request.setAttribute("message", "Page d'accueil");
-				vue = "/WEB-INF/accueil.jsp";
+				vue = "/WEB-INF/connexion.jsp";
 				break;
 		
-		
+		*/
 			case "/index":
 			
 				request.setAttribute("message", "Bienvenue sur l'index");
 				vue = "/WEB-INF/index.jsp";
 				break;
+				
+				
 				
 			case "/admin":
 	            

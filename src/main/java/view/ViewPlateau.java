@@ -68,9 +68,23 @@ public class ViewPlateau extends HttpServlet {
 		}
 
 		// 3. RENDU HTML (uniquement si pas d'action)
-		String nomJoueur = (joueur != null) ? joueur.getPseudonyme() : "—";
-		int argent      = (joueur != null) ? joueur.getPointsCompetences() : 0;
-		String plateauHTML = plateau.initialiserPlateau(joueur);
+
+		int tempsRestantSec = (session.getAttribute("tempsInitial") != null) ? (int)session.getAttribute("tempsInitial") : 1800;
+		
+		String plateauHTMLRaw = plateau.initialiserPlateau(joueur);
+		String inventaireHTMLRaw = plateau.genererInventaireHTML(joueur);
+		String listeJoueursHTMLRaw = listeJoueursHTML.toString();
+
+		// ON DOUBLE LES % POUR ÉVITER LE CONFLIT AVEC LE FORMATED DE LA VUE
+		String plateauHTML = (plateauHTMLRaw != null) ? plateauHTMLRaw.replace("%", "%%") : "";
+		String inventaireHTML = (inventaireHTMLRaw != null) ? inventaireHTMLRaw.replace("%", "%%") : "";
+		String listeJoueursFinal = (listeJoueursHTMLRaw != null) ? listeJoueursHTMLRaw.replace("%", "%%") : "";
+		
+		String chronoHTML = """
+			    <div id="chrono-container" style="background: #333; color: #ffeb3b; padding: 10px; margin-bottom:10px; text-align: center; border-radius: 5px; font-family: monospace; font-size: 1.5rem;">
+			        ⏱️ <span id="timer">00:00</span>
+			    </div>
+			""";
 
 		PrintWriter out = response.getWriter();
 		out.print("""
@@ -78,7 +92,7 @@ public class ViewPlateau extends HttpServlet {
             <html>
             <head>
                 <title>Plateau de jeu</title>
-                <link rel="stylesheet" href="%s/css/style.css">
+               
                 <style>
                     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
                     html, body { height: 100%%; overflow: hidden; }
@@ -123,6 +137,35 @@ public class ViewPlateau extends HttpServlet {
                     }
                 </style>
             </head>
+            
+				<script>
+            
+            let tempsInitial = %s; 
+            let urlAccueil = "%s";
+            
+            function startTimer() {
+                const display = document.querySelector('#timer');
+                let timer = tempsInitial;
+
+                const interval = setInterval(function () {
+                    let minutes = parseInt(timer / 60, 10);
+                    let seconds = parseInt(timer %% 60, 10); 
+
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                    if(display) display.textContent = minutes + ":" + seconds;
+
+                    if (--timer < 0) {
+                        clearInterval(interval);
+                        alert("⏰ TEMPS ÉCOULÉ ! Fin de la partie.");
+                        window.location.href = urlAccueil + "/accueil";
+                    }
+                }, 1000);
+            }
+            window.onload = startTimer;
+				    </script>
+            
             <body>
                 <div class="page-wrapper">
                     <div class="game-area">
@@ -138,9 +181,13 @@ public class ViewPlateau extends HttpServlet {
                             <a href="?action=acheter"   class="btn">🏠 Acheter</a>
                             <a href="?action=construire" class="btn">🔨 Construire</a>
                             <a href="?action=finirTour" class="btn">⏭ Finir le tour</a>
-
-                            <h4>Mes propriétés</h4>
-                            %s
+                            
+				                <hr>
+				                <h4>Joueurs</h4>
+			                    %s 
+			                    <hr>
+				                <h4>Mes propriétés</h4>
+				                %s
                         </div>
 
                     </div>
@@ -151,12 +198,15 @@ public class ViewPlateau extends HttpServlet {
             </body>
             </html>
         """.formatted(
+        		tempsRestantSec,
 				request.getContextPath(),
 				plateauHTML,
-			//	nomJoueur,
-			//	argent,
-				listeJoueursHTML.toString(),
-				plateau.genererInventaireHTML(joueur)  // inventaire dans le panneau// modales cachées en bas du body
+				chronoHTML,
+				// plateau.genererInventaireHTML(joueur),  // inventaire dans le panneau// modales cachées en bas du body
+				listeJoueursFinal,
+				inventaireHTML                       
+			    
+				
 		));
 
 		out.flush();

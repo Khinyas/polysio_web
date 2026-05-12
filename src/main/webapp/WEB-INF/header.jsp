@@ -1,7 +1,7 @@
 <%-- Import du mod�le pour que le JSP reconnaisse l'objet ModelUser --%>
 <%@ page import="model.ModelUser" %>
 <head>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css">
 </head>
 
 <nav class="header-nav">
@@ -41,7 +41,6 @@
 			    			ACCUEIL
 					</a>
 	</div>
-    </div>
 </nav>
 
 
