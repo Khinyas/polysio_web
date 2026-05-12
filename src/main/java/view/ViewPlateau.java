@@ -73,7 +73,7 @@ public class ViewPlateau extends HttpServlet {
 		}
 
 		// ── 5. ON ENVOIE VERS LE JSP ─────────────────────────────────────
-		request.getRequestDispatcher("/WEB-INF/plateau.jsp")
+		request.getRequestDispatcher("/WEB-INF/viewPlateau.jsp")
 				.forward(request, response);
 	}
 
