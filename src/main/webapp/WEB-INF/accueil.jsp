@@ -3,17 +3,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
-</style>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css">
 <title>Accueil</title>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
 </head>
+
+
 <body>
 
 <%@ include file="header.jsp" %>
-
+<% if (request.getAttribute("message") != null) { %>
+    <div class="alerte">
+        <%= request.getAttribute("message") %>
+    </div>
+<% } %>
 	<div class="form-container">
 	
 	<form action="${pageContext.request.contextPath}/ControllerAccueil" method="GET">

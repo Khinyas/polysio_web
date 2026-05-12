@@ -1,7 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ModelPlateau {
 
@@ -9,6 +11,8 @@ public class ModelPlateau {
     private List<ModelPropriete> listeProprietes;
     private List<ModelJoueur> listeJoueurs;
     private String contextPath;
+
+    private Map<String, String> emojiMap = new HashMap<>();
 
     public ModelPlateau(List<ModelCase> listeCasesP, List<ModelPropriete> listeProprieteP, String contextPathP, List<ModelJoueur> joueurs) {
         this.listeCases = listeCasesP;
@@ -18,6 +22,7 @@ public class ModelPlateau {
     }
 
     public String initialiserPlateau(ModelJoueur joueurActuel) {
+        System.out.println("DEBUG plateauBuilder : " + listeCases.size() + " cases");
         StringBuilder html = new StringBuilder();
         html.append("<div class='jeu-container'>");
 
@@ -34,10 +39,12 @@ public class ModelPlateau {
 
 /**** Les méthodes internes du plateau qui sont private ***/
     private String genererCasesHTML() {
+        System.out.println("DEBUG genererCasesHTML : " + this.listeCases.size() + " cases");
         StringBuilder html = new StringBuilder();
         for (ModelCase casePlateau : this.listeCases) {
 
             if (casePlateau.getNom().equals("centre")) {
+                System.out.println("CASE CENTRE CHARGEE");
                 html.append("""
                     <div id='%s' class='case'
                          style='grid-column:2 / span 9; grid-row:2 / span 9;'>
@@ -99,7 +106,7 @@ public class ModelPlateau {
                             j.getPseudonyme(),
                             caseActuelle.getPositionX() + 1,
                             caseActuelle.getPositionY() + 1,
-                            "🔵" // Ici tu pourrais mettre une image différente par joueur
+                        j.getCouleur().getCouleurJoueur()
                     ));
             }
         }

@@ -98,6 +98,7 @@ public class ControllerCase extends HttpServlet {
 		} catch (SQLException e) {
 			System.err.println("Erreur SQL : " + e.getMessage());
 		}
+		System.out.println("DEBUG plateauBuilder : " + listeCases.size() + " cases");
 		return listeCases;
 	}
 }

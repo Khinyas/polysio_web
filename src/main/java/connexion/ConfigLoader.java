@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Properties;
 
 public class ConfigLoader {
-    public static final String ENV_FILE_PATH = "resources/config.properties";
+    public static final String ENV_FILE_PATH = "src/main/resources/config.properties";
     public static final String POLYSIO_FILE_PATH = "src/polysio.properties";
     private Properties props = new Properties();
     private String filename;

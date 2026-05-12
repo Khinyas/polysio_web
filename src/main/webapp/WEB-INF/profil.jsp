@@ -29,6 +29,10 @@
 	    <form action="ControllerProfil" method="POST">
 	    <input type="text" name="newusername" class="input-field">
 	        <button type="submit">Modifier le pseudo</button>
+
+			<!-- Affichage erreur si elle existe -->
+			<p style="color:red;">${msgErreur}</p>
+						
 	   	</form>
 	</div>
 	</body>

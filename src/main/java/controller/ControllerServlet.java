@@ -58,8 +58,8 @@ public class ControllerServlet extends HttpServlet {
 		
 		if (path.equals("/admin")) {
 	        if (user == null || user.getRole() != ModelUserRole.ADMIN) {
-	            request.setAttribute("message", "Accès refusé : Identifiants insuffisants.");
-	            request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+	            request.getSession().setAttribute("flashMessage", "Accès refusé : Identifiants insuffisants.");
+				response.sendRedirect(request.getContextPath() + "/accueil");
 	            return; 
 	        }
 	    }
@@ -81,30 +81,11 @@ public class ControllerServlet extends HttpServlet {
 		        return;
 		    }
 		}
-		
-	/*	if (path.equals("")  || path == null || path.equals("/")) {
-			if (user == null) {
-		        System.out.println("DEBUG: Accès refusé, redirection accueil");
-		        response.sendRedirect(request.getContextPath() + "/connexion"); 
-		        return;
-			} else {
-				response.sendRedirect(request.getContextPath() + "/accueil");
-			}
-			return;
-		}
-			*/
-		
-		
+
+
 		switch (path) {
 		
-			
-		/*	case "" :
-			case "/":
-				request.setAttribute("message", "Page d'accueil");
-				vue = "/WEB-INF/connexion.jsp";
-				break;
-		
-		*/
+
 			case "/index":
 			
 				request.setAttribute("message", "Bienvenue sur l'index");
@@ -132,10 +113,16 @@ public class ControllerServlet extends HttpServlet {
 				request.setAttribute("message", "Page d'inscription");
 				vue = "/WEB-INF/inscription.jsp";
 				break;
-		
-				
+
+
 			case "/accueil":
-				request.setAttribute("message", "Page d'accueil");
+				String flash = (String) request.getSession().getAttribute("flashMessage");
+				if (flash != null) {
+					request.setAttribute("message", flash); // ← "message" comme le JSP attend
+					request.getSession().removeAttribute("flashMessage");
+				} else {
+					request.setAttribute("message", "Page d'accueil");
+				}
 				vue = "/WEB-INF/accueil.jsp";
 				break;
 				
