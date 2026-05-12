@@ -5,21 +5,22 @@ import java.util.Properties;
 
 public class ConfigLoader {
     public static final String ENV_FILE_PATH = "config.properties";
-    public static final String POLYSIO_FILE_PATH = "src/polysio.properties";
+    public static final String POLYSIO_FILE_PATH = "polysio.properties";
     private Properties props = new Properties();
     private String filename;
 
     // Constructeur pour instancier des fichiers :
     public ConfigLoader(String filenameP) {
         this.filename = filenameP;
-        File file = new File(filename); // Ici filename est celui hérité du constructeur
-        if (file.exists()) {
-            try (InputStream input = new FileInputStream(file)) {
-                props.load(input);
-                System.out.println("✅ Configuration chargée du fichier : " + filename + "...");
-            } catch (IOException erreur) {
-                System.err.println("❌ Erreur critique : " + erreur.getMessage());
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream(filenameP)) {
+            if (input == null) {
+                System.err.println("❌ Fichier non trouvé dans le classpath : " + filenameP);
+                return;
             }
+            props.load(input);
+            System.out.println("✅ Configuration chargée : " + filenameP);
+        } catch (IOException erreur) {
+            System.err.println("❌ Erreur : " + erreur.getMessage());
         }
     }
 
