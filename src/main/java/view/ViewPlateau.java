@@ -59,6 +59,9 @@ public class ViewPlateau extends HttpServlet {
 		}
 		long secondesRestantes = Math.max(0, (finPartieMs - maintenant) / 1000);
 
+		System.out.println("DEBUG finPartieMs = " + session.getAttribute("finPartieMs"));
+		System.out.println("DEBUG tempsRestantSec = " + (int) secondesRestantes);
+
 		// ── 4. ON PRÉPARE LES DONNÉES POUR LE JSP ───────────────────────
 		request.setAttribute("plateauHTML",     plateau.initialiserPlateau(joueur));
 		request.setAttribute("inventaireHTML",  plateau.genererInventaireHTML(joueur));

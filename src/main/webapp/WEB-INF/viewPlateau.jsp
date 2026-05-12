@@ -10,7 +10,28 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html, body  { height: 100%; overflow: hidden; }
         .game-container { display: flex; height: 100dvh; gap: 16px; padding: 8px; }
-        .plateau    { flex-shrink: 0; height: 100%; aspect-ratio: 1/1; }
+        .jeu-container {
+            flex-shrink: 0;
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+        .plateau-grid {
+            display: grid;
+            grid-template-columns: 12.5% repeat(9, 8.3%) 12.5%;
+            grid-template-rows:    12.5% repeat(9, 8.3%) 12.5%;
+            width: 100%;
+            height: 100%;
+        }
+        .case {
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .case img { width: 100%; height: 100%; object-fit: fill; display: block; }
         .sidebar    { flex: 1; background: #f5f0e8; border: 1px solid #ccc;
                       border-radius: 8px; padding: 16px; overflow-y: auto;
                       display: flex; flex-direction: column; gap: 12px; }
@@ -41,10 +62,8 @@
 <%-- ── PAGE PRINCIPALE ── --%>
 <div class="game-container">
 
-    <%-- Plateau --%>
-    <div class="plateau">
-        <%= request.getAttribute("plateauHTML") %>
-    </div>
+<%-- Plateau — pas de div wrapper, jeu-container est déjà dedans --%>
+<%= request.getAttribute("plateauHTML") %>
 
     <%-- Barre latérale --%>
     <div class="sidebar">
@@ -89,27 +108,25 @@
     let tempsRestant = <%= request.getAttribute("tempsRestantSec") %>;
     let urlAccueil   = "<%= request.getContextPath() %>";
 
-    function startTimer() {
-        const display = document.getElementById('timer');
-        if (!display) return;
-
-        const interval = setInterval(function () {
-            let minutes = Math.floor(tempsRestant / 60);
-            let seconds = tempsRestant % 60;
-
-            display.textContent =
-                String(minutes).padStart(2, '0') + ':' +
-                String(seconds).padStart(2, '0');
-
-            if (--tempsRestant < 0) {
-                clearInterval(interval);
-                alert("⏰ TEMPS ÉCOULÉ !");
-                window.location.href = urlAccueil + "/accueil";
-            }
-        }, 1000);
+    const display = document.getElementById('timer');
+    if (display) {
+        let m = Math.floor(tempsRestant / 60);
+        let s = tempsRestant % 60;
+        display.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
     }
 
-    window.onload = startTimer;
+    const interval = setInterval(function () {
+        let minutes = Math.floor(tempsRestant / 60);
+        let seconds = tempsRestant % 60;
+        display.textContent =
+            String(minutes).padStart(2, '0') + ':' +
+            String(seconds).padStart(2, '0');
+        if (--tempsRestant < 0) {
+            clearInterval(interval);
+            alert("⏰ TEMPS ÉCOULÉ !");
+            window.location.href = urlAccueil + "/accueil";
+        }
+    }, 1000);
 </script>
 </body>
 </html>
