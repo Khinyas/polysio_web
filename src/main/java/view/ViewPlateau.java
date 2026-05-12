@@ -29,7 +29,9 @@ public class ViewPlateau extends HttpServlet {
 		// 1. RÉCUPÉRATION SESSION
 		HttpSession session = request.getSession();
 		ModelJoueur joueur = (ModelJoueur) session.getAttribute("joueurCourant");
+		session.setAttribute("joueurCourant", joueur);
 		ModelPlateau plateau = (ModelPlateau) session.getAttribute("plateau");
+		session.setAttribute("plateau", plateau);
 
 		StringBuilder listeJoueursHTML = new StringBuilder();
 
@@ -89,6 +91,34 @@ public class ViewPlateau extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		String ctx = request.getContextPath();
+
+		// Récupère le résultat du dé si présent
+		Integer dernierDe = (Integer) session.getAttribute("dernierDe");
+		String popupHTML = "";
+		if (dernierDe != null) {
+			session.removeAttribute("dernierDe"); // ← on consomme le message
+			popupHTML = """
+        <div id="popup" class="modal-voile" style="
+            position:fixed; top:0; left:0;
+            width:100%%; height:100%%;
+            background:rgba(0,0,0,0.6);
+            display:flex; align-items:center; justify-content:center;
+            z-index:1000;">
+            <div style="
+                background:white; border-radius:20px;
+                padding:30px; max-width:500px;
+                display:flex; flex-direction:column;
+                align-items:center; gap:20px;">
+                <p>🎲 Vous avez fait un %d !</p>
+                <a href="%s/ViewPlateau" style="
+                    padding:10px 20px; background:#4a7c59;
+                    color:white; border-radius:8px;
+                    text-decoration:none;">Continuer</a>
+            </div>
+        </div>
+        """.formatted(dernierDe, ctx);
+		}
+
 
 		out.print("""
 		<!DOCTYPE html>
@@ -196,6 +226,7 @@ public class ViewPlateau extends HttpServlet {
 		</html>
 		""".formatted(
 				plateauHTML,
+				popupHTML,
 				chronoHTML,
 				ctx, ctx, ctx, ctx,
 				listeJoueursFinal,

@@ -170,6 +170,41 @@ public class ModelPlateau {
         return html.toString();
     }
 
+    private String genererModaleHTML() {
+        StringBuilder html = new StringBuilder();
+        for (ModelCase casePlateau : this.listeCases) {
+            if (casePlateau instanceof ModelPropriete propriete) {
+                html.append(String.format("""
+                    <div id='detail-%d' class='modal-overlay'>
+                        <div class='modal-content'>
+                            <a href='#' class='close'>&times;</a>
+                            <h2>%s</h2>
+                            <img src='%s%s' width='200'/>
+                            <ul>
+                                <li>Prix d'achat : %d pts</li>
+                                <li>Loyer de base : %d pts</li>
+                                <li>Avec bâtiment : %d pts</li>
+                            </ul>
+                            <p>Propriétaire : %s</p>
+                        </div>
+                    </div>
+                    """,
+                        propriete.getId(),
+                        propriete.getNom(),
+                        contextPath, propriete.getCheminSvgFiche(),
+                        propriete.getPrix(),
+                        propriete.getLoyerNu(),
+                        propriete.getLoyerBatiment(),
+                        propriete.getProprietaire() != null ? propriete.getProprietaire() : "Aucun"
+                ));
+            }
+        }
+        return html.toString();
+    }
+
+
+
+
     public ModelCase getCaseParPosition(int positionP) {
         for (ModelCase modelCase : listeCases) {
             if (modelCase.getId() == positionP) return modelCase;
