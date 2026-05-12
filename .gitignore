@@ -102,6 +102,7 @@ resources/config.properties
 config.properties
 application.properties
 application-*.properties
+config.properties
 .env
 *.key
 *.pem
