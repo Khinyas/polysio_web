@@ -36,24 +36,44 @@
         <h1>PANNEAU D'ADMINISTRATION</h1>
 
         <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>Pseudo</th>
-                <th>Email</th>
-                <th>Rôle</th>
-            </tr>
+    <tr>
+        <th>ID</th>
+        <th>Pseudo</th>
+        <th>Email</th>
+        <th>Rôle</th>
+        <th>Actions</th>
+    </tr>
 
-            <% if (utilisateurs != null) { %>
-                <% for (ModelUser u : utilisateurs) { %>
-                    <tr>
-                        <td><%= u.getId() %></td>
-                        <td><%= u.getUsername() %></td>
-                        <td><%= u.getEmail() %></td>
-                        <td><%= u.getRole() %></td>
-                    </tr>
-                <% } %>
-            <% } %>
-        </table>
+    <% if (utilisateurs != null) { %>
+        <% for (ModelUser u : utilisateurs) { %>
+            <tr>
+                <form action="admin" method="post">
+                    <input type="hidden" name="action" value="modifier">
+                    <input type="hidden" name="id" value="<%= u.getId() %>">
+
+                    <td><%= u.getId() %></td>
+                    
+                    <td><input type="text" name="pseudo" value="<%= u.getUsername() %>"></td>
+                    <td><input type="text" name="email" value="<%= u.getEmail() %>"></td>
+                    <td>
+                        <select name="role">
+                            <option value="ADMIN" <%= u.getRole().toString().equals("ADMIN") ? "selected" : "" %>>ADMIN</option>
+                            <option value="USER" <%= u.getRole().toString().equals("USER") ? "selected" : "" %>>USER</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button type="submit">Enregistrer</button>
+                        
+                        <a href="admin?action=supprimer&id=<%= u.getId() %>" 
+                           onclick="return confirm('Supprimer <%= u.getUsername() %> ?')">
+                           <button type="button" style="color:red;">Supprimer</button>
+                        </a>
+                    </td>
+                </form>
+            </tr>
+        <% } %>
+    <% } %>
+</table>
 
         <br>
 
