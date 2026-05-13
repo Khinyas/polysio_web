@@ -1,19 +1,20 @@
 package service;
 
+import connexion.DAOAcces;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class Securite {
 
     public static String hacherPassword(String passwordClairP) {
         // C'est ici qu'on utilise l'import : l'appel à BCrypt.hashpw
-    	
-        return BCrypt.hashpw(passwordClairP, BCrypt.gensalt());
+        String passwordWithPrivateKey = passwordClairP.trim() + DAOAcces.cfgApp.get("db.privateKey");
+        return BCrypt.hashpw(passwordWithPrivateKey, BCrypt.gensalt());
     }
 
     public static Boolean verifyPassword(String passwordSaisi, String passwordHashedP) {
         try {
-            // Et ici : l'appel à BCrypt.checkpw
-            return BCrypt.checkpw(passwordSaisi, passwordHashedP);
+            String passwordWithPrivateKey = passwordSaisi + DAOAcces.cfgApp.get("db.privateKey");
+            return BCrypt.checkpw(passwordWithPrivateKey, passwordHashedP);
         } catch (Exception e) {
             return false;
         }
