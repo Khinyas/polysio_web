@@ -19,17 +19,24 @@
         <%= request.getAttribute("message") %>
     </div>
 <% } %>
-	<div class="form-container">
-	
-	<form action="${pageContext.request.contextPath}/ControllerAccueil" method="GET">
-    <input type="hidden" name="action" value="jouer">
-    
-</form>
 
 
+<div class="form-container">
 
-<a href="${pageContext.request.contextPath}/ControllerAccueil?action=choisirPartie"> Lancer une partie </a>
+    <% if (session.getAttribute("userSession") != null) { %>
+        <%---   Connecté → on affiche le bouton --%>
+        Bienvenue <%= ((ModelUser) session.getAttribute("userSession")).getUsername() %>
+        <a href="${pageContext.request.contextPath}/ControllerAccueil?action=choisirPartie">
+            Lancer une partie
+        </a>
+    <% } else { %>
+        <%-- Non connecté → message ou rien --%>
+        <p>Connectez-vous pour lancer une partie.</p>
+    <% } %>
+
 </div>
+
+
 
 </body>
 </html>
