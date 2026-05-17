@@ -14,12 +14,17 @@ public class ConfigLoader {
         this.filename = filenameP;
         File file = new File(filename); // Ici filename est celui hérité du constructeur
         if (file.exists()) {
-            try (InputStream input = new FileInputStream(file)) {
-                props.load(input);
-                System.out.println("✅ Configuration chargée du fichier : " + filename + "...");
-            } catch (IOException erreur) {
-                System.err.println("❌ Erreur critique : " + erreur.getMessage());
-            }
+        	// À mettre dans le constructeur de ConfigLoader à la place du FileInputStream classique :
+        	try (InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties")) {
+        	    if (input != null) {
+        	        props.load(input);
+        	        System.out.println("✅ Configuration chargée !");
+        	    } else {
+        	        System.err.println("❌ Fichier introuvable dans le classpath.");
+        	    }
+        	} catch (IOException erreur) {
+        	    System.err.println("❌ Erreur critique : " + erreur.getMessage());
+        	}
         }
     }
 
